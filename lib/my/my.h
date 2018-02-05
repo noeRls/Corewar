@@ -1,71 +1,116 @@
 /*
 ** EPITECH PROJECT, 2017
-** libmy header
+** my.h
 ** File description:
-** hi
+** header for "my" lib
 */
 
-#ifndef LIBHEADER
-#define LIBHEADER
+#include <stdarg.h>
 
-#include <stdlib.h>
+void *my_malloc(int size);
 
-#define ABS(value) (((value) < 0 ? ((value) * -1) : (value)))
+/*	char/my_charb.c	*/
 
-char *my_calloc(int const array_size, char const mem_value);
-void *my_malloc(int const size);
-int get_nbr_word(const char **array);
-char **str_to_word_array(char *str, const char *sep);
-char *get_next_line(int fd);
-char *my_delete_zero(char *result, int const size);
-int my_str_numcmp(char const *nb1, char const *nb2);
-char *rminus(char *nb);
-int is_neg(char const *nb);
-char *its(long long b);
-long long is_base_num(char const c, char const *base);
-char *add_it(char const *str, char const c, int const pos);
-char *remove_it(char* str, int c);
-char *convert_base(char const *nbr, char const *base_from, char const *base_to);
-long long my_getnbr_base(char const *str, char const *base);
-int my_putnbr_base(int nbr, char const *base);
-int get_color(unsigned char red, unsigned char green, unsigned char blue);
-char *my_strnncpy(char *dest, char const *src, int x, int n);
-void my_putchar(char c);
-int my_isneg (int nb);
-int my_put_nbr(long long nb);
-void my_swap(int *a, int *b);
-int my_putstr(char const *str);
-int my_strlen(char const *str);
-long long my_getnbr(char const *str);
-int my_compute_power_rec(int nb, int power);
-long long my_compute_power_it(long long nb, long long power);
+int my_char_isprintable(char c);
+
+/*	char/my_char.c	*/
+
+int my_char_isalpha(char c);
+int isonlychar(char *str, char c);
+int my_char_isnum(char c);
+char upchar(char c);
+char lowchar(char c);
+
+/*	int/getnbr.c	*/
+
+int getnbr(char *str);
+
+/*	int/my_compute.c	*/
+
+int my_compute_power(int nb, int p);
 int my_compute_square_root(int nb);
-int my_is_prime(int nb);
+
+/*	int/my_maths.c	*/
+
+int digits(int a);
 int my_find_prime_sup(int nb);
+int my_is_prime(int nb);
+int min(int a, int b);
+int max(int a, int b);
+
+/*	int/my_sort_int_array.c	*/
+
+void my_sort_int_array(int *array, int size);
+
+/*	mem/my_sys_utils.c	*/
+
+void my_memset(char *str, char c, int len);
+void my_swap(int *a, int *b);
+void my_swap_char(char *a, char *b);
+
+/*	put/my_put.c	*/
+
+void my_putchar(char c);
+void my_putstr(char const *str);
+void my_putstr_err(char const *str);
+
+/*	put/my_put_nbr.c	*/
+
+void my_put_nbr(int nb);
+
+/*	str/get_nbr_base.c	*/
+
+char *get_nbr_base(long long nb, char const *base);
+
+/*	str/intochar.c	*/
+
+char *my_intochar(int base);
+
+/*	str/my_show_word_array.c	*/
+
+void my_show_word_array(char * const *tab);
+
+/*	str/my_strcmps.c	*/
+
+int my_strcmp(char const *s1, char const *s2);
+int my_strncmp(char const *s1, char const *s2, int n);
+int my_supercmp(char const *s1, char const *s2);
+
+/*	str/my_strdigits.c	*/
+
+int my_strdigits(long long nb);
+
+/*	str/my_str_is.c	*/
+
+int my_str_isalpha(char const *str);
+int my_str_islower(char const *str);
+int my_str_isnum(char const *str);
+int my_str_isprintable(char const *str);
+int my_str_isupper(char const *str);
+
+/*	str/my_str_utilsb.c	*/
+
+int my_strlen(char const *str);
+int my_strlento(char const *str, char c);
+char *my_strlowcase(char *str);
+char *my_strupcase(char *str);
+char *my_revstr(char *str);
+
+/*	str/my_str_utils.c	*/
+
 char *my_strcpy(char *dest, char const *src);
 char *my_strncpy(char *dest, char const *src, int n);
-char *my_revstr(char *str);
-int my_strcmp(char const *s1, char const *s2);
-char*my_strupcase(char*str);
-char *my_strlowcase(char *str);
-int my_str_isalpha(char const *str);
-int my_str_isnum(char const *str);
-int my_str_islower(char const *str);
-int my_str_isupper(char const *str);
-int my_str_isprintable(char const *str);
-char *my_strcat(char const *dest, char const *src);
+char *my_strcat(char *dest, char const *src);
 char *my_strncat(char *dest, char const *src, int nb);
 char *my_strdup(char const *src);
-void check_if_changement_signe(int tmp, int *negative);
-long long convert_digit_to_int(int *digits, int nb_digit, int negative);
-int determine_lenght(long long nb);
-int goto_end_string(char const *dest, char *returned, int i);
-int goto_end_str(char const *dest, int i);
-int my_strncmp(char const *s1, char const *s2, int n);
-int count_word(char const *str);
-int my_char_isalpha(char const c);
-int my_c_isnum(char c);
-int my_printf(char const *str, ...);
-int is_arg(int *occu, char **flag, int nbr_flag, char *arg);
 
-#endif
+/*	str/str_words.c	*/
+
+char **str_words(char *str);
+char **str_words_adv(char *str, char const *allowed);
+char **str_words_forb(char const *str, char const *forb);
+char **str_words_param(char const *str, char const *forb);
+
+/*	str/match.c	*/
+
+int match(char const *str, char const *str1);

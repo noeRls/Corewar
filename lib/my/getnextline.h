@@ -5,9 +5,7 @@
 ** header file
 */
 
-#include <unistd.h>
-
 #ifndef GETNEXTLINE_H_
 	#define GETNEXTLINE_H_
-	#define READ_SIZE 30
+	#define READ_SIZE 110980
 #endif /* !GETNEXTLINE_H_ */

@@ -1,78 +1,59 @@
 ##
 ## EPITECH PROJECT, 2017
-## Makefile
+## my_lib Makefile
 ## File description:
-## libmy
+## Makefile for my lib
 ##
 
-SRC	=	my_printf.c	\
-		my_printf_tool.c	\
-		my_printf_tool2.c	\
-		specifier.c	\
-		specifier2.c	\
-		specifier3.c	\
-		add_it.c	\
-		convert_base.c	\
-		get_color.c	\
-		my_char_isnum.c	\
-		my_compute_power_it.c	\
-		my_compute_power_rec.c	\
-		my_compute_square_root.c	\
-		my_find_prime_sup.c	\
-		my_getnbr_base.c	\
-		my_getnbr.c	\
-		my_int_to_str.c	\
-		my_isneg.c	\
-		my_is_prime.c	\
-		my_putchar.c	\
-		my_putnbr_base.c	\
-		my_put_nbr.c	\
-		my_putstr.c	\
-		my_revstr.c	\
-		my_strcat.c	\
-		my_strcmp.c	\
-		my_strcpy.c	\
-		my_strdup.c	\
-		my_str_isalpha.c	\
-		my_str_islower.c	\
-		my_str_isnum.c	\
-		my_str_isprintable.c	\
-		my_str_isupper.c	\
-		my_strlen.c	\
-		my_strlowcase.c	\
-		my_strncat.c	\
-		my_strncmp.c	\
-		my_strncpy.c	\
-		my_strnncpy.c	\
-		my_strupcase.c	\
-		my_str_word_array_tool.c	\
-		my_swap.c	\
-		remove_it.c	\
-		is_neg.c	\
-		rminus.c	\
-		my_str_numcmp.c	\
-		my_delete_zero.c	\
-		super_arg_management.c	\
-		gnl.c	\
-		str_to_word_array.c	\
-		my_calloc.c	\
-		my_malloc.c	\
+NAME	= libmy.a
 
-OBJ	=	$(SRC:.c=.o)
+RM	= rm -f
 
-NAME	=	libmy.a
+SRCS	= ./char/my_char.c \
+	  ./char/my_charb.c \
+	  ./int/getnbr.c \
+	  ./int/my_compute.c \
+	  ./int/my_maths.c \
+	  ./int/my_sort_int_array.c \
+	  ./mem/my_malloc.c \
+	  ./mem/my_sys_utils.c \
+	  ./my_printf/display_basenb.c \
+	  ./my_printf/display_f.c \
+	  ./my_printf/display_nb.c \
+	  ./my_printf/display_tools.c \
+	  ./my_printf/my_printf.c \
+	  ./my_printf/indent.c \
+	  ./put/my_put.c \
+	  ./put/my_put_nbr.c \
+	  ./str/word_arrays/str_words.c \
+	  ./str/word_arrays/str_words_forb.c \
+	  ./str/word_arrays/str_words_param.c \
+	  ./str/get_nbr_base.c \
+	  ./str/get_next_line.c \
+	  ./str/intochar.c \
+	  ./str/my_show_word_array.c \
+	  ./str/my_str_is.c \
+	  ./str/my_str_utils.c \
+	  ./str/my_str_utilsb.c \
+	  ./str/my_strcmps.c \
+	  ./str/my_strdigits.c \
+	  ./str/match.c \
 
-all:	$(NAME)
+CFLAGS	=	-I./ -g3
 
-$(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ) $(CFLAG)
+OBJS	= $(SRCS:.c=.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	 ar rc $(NAME) $(OBJS)
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
 
-re: fclean $(NAME)
+re: fclean all
 
-.PHONY: clean fclean all
+.PHONY: all clean fclean re
