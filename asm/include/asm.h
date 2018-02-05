@@ -14,5 +14,7 @@
 #include "op.h"
 
 int write_instruction(char *cmd, int fd);
+void print_tabtab(char **);
+char **str_to_av(char *);
 
 #endif
