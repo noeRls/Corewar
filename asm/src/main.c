@@ -7,10 +7,6 @@
 
 #include "asm.h"
 
-void print_help()
-{
-}
-
 int replace_space(char *str)
 {
 	int string_mode = 0;
@@ -72,16 +68,18 @@ void print_tabtab(char **tab)
 
 int main(int ac, char **av)
 {
-	int fd = open(av[1], O_RDONLY);
+	int src = open(av[1], O_RDONLY);
+	int bin = open(av[2], O_WRONLY | O_CREAT, 0444);
 	char *s;
 	char **tab;
 
-	if (fd == -1)
+	(void)ac;
+	if (src == -1 || bin == -1)
 		return (84);
-	while ((s = get_next_line(fd))) {
-		my_printf("on a choppé ligne 1: %s\n", s);
+	while ((s = get_next_line(src))) {
 		tab = str_to_av(s);
 		print_tabtab(tab);
+		write_instruction(tab[0], bin);
 	}
 	return (0);
 }

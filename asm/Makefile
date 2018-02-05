@@ -6,11 +6,15 @@
 ##
 
 
-SRC		=	src/main.c
+SDIR		=	$(realpath src)/
+
+SRC		=	$(SDIR)main.c			\
+			$(SDIR)write_instruction.c	\
+			$(SDIR)op.c
 
 OBJ		=	$(SRC:.c=.o)
 
-NAME		=	test
+NAME		=	asm
 
 CFLAGS		+=	-Wall -Wextra -I./include
 
@@ -28,6 +32,7 @@ lib:
 
 clean:
 	rm -f $(OBJ)
+	rm -f *.core vg*
 	make clean -C lib/my
 
 fclean: clean

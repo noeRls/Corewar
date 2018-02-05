@@ -5,6 +5,14 @@
 ** header file for asm
 */
 
+#ifndef ASM_H
+#define ASM_H
+
 #include "display_f.h"
 #include "get_next_line.h"
 #include "my.h"
+#include "op.h"
+
+int write_instruction(char *cmd, int fd);
+
+#endif
