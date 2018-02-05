@@ -1,13 +1,11 @@
 /*
 ** EPITECH PROJECT, 2018
-** main
+** CPE_corewar_2017
 ** File description:
 ** main
 */
 
-#include "corewar.h"
-
-int main(int ac, char **av)
+int main(void)
 {
 	return (0);
 }
