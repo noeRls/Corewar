@@ -7,11 +7,6 @@
 
 #include "asm.h"
 
-//r for register, which means, 01
-//DIRECT_CHAR for direct char, which means, 10
-//alphanumeric for indirect char, which means 11
-//to add further: % to a label, which means indirect char too
-
 arg_type get_arg_type(char *str)
 {
 	if (contains(str, LABEL_CHAR))
@@ -25,16 +20,17 @@ arg_type get_arg_type(char *str)
 
 void write_coding_byte(char **tab, int fd)
 {
-	char buffer[4] = {0, 0, 0, 0};
+	char c = 0;
 	arg_type type;
 
 	for (int i = 1; tab[i]; i++) {
 		type = get_arg_type(tab[i]);
 		if (type == REGISTER)
-			buffer[i - 1] = 1;
+			c = c ^ (85 & (192 >> (i - 1) * 2));
 		if (type == DIRECT)
-			buffer[i - 1] = 2;
+			c = c ^ (170 & (192 >> (i - 1) * 2));
 		if (type == INDIRECT || type == LABEL)
-			buffer[i - 1] = 3;
+			c = c ^ (255 & (192 >> (i - 1) * 2));
 	}
+	write(fd, &c, sizeof(char));
 }
