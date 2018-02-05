@@ -19,7 +19,6 @@ int my_strcmp(char const *s1, char const *s2)
 	} else {
 		minindex = lenb;
 	}
-
 	while (index < minindex) {
 		if (s1[index] == s2[index]) {
 			index = index + 1;
