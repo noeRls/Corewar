@@ -10,7 +10,7 @@
 int main(int ac, char **av)
 {
 	int src = open(av[1], O_RDONLY);
-	int bin = open(av[2], O_WRONLY | O_CREAT, 0444);
+	int bin = open(file_to_core(av[1]), O_WRONLY | O_CREAT, 0444);
 	char *s;
 	char **tab;
 	int mnemonic;

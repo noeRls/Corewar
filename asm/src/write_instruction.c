@@ -11,11 +11,13 @@ int write_instruction(char *cmd, int fd)
 {
 	extern op_t op_tab[];
 
-	for (char i = 0; op_tab[i].mnemonique != 0; i++) {
-		if (my_strcmp(cmd, op_tab[i].mnemonique) == 0) {
+	for (char i = 0; op_tab[(int)i].mnemonique != 0; i++) {
+		if (my_strcmp(cmd, op_tab[(int)i].mnemonique) == 0) {
 			++i;
 			write(fd, &i, sizeof(i));
+			--i;
 			return (int)i;
 		}
 	}
+	return (-1);
 }

@@ -6,6 +6,7 @@
 */
 
 #include <stdarg.h>
+#include <unistd.h>
 
 void *my_malloc(int size);
 
