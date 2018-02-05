@@ -28,6 +28,7 @@ int main(int ac, char **av)
 		mnemonique = write_instruction(tab[0], bin);
 		verif_syntax(mnemonique, tab);
 		write_coding_byte(tab, bin);
+		arg_encoder(tab, bin);
 	}
 	return (0);
 }

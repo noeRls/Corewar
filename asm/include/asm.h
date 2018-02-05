@@ -26,5 +26,7 @@ char **str_to_av(char *);
 char *file_to_core(char *);
 void verif_syntax(int, char **);
 void write_coding_byte(char **, int);
+arg_type get_arg_type(char *);
+void arg_encoder(char **, int);
 
 #endif

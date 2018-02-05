@@ -10,6 +10,7 @@ SDIR		=	$(realpath src)/
 
 SRC		=	$(SDIR)main.c			\
 			$(SDIR)str_to_av.c		\
+			$(SDIR)arg_encoder.c		\
 			$(SDIR)write_instruction.c	\
 			$(SDIR)file_to_core.c		\
 			$(SDIR)verif_syntax.c		\
