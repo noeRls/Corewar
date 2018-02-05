@@ -23,6 +23,7 @@ SRCS	= ./char/my_char.c \
 	  ./my_printf/display_tools.c \
 	  ./my_printf/my_printf.c \
 	  ./my_printf/indent.c \
+	  ./put/my_puterror.c \
 	  ./put/my_put.c \
 	  ./put/my_put_nbr.c \
 	  ./str/word_arrays/str_words.c \
