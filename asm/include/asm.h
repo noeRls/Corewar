@@ -13,10 +13,18 @@
 #include "my.h"
 #include "op.h"
 
+typedef enum {
+	REGISTER,
+	DIRECT,
+	INDIRECT,
+	LABEL
+} arg_type;
+
 int write_instruction(char *cmd, int fd);
 void print_tabtab(char **);
 char **str_to_av(char *);
 char *file_to_core(char *);
 void verif_syntax(int, char **);
+void write_coding_byte(char **, int);
 
 #endif
