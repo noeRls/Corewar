@@ -6,18 +6,22 @@
 ##
 
 
-SRC	=	src/main.c
+SRC		=	src/main.c
 
-OBJ	=	$(SRC:.c=.o)
+OBJ		=	$(SRC:.c=.o)
 
-NAME	=	test
+NAME		=	test
 
-CFLAGS	+=	-Wall -Wextra -I./include
+CFLAGS		+=	-Wall -Wextra -I./include
+
+LDFLAGS		=	-L./lib/my
+
+LDLIBS		=	-lmy
 
 all:	lib $(NAME)
 
 $(NAME):	$(OBJ)
-	gcc -o $(NAME) $(OBJ) $(CFLAGS) -L./lib/my -lmy
+	gcc -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
 
 lib:
 	make -C lib/my
@@ -32,6 +36,4 @@ fclean: clean
 
 re:	fclean all
 
-r:	all clean
-
-.PHONY: all lib clean fclean re r
+.PHONY: all lib clean fclean re
