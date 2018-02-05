@@ -16,5 +16,6 @@
 int write_instruction(char *cmd, int fd);
 void print_tabtab(char **);
 char **str_to_av(char *);
+char *file_to_core(char *);
 
 #endif
