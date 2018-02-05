@@ -6,6 +6,9 @@
 */
 
 #include <stdarg.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 void *my_malloc(int size);
 
