@@ -9,7 +9,7 @@
 
 char *file_to_core(char *s)
 {
-	char *new = malloc(my_strlen(s) + 3);
+	char *new = malloc(my_strlen(s) + 4);
 
 	(!new) ? exit(84) : new;
 	new = my_strcpy(new, s);
