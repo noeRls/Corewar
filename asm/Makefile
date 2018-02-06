@@ -13,7 +13,7 @@ SRC		=	$(SDIR)main.c			\
 			$(SDIR)arg_encoder.c		\
 			$(SDIR)write_instruction.c	\
 			$(SDIR)rewrite.c		\
-			$(SDIR)file_to_core.c		\
+			$(SDIR)file_to_cor.c		\
 			$(SDIR)verif_syntax.c		\
 			$(SDIR)header.c			\
 			$(SDIR)op.c			\

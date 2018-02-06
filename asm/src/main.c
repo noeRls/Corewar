@@ -15,7 +15,7 @@ void init_header(header_t *header)
 int main(int ac, char **av)
 {
 	int src = open(av[1], O_RDONLY);
-	int bin = open(file_to_core(av[1]), O_RDWR | O_CREAT, 0666);
+	int bin = open(file_to_cor(av[1]), O_RDWR | O_CREAT, 0666);
 	char *s;
 	char **tab;
 	int mnemonique;

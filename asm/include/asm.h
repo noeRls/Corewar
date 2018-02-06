@@ -23,7 +23,7 @@ typedef enum {
 int write_instruction(char *cmd, int fd);
 void print_tabtab(char **);
 char **str_to_av(char *);
-char *file_to_core(char *);
+char *file_to_cor(char *);
 void verif_syntax(int, char **);
 void write_coding_byte(char **, int);
 arg_type get_arg_type(char *);

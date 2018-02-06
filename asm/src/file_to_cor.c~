@@ -9,11 +9,11 @@
 
 char *file_to_core(char *s)
 {
-	char *new = malloc(my_strlen(s) + 4);
+	char *new = malloc(my_strlen(s) + 3);
 
 	(!new) ? exit(84) : new;
 	new = my_strcpy(new, s);
 	new[my_strlen(s) - 1] = '\0';
-	new = my_strcat(new, "core");
+	new = my_strcat(new, "cor");
 	return (new);
 }
