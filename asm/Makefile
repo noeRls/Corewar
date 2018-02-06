@@ -14,6 +14,7 @@ SRC		=	$(SDIR)main.c			\
 			$(SDIR)write_instruction.c	\
 			$(SDIR)file_to_core.c		\
 			$(SDIR)verif_syntax.c		\
+			$(SDIR)header.c			\
 			$(SDIR)op.c			\
 			$(SDIR)coding_byte.c
 
