@@ -7,6 +7,16 @@
 
 #include "asm.h"
 
+void magic_reverse(void *x)
+{
+	((char *)x)[0] ^= ((char *)x)[3];
+	((char *)x)[3] ^= ((char *)x)[0];
+	((char *)x)[0] ^= ((char *)x)[3];
+	((char *)x)[1] ^= ((char *)x)[2];
+	((char *)x)[2] ^= ((char *)x)[1];
+	((char *)x)[1] ^= ((char *)x)[2];
+}
+
 void rewrite(int bin, header_t *header)
 {
 	int c;
@@ -19,6 +29,7 @@ void rewrite(int bin, header_t *header)
 	if (read(bin, buffer, header->prog_size) == -1)
 		exit(84);
 	lseek(bin, 0, SEEK_SET);
+	magic_reverse(&(header->magic));
 	write(bin, header, sizeof(header_t));
 	write(bin, buffer, header->prog_size);
 }
