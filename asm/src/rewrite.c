@@ -9,12 +9,12 @@
 
 void magic_reverse(void *x)
 {
-	((char *)x)[0] ^= ((char *)x)[3];
-	((char *)x)[3] ^= ((char *)x)[0];
-	((char *)x)[0] ^= ((char *)x)[3];
-	((char *)x)[1] ^= ((char *)x)[2];
-	((char *)x)[2] ^= ((char *)x)[1];
-	((char *)x)[1] ^= ((char *)x)[2];
+	*((char *)x) ^= *(((char *)x) + 3);
+	*(((char *)x) + 3) ^= *((char *)x);
+	*((char *)x) ^= *(((char *)x) + 3);
+	*(((char *)x) + 1) ^= *(((char *)x) + 2);
+	*(((char *)x) + 2) ^= *(((char *)x) + 1);
+	*(((char *)x) + 1) ^= *(((char *)x) + 2);
 }
 
 void rewrite(int bin, header_t *header)
