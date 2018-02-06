@@ -26,6 +26,7 @@ SRCS	= ./char/my_char.c \
 	  ./put/my_puterror.c \
 	  ./put/my_put.c \
 	  ./put/my_put_nbr.c \
+	  ./super_getnbr.c  \
 	  ./str/word_arrays/str_words.c \
 	  ./str/word_arrays/str_words_forb.c \
 	  ./str/word_arrays/str_words_param.c \
