@@ -14,11 +14,16 @@ void write_register_arg(char *str, int fd)
 	write(fd, &c, sizeof(char));
 }
 
-void write_direct_arg(char *str, int fd)
+void write_direct_arg(char *str, int fd, int mnemonique)
 {
 	char c = 0;
 	size_t tmp = super_getnbr(++str);
 
+	if (mnemonique == 9 || mnemonique == 10 || mnemonique == 11\
+	|| mnemonique == 12 || mnemonique == 14 || mnemonique == 15) {
+		write_indirect_arg(str, fd);
+		return;
+	}
 	c ^= tmp & 4278190080;
 	write(fd, &c, sizeof(c));
 	c = 0;
@@ -44,7 +49,7 @@ void write_indirect_arg(char *str, int fd)
 	write(fd, &c, sizeof(c));
 }
 
-void arg_encoder(char **tab, int fd)
+void arg_encoder(char **tab, int fd, int mnemonique)
 {
 	for (int i = 1 ; tab[i] ; i++) {
 		switch (get_arg_type(tab[i])) {
@@ -52,7 +57,7 @@ void arg_encoder(char **tab, int fd)
 			write_register_arg(tab[i], fd);
 			break;
 		case DIRECT:
-			write_direct_arg(tab[i], fd);
+			write_direct_arg(tab[i], fd, mnemonique);
 			break;
 		case INDIRECT:
 			write_indirect_arg(tab[i], fd);
