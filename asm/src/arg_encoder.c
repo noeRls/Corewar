@@ -46,8 +46,6 @@ void write_indirect_arg(char *str, int fd)
 
 void arg_encoder(char **tab, int fd)
 {
-	arg_type type;
-
 	for (int i = 1 ; tab[i] ; i++) {
 		switch (get_arg_type(tab[i])) {
 		case REGISTER:

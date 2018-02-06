@@ -28,5 +28,6 @@ void verif_syntax(int, char **);
 void write_coding_byte(char **, int);
 arg_type get_arg_type(char *);
 void arg_encoder(char **, int);
+void fill_header(char **, header_t *);
 
 #endif

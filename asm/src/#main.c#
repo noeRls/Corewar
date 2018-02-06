@@ -15,7 +15,7 @@ int main(int ac, char **av)
 	char **tab;
 	int mnemonique;
 
-	printf("");
+	printf("%x");
 	(void)ac;
 	if (src == -1 || bin == -1)
 		return (84);

@@ -1,0 +1,20 @@
+/*
+** EPITECH PROJECT, 2018
+** CPE_corewar_2017
+** File description:
+** header
+*/
+
+#include "asm.h"
+
+void write_name()
+{
+}
+
+void write_header(char **tab, int fd)
+{
+	if (!my_strcmp(tab[0], ".name"))
+		write_name(char *str);
+	if (!my_strcmp(tab[0], ".comment"))
+		;
+}
