@@ -57,6 +57,8 @@ void arg_encoder(char **tab, int fd)
 		case INDIRECT:
 			write_indirect_arg(tab[i], fd);
 			break;
+		case LABEL:
+			break;
 		}
 	}
 }

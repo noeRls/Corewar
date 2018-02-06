@@ -119,3 +119,5 @@ char **str_words_param(char const *str, char const *forb);
 /*	str/match.c	*/
 
 int match(char const *str, char const *str1);
+
+size_t super_getnbr(char *str);

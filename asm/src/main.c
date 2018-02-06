@@ -16,7 +16,6 @@ int main(int ac, char **av)
 	int mnemonique;
 	header_t header;
 
-	printf("");
 	(void)ac;
 	if (src == -1 || bin == -1)
 		return (84);
@@ -26,8 +25,7 @@ int main(int ac, char **av)
 		tab = str_to_av(s);
 		if (tab[0][0] == COMMENT_CHAR)
 			continue;
-//		print_tabtab(tab);
-		write_header(tab, &header);
+		fill_header(tab, &header);
 		mnemonique = write_instruction(tab[0], bin);
 		verif_syntax(mnemonique, tab);
 		write_coding_byte(tab, bin);
