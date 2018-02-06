@@ -30,6 +30,8 @@ void rewrite(int bin, header_t *header)
 		exit(84);
 	lseek(bin, 0, SEEK_SET);
 	magic_reverse(&(header->magic));
+	magic_reverse(&(header->prog_size));
 	write(bin, header, sizeof(header_t));
+	magic_reverse(&(header->prog_size));
 	write(bin, buffer, header->prog_size);
 }
