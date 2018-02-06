@@ -24,7 +24,8 @@ int main(int ac, char **av)
 		tab = str_to_av(s);
 		if (tab[0][0] == COMMENT_CHAR)
 			continue;
-		print_tabtab(tab);
+//		print_tabtab(tab);
+		write_header(tab, bin);
 		mnemonique = write_instruction(tab[0], bin);
 		verif_syntax(mnemonique, tab);
 		write_coding_byte(tab, bin);
