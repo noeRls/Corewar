@@ -10,7 +10,7 @@
 void *my_super_memset(void *ptr, int c, size_t n)
 {
 	for (size_t i = 0; i < n; i++) {
-		*((char *)ptr) = c;
+		*((char *)ptr++) = c;
 	}
 	return (ptr);
 }

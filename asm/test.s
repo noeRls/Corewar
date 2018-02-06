@@ -1,6 +1,8 @@
 	# test oui
 	#
 	#Salut a tous les gamers c'est wartek
+	.name "zork"
+	.comment "just a basic living prog"
 	and r2,23,%34
 
 

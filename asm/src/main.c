@@ -10,11 +10,6 @@
 void init_header(header_t *header)
 {
 	my_super_memset(header, 0, sizeof(*header));
-/*	for (int i = 0 ; i < PROG_NAME_LENGTH + 1 ; i++)
-		header->prog_name[i] = '\0';
-	for (int i = 0 ; i < COMMENT_LENGTH + 1 ; i++)
-		header->comment[i] = '\0';
-*/
 }
 
 int main(int ac, char **av)
