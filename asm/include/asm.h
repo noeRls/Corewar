@@ -29,5 +29,6 @@ void write_coding_byte(char **, int);
 arg_type get_arg_type(char *);
 void arg_encoder(char **, int);
 void fill_header(char **, header_t *);
+void rewrite(int, header_t *);
 
 #endif

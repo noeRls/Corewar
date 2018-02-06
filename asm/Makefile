@@ -12,6 +12,7 @@ SRC		=	$(SDIR)main.c			\
 			$(SDIR)str_to_av.c		\
 			$(SDIR)arg_encoder.c		\
 			$(SDIR)write_instruction.c	\
+			$(SDIR)rewrite.c		\
 			$(SDIR)file_to_core.c		\
 			$(SDIR)verif_syntax.c		\
 			$(SDIR)header.c			\
@@ -22,7 +23,7 @@ OBJ		=	$(SRC:.c=.o)
 
 NAME		=	asm
 
-CFLAGS		+=	-Wall -Wextra -I./include
+CFLAGS		+=	-Wall -Wextra -I./include -g3
 
 LDFLAGS		=	-L./lib/my
 
