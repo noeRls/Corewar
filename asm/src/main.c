@@ -31,7 +31,8 @@ int main(int ac, char **av)
 		tab = str_to_av(s);
 		if (tab[0][0] == COMMENT_CHAR)
 			continue;
-		fill_header(tab, &header);
+		if (fill_header(tab, &header))
+			continue;
 		mnemonique = write_instruction(tab[0], bin);
 		verif_syntax(mnemonique, tab);
 		write_coding_byte(tab, bin);
