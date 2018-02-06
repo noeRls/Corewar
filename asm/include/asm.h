@@ -30,5 +30,6 @@ arg_type get_arg_type(char *);
 void arg_encoder(char **, int);
 void fill_header(char **, header_t *);
 void rewrite(int, header_t *);
+void *my_super_memset(void *, int, size_t);
 
 #endif

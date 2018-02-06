@@ -9,11 +9,12 @@
 
 void init_header(header_t *header)
 {
-//	memset(header, 0, sizeof(*header));
-	for (int i = 0 ; i < PROG_NAME_LENGTH + 1 ; i++)
+	my_super_memset(header, 0, sizeof(*header));
+/*	for (int i = 0 ; i < PROG_NAME_LENGTH + 1 ; i++)
 		header->prog_name[i] = '\0';
 	for (int i = 0 ; i < COMMENT_LENGTH + 1 ; i++)
 		header->comment[i] = '\0';
+*/
 }
 
 int main(int ac, char **av)
@@ -29,7 +30,6 @@ int main(int ac, char **av)
 	if (src == -1 || bin == -1)
 		return (84);
 	init_header(&header);
-	printf("magic %d\n", COREWAR_EXEC_MAGIC);
 	while ((s = get_next_line(src))) {
 		if (!(*s))
 			continue;
