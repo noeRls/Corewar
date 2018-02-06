@@ -28,7 +28,7 @@ void verif_syntax(int, char **);
 void write_coding_byte(char **, int);
 arg_type get_arg_type(char *);
 void arg_encoder(char **, int);
-void fill_header(char **, header_t *);
+int fill_header(char **, header_t *);
 void rewrite(int, header_t *);
 void *my_super_memset(void *, int, size_t);
 

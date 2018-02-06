@@ -16,12 +16,10 @@ int replace_space(char *str)
 		if (string_mode == 0 && str[i] == '"') {
 			str[i] = '\0';
 			string_mode = 1;
-			i++;
 		}
 		if (string_mode == 1 && str[i] == '"') {
 			str[i] = '\0';
 			string_mode = 0;
-			i++;
 		}
 		if (string_mode == 0 && (str[i] == ' ' || str[i] == '\t'\
 					|| str[i] == ','))
