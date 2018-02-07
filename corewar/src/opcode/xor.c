@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void xor(env_t *env, program_t *p, instr info)
+void xor(env_t *env, program_t *p, instr_t info)
 {
 
 }

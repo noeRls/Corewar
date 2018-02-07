@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void zjmp(env_t *env, program_t *p, instr info)
+void zjmp(env_t *env, program_t *p, instr_t info)
 {
 
 }

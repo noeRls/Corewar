@@ -22,7 +22,8 @@ void manage_cycle(env_t *env)
 	for (program_t *prgm = env->prgm; prgm; prgm = prgm->next) {
 		prgm->live_signal += 1;
 		if (prgm->live_signal > env->cycle_to_die)
-			destroy_program(prgm);
+			//destroy_program(prgm);
+			;
 		prgm->cycle -= 1;
 	}
 	if (env->live_counter >= NBR_LIVE) {
@@ -33,7 +34,7 @@ void manage_cycle(env_t *env)
 
 int execute_prog(env_t *env, program_t *p)
 {
-	static void (*fctns[])(env_t *, program_t *, instr_t) = {live, ld, st, add, sub, and, or, xor, zjmp, ldi, sti, fork, lld, lldi, lfork, aff};
+	static void (*fctns[])(env_t *, program_t *, instr_t) = {live, ld, st, add, sub, and, or, xor, zjmp, ldi, sti, fork_op, lld, lldi, lfork, aff};
 	instr_t tmp;
 
 	read_from_mem(&(env->memory[p->PC]), &tmp, sizeof(instr_t));

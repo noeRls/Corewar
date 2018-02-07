@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void st(env_t *env, program_t *p, instr info)
+void st(env_t *env, program_t *p, instr_t info)
 {
 
 }

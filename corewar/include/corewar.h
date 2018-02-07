@@ -10,7 +10,10 @@
 #include "my.h"
 #include "op.h"
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
 
 #define PC reg[0]
 
@@ -41,3 +44,41 @@ typedef struct env_s {
 	int live_counter;
 	int cycle_to_die;
 } env_t;
+
+/*	src/main.c	*/
+
+program_t *start_prog(char *path);
+static void magic_reverse(void *x);
+void ini_prog_memory(env_t *env);
+void init(int ac, char **av, env_t *env);
+int main(int ac, char **av);
+
+/*	src/read_from_mem.c	*/
+
+void read_from_mem(char *memory, void *data, int size);
+
+/*	src/run.c	*/
+
+int nbr_prog_alive(env_t *env);
+void manage_cycle(env_t *env);
+int execute_prog(env_t *env, program_t *p);
+int run(env_t *env);
+
+/*	src/opcodes	*/
+
+void add(env_t *env, program_t *p, instr_t info);
+void aff(env_t *env, program_t *p, instr_t info);
+void and(env_t *env, program_t *p, instr_t info);
+void fork_op(env_t *env, program_t *p, instr_t info);
+void ld(env_t *env, program_t *p, instr_t info);
+void ldi(env_t *env, program_t *p, instr_t info);
+void lfork(env_t *env, program_t *p, instr_t info);
+void live(env_t *env, program_t *p, instr_t info);
+void lld(env_t *env, program_t *p, instr_t info);
+void lldi(env_t *env, program_t *p, instr_t info);
+void or(env_t *env, program_t *p, instr_t info);
+void st(env_t *env, program_t *p, instr_t info);
+void sti(env_t *env, program_t *p, instr_t info);
+void sub(env_t *env, program_t *p, instr_t info);
+void xor(env_t *env, program_t *p, instr_t info);
+void zjmp(env_t *env, program_t *p, instr_t info);

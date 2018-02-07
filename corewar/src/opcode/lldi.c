@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void lldi(env_t *env, program_t *p, instr info)
+void lldi(env_t *env, program_t *p, instr_t info)
 {
 
 }

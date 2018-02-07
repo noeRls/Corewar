@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void ldi(env_t *env, program_t *p, instr info)
+void ldi(env_t *env, program_t *p, instr_t info)
 {
 
 }

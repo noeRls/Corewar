@@ -9,7 +9,7 @@
 
 program_t *start_prog(char *path)
 {
-	int fd = open(path);
+	int fd = open(path, O_RDONLY);
 	program_t *prgm = malloc(sizeof(program_t));
 
 	if (!fd)
@@ -19,7 +19,6 @@ program_t *start_prog(char *path)
 	prgm->carry = 0;
 	prgm->fork = 0;
 	prgm->live_signal = 0;
-	my_memset(prgm->reg, 0, REG_NUMBER * sizeof(int));
 	return (prgm);
 }
 
@@ -46,7 +45,7 @@ void ini_prog_memory(env_t *env)
 		read(tmp->fd, &hd, sizeof(header_t));
 		magic_reverse(&(hd.prog_size));
 		code_size = hd.prog_size - sizeof(header_t);
-		read(tmp->fd, &(env->memory[tmp->PC]), code_size);
+		read(tmp->fd, &(env->memory[tmp->PC]), hd.prog_size);
 	}
 }
 
@@ -59,13 +58,13 @@ void init(int ac, char **av, env_t *env)
 	env->cycle_to_die = CYCLE_TO_DIE;
 	env->cycle = 0;
 	env->prgm = malloc(sizeof(program_t));
-	st->mem_start = 0;
 	st = start_prog(av[1]);
+	st->mem_start = 0;
 	st->next = 0;
 	start = st;
 	for (int i = 2; i < ac; i++) {
-		st->mem_start = (i - 1) * (MEM_SIZE / env->nbr_player);
 		st->next = start_prog(av[i]);
+		st->next->mem_start = (i - 1) * (MEM_SIZE / env->nbr_player);
 		st = st->next;
 	}
 	st->next = 0;
@@ -81,6 +80,6 @@ int main(int ac, char **av)
 	env_t env;
 
 	init(ac, av, &env);
-	run(env);
+	run(&env);
 	return (0);
 }

@@ -9,6 +9,7 @@
 SRC =	./src/main.c			\
 	./src/op.c			\
 	./src/run.c			\
+	./src/read_from_mem.c		\
 	./src/opcode/live.c		\
 	./src/opcode/zjmp.c		\
 	./src/opcode/ld.c		\
@@ -26,32 +27,25 @@ SRC =	./src/main.c			\
 	./src/opcode/sub.c		\
 	./src/opcode/lld.c		\
 
-
 OBJ =	$(SRC:.c=.o)
 
+CPPFLAGS = -Llib/my -lmy -Iinclude -g3
+
 NAME =	test
-
-CFLAGS +=	-Wall -Wextra -I./include
-
-LDFLAGS	=	-L./lib/my
-
-LDLIBS =	-lmy
 
 all:	lib $(NAME)
 
 $(NAME):	$(OBJ)
-	gcc -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
-
-lib:
 	make -C lib/my
+	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(CPPFLAGS)
 
 clean:
-	rm -f $(OBJ)
 	make clean -C lib/my
+	$(RM) -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
 	make fclean -C lib/my
+	$(RM) -f $(NAME)
 
 re:	fclean all
 

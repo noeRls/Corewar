@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void or(env_t *env, program_t *p, instr info)
+void or(env_t *env, program_t *p, instr_t info)
 {
 
 }

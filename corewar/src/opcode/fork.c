@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void fork(env_t *env, program_t *p, instr info)
+void fork_op(env_t *env, program_t *p, instr_t info)
 {
 
 }
