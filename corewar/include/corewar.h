@@ -8,6 +8,7 @@
 #include "display_f.h"
 #include "get_next_line.h"
 #include "my.h"
+#include "op.h"
 
 typedef struct program_s {
 	int id;
@@ -26,4 +27,7 @@ typedef struct env_s {
 	int cycle;
 	int cycle_to_die;
 	program_t *prgm;
+
+	int live_counter;
+	int cycle_to_die;
 } env_t;

@@ -5,6 +5,8 @@
 ** main
 */
 
+#include "corewar.h"
+
 program_t start_prog(char *path)
 {
 	int fd = open(path);
@@ -23,10 +25,11 @@ program_t start_prog(char *path)
 
 void init(int ac, char **av, env_t *env)
 {
+	env->cycle_to_die = CYCLE_TO_DIE;
+	env->cycle = 0;
 	env->prgm = malloc(sizeof(program_t));
 	*(env->prgm) = start_prog(av[1]);
 	for (int i = 2; i < ac; i++) {
-
 	}
 }
 
@@ -35,7 +38,6 @@ int main(int ac, char **av)
 	env_t env;
 
 	init(ac, av, &env);
-	for (int i = 0; i < env.prgms; i++) {
-
-	}
+	run(env);
+	return (0);
 }
