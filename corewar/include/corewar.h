@@ -14,20 +14,21 @@ typedef struct program_s {
 	int id;
 	int fd;
 	int prog_nb;
-	int pc;
 	int carry;
 	int fork;
-	int last_live_signal;
-	int reg[REG_NUMBER];
+	int live_signal;
+	int cycle;
+	int mem_start; //index of it allowed space
+	//currently it's r0
 	struct program_s *next;
 } program_t;
 
 typedef struct env_s {
 	char memory[MEM_SIZE];
-	int cycle;
-	int cycle_to_die;
 	program_t *prgm;
 
+	int nbr_player;
+	int cycle;
 	int live_counter;
 	int cycle_to_die;
 } env_t;
