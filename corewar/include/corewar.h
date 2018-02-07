@@ -21,7 +21,13 @@ typedef struct program_s {
 	int mem_start; //index of it allowed space
 	//currently it's r0
 	struct program_s *next;
+	int reg[REG_NUMBER];
 } program_t;
+
+typedef struct list_pg_s {
+	program_t pg;
+	program_t *next;
+} list_pg_t;
 
 typedef struct env_s {
 	char memory[MEM_SIZE];
