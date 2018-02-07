@@ -37,6 +37,7 @@ int main(int ac, char **av)
 		verif_syntax(mnemonique, tab);
 		write_coding_byte(tab, bin);
 		arg_encoder(tab, bin);
+		free(s);
 	}
 	rewrite(bin, &header);
 	return (0);

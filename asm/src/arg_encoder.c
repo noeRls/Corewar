@@ -19,17 +19,7 @@ void write_direct_arg(char *str, int fd)
 	char c = 0;
 	size_t tmp = super_getnbr(++str);
 
-	c ^= tmp & 4278190080;
-	write(fd, &c, sizeof(c));
-	c = 0;
-	c ^= tmp & 16711680;
-	write(fd, &c, sizeof(c));
-	c = 0;
-	c ^= tmp & 65280;
-	write(fd, &c, sizeof(c));
-	c = 0;
-	c ^= tmp & 255;
-	write(fd, &c, sizeof(c));
+	write(fd, tmp, DIR_SIZE);
 }
 
 void write_indirect_arg(char *str, int fd)

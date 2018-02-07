@@ -9,11 +9,16 @@
 
 char *file_to_cor(char *s)
 {
-	char *new = malloc(my_strlen(s) + 3);
+	char *new = 0;
+	int last = my_strlen(s);
 
-	(!new) ? exit(84) : new;
-	new = my_strcpy(new, s);
-	new[my_strlen(s) - 1] = '\0';
-	new = my_strcat(new, "cor");
+	for (int i = 0; s[i]; i++)
+		if (s[i] == '.')
+			last = i;
+	new = malloc(sizeof(char) * (last + 5));
+	if (!new)
+		exit(84);
+	my_strncpy(new, s, last);
+	my_strcat(new, ".cor");
 	return (new);
 }
