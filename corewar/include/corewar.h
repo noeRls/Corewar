@@ -9,6 +9,8 @@
 #include "get_next_line.h"
 #include "my.h"
 #include "op.h"
+#include <sys/types.h>
+#include <unistd.h>
 
 #define PC reg[0]
 
@@ -18,6 +20,7 @@ typedef struct instr_s {
 } instr_t;
 
 typedef struct program_s {
+	char *reg;
 	int id;
 	int fd;
 	int prog_nb;
