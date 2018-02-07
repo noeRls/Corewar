@@ -18,7 +18,7 @@ typedef struct program_s {
 	int carry;
 	int fork;
 	int last_live_signal;
-	int reg[REG_NUMBER];
+	char *reg;
 } program_t;
 
 typedef struct list_pg_s {
