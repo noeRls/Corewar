@@ -10,28 +10,32 @@
 #include "my.h"
 #include "op.h"
 
+#define PC reg[0]
+
+typedef struct instr_s {
+	char code;
+	char desc;
+} instr_t;
+
 typedef struct program_s {
 	int id;
 	int fd;
 	int prog_nb;
-	int pc;
 	int carry;
 	int fork;
-	int last_live_signal;
+	int live_signal;
 	char *reg;
+	int cycle;
+	int mem_start; //index of it allowed space
+	struct program_s *next;
 } program_t;
-
-typedef struct list_pg_s {
-	program_t pg;
-	program_t *next;
-} list_pg_t;
 
 typedef struct env_s {
 	char memory[MEM_SIZE];
-	int cycle;
-	int cycle_to_die;
 	program_t *prgm;
 
+	int nbr_player;
+	int cycle;
 	int live_counter;
 	int cycle_to_die;
 } env_t;
