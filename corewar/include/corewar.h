@@ -9,8 +9,11 @@
 #include "get_next_line.h"
 #include "my.h"
 #include "op.h"
+#include <sys/types.h>
+#include <unistd.h>
 
 typedef struct program_s {
+	char *reg;
 	int id;
 	int fd;
 	int prog_nb;
@@ -21,7 +24,6 @@ typedef struct program_s {
 	int mem_start; //index of it allowed space
 	//currently it's r0
 	struct program_s *next;
-	int reg[REG_NUMBER];
 } program_t;
 
 typedef struct list_pg_s {
