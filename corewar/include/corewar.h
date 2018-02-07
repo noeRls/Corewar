@@ -19,8 +19,12 @@ typedef struct program_s {
 	int fork;
 	int last_live_signal;
 	int reg[REG_NUMBER];
-	struct program_s *next;
 } program_t;
+
+typedef struct list_pg_s {
+	program_t pg;
+	program_t *next;
+} list_pg_t;
 
 typedef struct env_s {
 	char memory[MEM_SIZE];
