@@ -31,18 +31,18 @@ void manage_cycle(env_t *env)
 	}
 }
 
-int execute_prog(env_t *env, programs_t *p)
+int execute_prog(env_t *env, program_t *p)
 {
 	static void (*fctns[])(env_t *, program_t *, instr_t) = {live, ld, st, add, sub, and, or, xor, zjmp, ldi, sti, fork, lld, lldi, lfork, aff};
 	instr_t tmp;
 
-	read_from_mem(&env->memory[p->PC], &tmp, sizeof(instr_t));
+	read_from_mem(&(env->memory[p->PC]), &tmp, sizeof(instr_t));
 	fctns[tmp.code](env, p, tmp);
 }
 
 int run(env_t *env) {
 	while (nbr_prog_alive(env) > 2) {
-		for (program_t *p = env->prgms; prgms; prgms = prgms->next) {
+		for (program_t *p = env->prgm; p; p = p->next) {
 			if (!p->cycle) {
 				execute_prog(env, p);
 			}

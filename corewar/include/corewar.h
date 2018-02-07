@@ -27,7 +27,6 @@ typedef struct program_s {
 	int carry;
 	int fork;
 	int live_signal;
-	char *reg;
 	int cycle;
 	int mem_start; //index of it allowed space
 	struct program_s *next;
