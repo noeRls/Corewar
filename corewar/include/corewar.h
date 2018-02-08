@@ -22,8 +22,15 @@ typedef struct instr_s {
 	char desc;
 } instr_t;
 
+typedef enum type_s {
+	NONE = 0,
+	DIR = 2,
+	IND = 4,
+	REG = 1
+} type_arg_t;
+
 typedef struct program_s {
-	char *reg;
+	int *reg;
 	int id;
 	int fd;
 	int prog_nb;
@@ -66,6 +73,13 @@ int run(env_t *env);
 
 /*	src/opcodes	*/
 
+type_arg_t get_arg_type(char desc, int arg_nbr);
+int setup_arg(int *arg, program_t *p, instr_t *info, int idx_mod_ind);
+void set_cycle(program_t *p, char code);
+int get_arg_data(program_t *p, type_arg_t type);
+int up_pc(program_t *p, int size);
+type_arg_t get_arg_type(char desc, int arg_nbr);
+
 void add(env_t *env, program_t *p, instr_t info);
 void aff(env_t *env, program_t *p, instr_t info);
 void and(env_t *env, program_t *p, instr_t info);
@@ -82,3 +96,6 @@ void sti(env_t *env, program_t *p, instr_t info);
 void sub(env_t *env, program_t *p, instr_t info);
 void xor(env_t *env, program_t *p, instr_t info);
 void zjmp(env_t *env, program_t *p, instr_t info);
+
+#define TRUE 1
+#define FALSE 0
