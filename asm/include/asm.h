@@ -47,10 +47,12 @@ char *file_to_cor(char *);
 void verif_syntax(int, char **);
 void write_coding_byte(char **, int);
 arg_type get_arg_type(char *);
-void arg_encoder(char **, int, int);
+void arg_encoder(char **, int, int, label_t *);
 int fill_header(char **, header_t *);
 void rewrite(int, header_t *);
 void *my_super_memset(void *, int, size_t);
 void write_indirect_arg(char *, int);
+void fill_label_call(char *, int, int, label_t *);
+void fill_label_decla(char *, int, int, label_t *);
 
 #endif
