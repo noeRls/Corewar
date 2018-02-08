@@ -26,6 +26,7 @@ SRC =	./src/main.c			\
 	./src/opcode/st.c		\
 	./src/opcode/sub.c		\
 	./src/opcode/lld.c		\
+	./src/opcode/tool_op.c		\
 
 OBJ =	$(SRC:.c=.o)
 

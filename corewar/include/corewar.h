@@ -22,7 +22,15 @@ typedef struct instr_s {
 	char desc;
 } instr_t;
 
+typedef enum type_s {
+	NONE = 0,
+	DIR = 2,
+	IND = 4,
+	REG = 1
+} type_arg_t;
+
 typedef struct program_s {
+	instr_t *info;
 	int *reg;
 	int id;
 	int fd;
@@ -36,7 +44,7 @@ typedef struct program_s {
 } program_t;
 
 typedef struct env_s {
-	char memory[MEM_SIZE];
+	unsigned char memory[MEM_SIZE];
 	program_t *prgm;
 
 	int nbr_player;
@@ -55,7 +63,8 @@ int main(int ac, char **av);
 
 /*	src/read_from_mem.c	*/
 
-void read_from_mem(char *memory, void *data, int size);
+void read_from_mem(unsigned char *memory, void *data, int size, int start);
+void print_hexa_mem(unsigned char *mem);
 
 /*	src/run.c	*/
 
@@ -65,6 +74,13 @@ int execute_prog(env_t *env, program_t *p);
 int run(env_t *env);
 
 /*	src/opcodes	*/
+
+type_arg_t get_arg_type(char desc, int arg_nbr);
+int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind);
+void set_cycle(program_t *p, char code);
+int get_arg_data(env_t *env, program_t *p, type_arg_t type);
+int up_pc(program_t *p, int size);
+type_arg_t get_arg_type(char desc, int arg_nbr);
 
 void add(env_t *env, program_t *p, instr_t info);
 void aff(env_t *env, program_t *p, instr_t info);
@@ -82,3 +98,6 @@ void sti(env_t *env, program_t *p, instr_t info);
 void sub(env_t *env, program_t *p, instr_t info);
 void xor(env_t *env, program_t *p, instr_t info);
 void zjmp(env_t *env, program_t *p, instr_t info);
+
+#define TRUE 1
+#define FALSE 0
