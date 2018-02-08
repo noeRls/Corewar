@@ -30,7 +30,6 @@ void fill_label_decla(char *str, int fd, int mnemonique, label_t *label)
 	decla->next = malloc(sizeof(decla_t));
 	decla = decla->next;
 	decla->name = my_strdup(str);
-	decla->abs_pos = label->current_pos;
-	decla->rel_pos = -1;
+	decla->pos = label->current_pos;
 	decla->next = NULL;
 }
