@@ -14,14 +14,21 @@ void write_register_arg(char *str, int fd)
 	write(fd, &c, sizeof(char));
 }
 
+int check_mnemonique_case(int mnemonique)
+{
+	mnemonique++;
+	if (mnemonique == 9 || mnemonique == 10 || mnemonique == 11\
+	|| mnemonique == 12 || mnemonique == 14 || mnemonique == 15)
+		return (1);
+	return (0);
+}
+
 void write_direct_arg(char *str, int fd, int mnemonique)
 {
 	char c = 0;
 	size_t tmp = super_getnbr(++str);
 
-	mnemonique++;
-	if (mnemonique == 9 || mnemonique == 10 || mnemonique == 11\
-	|| mnemonique == 12 || mnemonique == 14 || mnemonique == 15) {
+	if (check_mnemonique_case(mnemonique)) {
 		write_indirect_arg(str, fd);
 		return;
 	}
@@ -50,7 +57,7 @@ void write_indirect_arg(char *str, int fd)
 	write(fd, &c, sizeof(c));
 }
 
-void arg_encoder(char **tab, int fd, int mnemonique)
+void arg_encoder(char **tab, int fd, int mnemonique, label_t *label)
 {
 	for (int i = 1 ; tab[i] ; i++) {
 		switch (get_arg_type(tab[i])) {
@@ -64,8 +71,10 @@ void arg_encoder(char **tab, int fd, int mnemonique)
 			write_indirect_arg(tab[i], fd);
 			break;
 		case LABEL_CALL:
+			fill_label_call(tab[i], fd, mnemonique, label);
 			break;
 		case LABEL_DECLARATION:
+			fill_label_decla(tab[i], fd, mnemonique, label);
 			break;
 		}
 	}
