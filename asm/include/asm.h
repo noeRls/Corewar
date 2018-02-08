@@ -17,7 +17,8 @@ typedef enum {
 	REGISTER,
 	DIRECT,
 	INDIRECT,
-	LABEL
+	LABEL_CALL,
+	LABEL_DECLARATION
 } arg_type;
 
 typedef struct label_call_s {
