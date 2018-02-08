@@ -22,7 +22,7 @@ int up_pc(program_t *p, int size)
 	return (0);
 }
 
-int get_arg_value(program_t *p, type_arg_t type)
+int get_arg_data(program_t *p, type_arg_t type)
 {
 	int value = 0;
 	int size = 0;
@@ -37,6 +37,8 @@ int get_arg_value(program_t *p, type_arg_t type)
 	case REG:
 		size = REG_SIZE;
 		break;
+	default:
+		return (0);
 	}
 	read_from_mem(&(env->memory[p->PC]), &value, size);
 	up_pc(p, size);
@@ -47,15 +49,25 @@ void set_cycle(program_t *p, char code)
 	p->cycle = op_tab[code - 1].nbr_cycles;
 }
 
-int setup_arg(int *arg, program_t *p, char desc)
+void manage_idx_mod(int *value, program_t *p)
+{
+	*value = (*value - p->mem_start) % IDX_MOD;
+	*value = *value + p->mem_start;
+}
+
+int setup_arg(int *arg, program_t *p, instr_t *info, int idx_mod_ind)
 {
 	type_arg_t type;
 
-	for (int i = 0; i < MAX_ARGS_NUMBER; i++) {
-		type = get_arg_type(desc, i + 1);
+	for (int i = 0; i < op_tab[info->code - 1].nbr_args; i++) {
+		type = get_arg_type(info->desc, i + 1);
 		if (type == NONE)
 			return (84);
-		arg[i] = get_arg_value(p, type);
+		arg[i] = get_arg_data(p, type);
+		if (type == IND) {
+			arg[i] = p->PC + arg[i];
+			idx_mod_ind ? manage_idx_mod(&(arg[i]), p) : 0;
+		}
 	}
 	return (0);
 }
