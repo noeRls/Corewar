@@ -12,11 +12,11 @@ label:	sub r2,r7,r2
 	and %23,40,r1
 	or 12,%1,r12
 	xor %32,%12,r1
-	zjmp %:label
+	zjmp %:ok
 	ldi %4,%12,r1
 	sti r1,r2,%4
 	fork %16
 	lld %4,r1
-	lldi %4,%12,r1
+ok:	lldi %4,%12,r1
 	lfork %16
 	aff r3

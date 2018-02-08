@@ -34,9 +34,9 @@ void write_coding_byte(char **tab, int fd, label_t *label)
 		type = get_arg_type(tab[i]);
 		if (type == REGISTER)
 			c = c ^ (85 & (192 >> (i - 1) * 2));
-		if (type == DIRECT)
+		if (tab[i][0] == DIRECT_CHAR)
 			c = c ^ (170 & (192 >> (i - 1) * 2));
-		if (type == INDIRECT || type == LABEL_CALL)
+		if (tab[i][0] != DIRECT_CHAR && tab[i][0] != 'r')
 			c = c ^ (255 & (192 >> (i - 1) * 2));
 	}
 	write(fd, &c, sizeof(char));

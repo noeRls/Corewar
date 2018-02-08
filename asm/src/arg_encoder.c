@@ -27,8 +27,11 @@ int check_mnemonique_case(int mnemonique)
 void write_direct_arg(char *str, int fd, int mnemonique, label_t *label)
 {
 	char c = 0;
-	size_t tmp = super_getnbr(++str);
+	size_t tmp;
 
+	if (str[0] == DIRECT_CHAR)
+		++str;
+	tmp = super_getnbr(str);
 	if (check_mnemonique_case(mnemonique)) {
 		write_indirect_arg(str, fd, label);
 		return;

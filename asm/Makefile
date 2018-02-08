@@ -16,6 +16,7 @@ SRC		=	$(SDIR)main.c			\
 			$(SDIR)file_to_cor.c		\
 			$(SDIR)verif_syntax.c		\
 			$(SDIR)label.c			\
+			$(SDIR)int_to_str.c		\
 			$(SDIR)rewrite_label.c		\
 			$(SDIR)header.c			\
 			$(SDIR)op.c			\

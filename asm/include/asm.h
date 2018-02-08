@@ -22,9 +22,10 @@ typedef enum {
 } arg_type;
 
 typedef struct label_call_s {
-	int abs_pos;
-	int rel_pos;
+	size_t abs_pos;
+	size_t rel_pos;
 	int nb_bytes;
+	arg_type type;
 	char *name;
 	struct label_call_s *next;
 } call_t;
@@ -59,5 +60,7 @@ void fill_label_call(char *, int, int, label_t *);
 void fill_label_decla(char *, int, label_t *);
 void printf_linked_list(call_t *, decla_t *);
 void rewrite_label(int, label_t *);
+int check_mnemonique_case(int);
+char *int_to_str(long int, char *);
 
 #endif
