@@ -38,6 +38,7 @@ typedef struct label_declaration_s {
 typedef struct label_list_s {
 	decla_t *decla;
 	call_t *call;
+	size_t current_pos;
 } label_t;
 
 int write_instruction(char *cmd, int fd);
@@ -52,7 +53,7 @@ int fill_header(char **, header_t *);
 void rewrite(int, header_t *);
 void *my_super_memset(void *, int, size_t);
 void write_indirect_arg(char *, int);
-void fill_label_call(char *, int, int, call_t *);
-void fill_label_decla(char *, int, int, decla_t *);
+void fill_label_call(char *, int, int, label_t *);
+void fill_label_decla(char *, int, int, label_t *);
 
 #endif
