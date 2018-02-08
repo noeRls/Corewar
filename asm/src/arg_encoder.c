@@ -19,6 +19,7 @@ void write_direct_arg(char *str, int fd, int mnemonique)
 	char c = 0;
 	size_t tmp = super_getnbr(++str);
 
+	mnemonique++;
 	if (mnemonique == 9 || mnemonique == 10 || mnemonique == 11\
 	|| mnemonique == 12 || mnemonique == 14 || mnemonique == 15) {
 		write_indirect_arg(str, fd);
