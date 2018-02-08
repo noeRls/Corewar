@@ -9,6 +9,7 @@
 
 void sti(env_t *env, program_t *p, instr_t info)
 {
+	printf("STI\n");
 	int arg[MAX_ARGS_NUMBER] = {0};
 	int index = 0;
 	int pc_b = p->PC;
@@ -17,6 +18,7 @@ void sti(env_t *env, program_t *p, instr_t info)
 		p->cycle = 1;
 		return;
 	}
+	printf("PASS\n");
 	for (int i = 1; i < 3; i++) {
 		if (get_arg_type(info.desc, i + 1) == REG)
 			arg[i] = p->reg[arg[i]];
