@@ -64,10 +64,14 @@ void set_cycle(program_t *p, char code)
 	p->cycle = op_tab[code - 1].nbr_cycles;
 }
 
-void manage_idx_mod(int *value, program_t *p)
+void manage_idx_mod(int *value, program_t *p, int idx_mod_ind)
 {
-	*value = (*value - p->mem_start) % IDX_MOD;
-	*value = *value + p->mem_start;
+	if (idx_mod_ind) {
+		*value = (*value - p->mem_start) % IDX_MOD;
+		*value = *value + p->mem_start;
+	} else {
+		*value = *value % MEM_SIZE;
+	}
 }
 
 int setup_arg(int *arg, program_t *p, instr_t *info, int idx_mod_ind)
@@ -83,7 +87,7 @@ int setup_arg(int *arg, program_t *p, instr_t *info, int idx_mod_ind)
 			return (84);
 		if (type == IND) {
 			arg[i] = p->PC + arg[i];
-			idx_mod_ind ? manage_idx_mod(&(arg[i]), p) : 0;
+			manage_idx_mod(&(arg[i]), p, idw_mod_ind);
 		}
 	}
 	return (0);

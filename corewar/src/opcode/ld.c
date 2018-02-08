@@ -17,6 +17,8 @@ void ld(env_t *env, program_t *p, instr_t info)
 		p->cycle = 1;
 		return;
 	}
+	if (get_arg_type(info.desc, 1) == IND)
+		arg[0] = env->memory[arg[0]];
 	p->carry = 0;
 	set_cycle(p, info.code);
 	p->reg[arg[1]] = env->memory[arg[0]];
