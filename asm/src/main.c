@@ -23,6 +23,16 @@ label_t *init_label(void)
 	return (label);
 }
 
+char **shift_tab(char **tab)
+{
+	int i;
+
+	for (i = 1 ; tab[i] ; i++)
+		tab[i - 1] = tab[i];
+	tab[i - 1] = tab[i];
+	return (tab);
+}
+
 int main(int ac, char **av)
 {
 	int src = open(av[1], O_RDONLY);
@@ -41,15 +51,21 @@ int main(int ac, char **av)
 		if (!(*s))
 			continue;
 		tab = str_to_av(s);
+		//print_tabtab(tab);
 		if (tab[0][0] == COMMENT_CHAR)
 			continue;
 		if (fill_header(tab, &header))
 			continue;
+		if (get_arg_type(tab[0]) == LABEL_DECLARATION) {
+			fill_label_decla(tab[0], bin, label);
+			tab = shift_tab(tab);
+		}
 		mnemonique = write_instruction(tab[0], bin, label);
-		verif_syntax(mnemonique, tab);
+//		verif_syntax(mnemonique, tab);
 		write_coding_byte(tab, bin, label);
 		arg_encoder(tab, bin, mnemonique, label);
 	}
+	printf_linked_list(label->call, label->decla);
 	rewrite(bin, &header);
 	return (0);
 }

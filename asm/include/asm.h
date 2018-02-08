@@ -54,7 +54,8 @@ int fill_header(char **, header_t *);
 void rewrite(int, header_t *);
 void *my_super_memset(void *, int, size_t);
 void write_indirect_arg(char *, int, label_t *);
-void fill_label_call(char *, int, int, label_t *);
-void fill_label_decla(char *, int, int, label_t *);
+void fill_label_call(char *, int, label_t *);
+void fill_label_decla(char *, int, label_t *);
+void printf_linked_list(call_t *, decla_t *);
 
 #endif

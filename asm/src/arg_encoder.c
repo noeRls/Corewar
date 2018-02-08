@@ -74,10 +74,10 @@ void arg_encoder(char **tab, int fd, int mnemonique, label_t *label)
 			write_indirect_arg(tab[i], fd, label);
 			break;
 		case LABEL_CALL:
-			fill_label_call(tab[i], fd, mnemonique, label);
+			fill_label_call(tab[i], fd, label);
 			break;
 		case LABEL_DECLARATION:
-			fill_label_decla(tab[i], fd, mnemonique, label);
+			my_puterror("error\n");
 			break;
 		}
 	}
