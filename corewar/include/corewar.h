@@ -69,6 +69,8 @@ void write_to_mem(unsigned char *memory, void *data, int size, int start);
 void print_hexa_mem(unsigned char *mem);
 void swap(void *data, int size);
 
+int get_reg_value(char *memory, program_t *p, int index);
+
 /*	src/run.c	*/
 
 int nbr_prog_alive(env_t *env);
