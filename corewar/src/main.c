@@ -38,7 +38,7 @@ static void magic_reverse(void *x)
 void ini_prog_memory(env_t *env)
 {
 	header_t hd;
-	int x = 1;
+	int x = 10;
 	int code_size = 0;
 
 	for (program_t *tmp = env->prgm; tmp; tmp = tmp->next) {//assign id
