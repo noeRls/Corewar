@@ -44,19 +44,21 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 
 	switch (type) {
 	case DIR:
-		size = DIR_SIZE;
+		size = T_DIR;
 		break;
 	case IND:
-		size = IND_SIZE;
+		size = T_IND;
 		break;
 	case REG:
-		size = REG_SIZE;
+		size = T_REG;
 		break;
 	default:
 		return (0);
 	}
 	read_from_mem(env->memory, &value, size, p->PC);
+	swap(&value, size);
 	up_pc(p, size);
+	return (value);
 }
 
 void set_cycle(program_t *p, char code)
@@ -81,11 +83,15 @@ int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind)
 
 	for (int i = 0; i < op_tab[info->code - 1].nbr_args; i++) {
 		type = get_arg_type(info->desc, i + 1);
+		printf("setup_arg\n");
 		if (!(type & op_tab[info->code - 1].type[i]))
 			return (84);
+		printf("little_pass\n");
 		arg[i] = get_arg_data(env, p, type);
-		if (type == REG && arg[i] > REG_NUMBER || arg[i] <= 0)
+		printf("arg[i]:%d\n", arg[i]);
+		if (type == REG && (arg[i] > REG_NUMBER || arg[i] <= 0))
 			return (84);
+		printf("big pass\n");
 		if (type == IND) {
 			arg[i] = p->PC + arg[i];
 			manage_idx_mod(&(arg[i]), p, idx_mod_ind);

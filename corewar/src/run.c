@@ -41,17 +41,24 @@ int execute_prog(env_t *env, program_t *p)
 	read_from_mem(env->memory, &tmp, sizeof(instr_t), p->PC);
 	p->PC += sizeof(instr_t);
 	p->info = &tmp;
-	fctns[tmp.code](env, p, tmp);
+	if (tmp.code > 16 || tmp.code < 1)
+		p->cycle = 1;
+	else
+		fctns[tmp.code - 1](env, p, tmp);
+	printf("code :%d\n", tmp.code);
 }
 
 int run(env_t *env) {
 	print_hexa_mem(env->memory);
-	while (nbr_prog_alive(env) > 2) {
+	printf("\n\n\n");
+	while (nbr_prog_alive(env) > 0) {
 		for (program_t *p = env->prgm; p; p = p->next) {
 			if (!p->cycle) {
 				execute_prog(env, p);
 				print_hexa_mem(env->memory);
+				printf("\n\n\n\n");
 			}
+			printf("kaka:%d\n", p->cycle);
 		}
 		manage_cycle(env);
 	}

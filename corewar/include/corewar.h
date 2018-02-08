@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #define PC reg[0]
 
@@ -64,7 +65,9 @@ int main(int ac, char **av);
 /*	src/read_from_mem.c	*/
 
 void read_from_mem(unsigned char *memory, void *data, int size, int start);
+void write_to_mem(unsigned char *memory, void *data, int size, int start);
 void print_hexa_mem(unsigned char *mem);
+void swap(void *data, int size);
 
 /*	src/run.c	*/
 
