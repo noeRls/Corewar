@@ -9,8 +9,12 @@
 
 arg_type get_arg_type(char *str)
 {
-	if (contains(str, LABEL_CHAR))
-		return (LABEL);
+	if (contains(str, LABEL_CHAR)) {
+		if (str[my_strlen(str)] != ':')
+			return (LABEL_CALL);
+		if (str[my_strlen(str)] == ':')
+			return (LABEL_DECLARATION);
+	}
 	if (str[0] == 'r')
 		return (REGISTER);
 	if (str[0] == DIRECT_CHAR)
@@ -32,7 +36,7 @@ void write_coding_byte(char **tab, int fd)
 			c = c ^ (85 & (192 >> (i - 1) * 2));
 		if (type == DIRECT)
 			c = c ^ (170 & (192 >> (i - 1) * 2));
-		if (type == INDIRECT || type == LABEL)
+		if (type == INDIRECT || type == LABEL_CALL)
 			c = c ^ (255 & (192 >> (i - 1) * 2));
 	}
 	write(fd, &c, sizeof(char));
