@@ -10,9 +10,9 @@
 arg_type get_arg_type(char *str)
 {
 	if (contains(str, LABEL_CHAR)) {
-		if (str[my_strlen(str)] != ':')
+		if (str[my_strlen(str) - 1] != ':')
 			return (LABEL_CALL);
-		if (str[my_strlen(str)] == ':')
+		if (str[my_strlen(str) - 1] == ':')
 			return (LABEL_DECLARATION);
 	}
 	if (str[0] == 'r')

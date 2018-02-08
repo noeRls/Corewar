@@ -56,6 +56,7 @@ int main(int ac, char **av)
 			continue;
 		if (fill_header(tab, &header))
 			continue;
+//		printf("tab 0 = %s\n", tab[0]);
 		if (get_arg_type(tab[0]) == LABEL_DECLARATION) {
 			fill_label_decla(tab[0], bin, label);
 			tab = shift_tab(tab);
