@@ -79,7 +79,7 @@ int setup_arg(int *arg, program_t *p, instr_t *info, int idx_mod_ind)
 		if (!(type & op_tab[info->code - 1].type[i]))
 			return (84);
 		arg[i] = get_arg_data(p, type);
-		if (type == REG && arg[i] > REG_NUMBER)
+		if (type == REG && arg[i] > REG_NUMBER || arg[i] <= 0)
 			return (84);
 		if (type == IND) {
 			arg[i] = p->PC + arg[i];
