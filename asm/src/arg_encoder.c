@@ -63,7 +63,9 @@ void arg_encoder(char **tab, int fd, int mnemonique)
 		case INDIRECT:
 			write_indirect_arg(tab[i], fd);
 			break;
-		case LABEL:
+		case LABEL_CALL:
+			break;
+		case LABEL_DECLARATION:
 			break;
 		}
 	}

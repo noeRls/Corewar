@@ -54,3 +54,12 @@ void read_from_mem(unsigned char *memory, void *data, int size, int start)
 		tmp[i] = memory[(start + i) % MEM_SIZE];
 	}
 }
+
+int get_reg_value(char *memory, program_t *p, int index)
+{
+	int res = 0;
+
+	res = p->reg[index];
+	swap(&res, sizeof(int));
+	return (res);
+}
