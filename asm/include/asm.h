@@ -20,6 +20,19 @@ typedef enum {
 	LABEL
 } arg_type;
 
+typedef struct label_call_s {
+	int pos;
+	arg_type type;
+	struct label_call_s *next;
+} label_call_t;
+
+typedef struct label_declaration_s {
+	char *name;
+	int pos;
+	struct label_declaration_s *next;
+	struct label_call_s *call;
+} label_declaration_t;
+
 int write_instruction(char *cmd, int fd);
 void print_tabtab(char **);
 char **str_to_av(char *);
