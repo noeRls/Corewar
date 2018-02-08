@@ -7,6 +7,18 @@
 
 #include "corewar.h"
 
+void swap(void *data, int size)
+{
+	char *tmp = (char *) data;
+	char t = 0;
+
+	for (int i = 0; i < size / 2; i++) {
+		t = tmp[i];
+		tmp[i] = tmp[size - 1 - i];
+		tmp[size - 1 - i] = t;
+	}
+}
+
 void print_hexa_mem(unsigned char *memory)
 {
 	unsigned char *tmp = 0;
