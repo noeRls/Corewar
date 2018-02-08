@@ -5,6 +5,8 @@
 ** mem
 */
 
+#include "corewar.h"
+
 void read_from_mem(char *memory, void *data, int size, int start)
 {
 	char *tmp = (char *) data;

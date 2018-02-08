@@ -39,7 +39,7 @@ void ini_prog_memory(env_t *env)
 	int code_size = 0;
 
 	for (program_t *tmp = env->prgm; tmp; tmp = tmp->next) {//assign id
-		tmp->reg = &(env->memory[tmp->mem_start]);
+		tmp->reg = (int *) &(env->memory[tmp->mem_start]);
 		tmp->reg[1] = x++; //assign r1 | id
 		tmp->reg[0] = tmp->mem_start + REG_NUMBER * REG_SIZE;//ini_pc
 		read(tmp->fd, &hd, sizeof(header_t));
