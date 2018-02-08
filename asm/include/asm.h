@@ -21,16 +21,17 @@ typedef enum {
 } arg_type;
 
 typedef struct label_call_s {
-	int pos;
-	arg_type type;
+	int abs_pos;
+	int rel_pos;
+	int nb_bytes;
+	char *label;
 	struct label_call_s *next;
 } label_call_t;
 
 typedef struct label_declaration_s {
-	char *name;
 	int pos;
+	char *label;
 	struct label_declaration_s *next;
-	struct label_call_s *call;
 } label_declaration_t;
 
 int write_instruction(char *cmd, int fd);
