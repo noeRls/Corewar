@@ -65,6 +65,7 @@ int main(int ac, char **av);
 
 void read_from_mem(unsigned char *memory, void *data, int size, int start);
 void print_hexa_mem(unsigned char *mem);
+void swap(void *data, int size);
 
 /*	src/run.c	*/
 
