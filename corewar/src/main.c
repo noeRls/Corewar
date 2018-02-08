@@ -19,6 +19,7 @@ program_t *start_prog(char *path)
 	prgm->carry = 0;
 	prgm->fork = 0;
 	prgm->live_signal = 0;
+	prgm->cycle = 0;
 	return (prgm);
 }
 
@@ -40,6 +41,7 @@ void ini_prog_memory(env_t *env)
 
 	for (program_t *tmp = env->prgm; tmp; tmp = tmp->next) {//assign id
 		tmp->reg = (int *) &(env->memory[tmp->mem_start]);
+		tmp->id = x;
 		tmp->reg[1] = x++; //assign r1 | id
 		tmp->reg[0] = tmp->mem_start + REG_NUMBER * REG_SIZE;//ini_pc
 		read(tmp->fd, &hd, sizeof(header_t));
@@ -71,6 +73,7 @@ void init(int ac, char **av, env_t *env)
 	env->prgm = start;
 	my_memset(env->memory, 0, MEM_SIZE);
 	ini_prog_memory(env);
+	env->live_counter = 0;
 }
 
 int main(int ac, char **av)
