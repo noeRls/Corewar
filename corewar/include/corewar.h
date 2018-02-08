@@ -63,7 +63,7 @@ int main(int ac, char **av);
 
 /*	src/read_from_mem.c	*/
 
-void read_from_mem(char *memory, void *data, int size);
+void read_from_mem(char *memory, void *data, int size, int start);
 
 /*	src/run.c	*/
 

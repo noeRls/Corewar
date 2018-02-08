@@ -38,7 +38,7 @@ int execute_prog(env_t *env, program_t *p)
 	static void (*fctns[])(env_t *, program_t *, instr_t) = {live, ld, st, add, sub, and, or, xor, zjmp, ldi, sti, fork_op, lld, lldi, lfork, aff};
 	instr_t tmp;
 
-	read_from_mem(&(env->memory[p->PC]), &tmp, sizeof(instr_t));
+	read_from_mem(env->memory, &tmp, sizeof(instr_t), p->PC);
 	p->PC += sizeof(instr_t);
 	p->info = &tmp;
 	fctns[tmp.code](env, p, tmp);

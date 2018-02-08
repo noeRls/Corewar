@@ -55,7 +55,7 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 	default:
 		return (0);
 	}
-	read_from_mem(&(env->memory[p->PC]), &value, size);
+	read_from_mem(env->memory, &value, size, p->PC);
 	up_pc(p, size);
 }
 
@@ -84,7 +84,7 @@ int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind)
 		if (!(type & op_tab[info->code - 1].type[i]))
 			return (84);
 		arg[i] = get_arg_data(env, p, type);
-		if (type == REG && arg[i] > REG_NUMBER)
+		if (type == REG && arg[i] > REG_NUMBER || arg[i] <= 0)
 			return (84);
 		if (type == IND) {
 			arg[i] = p->PC + arg[i];
