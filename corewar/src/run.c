@@ -39,7 +39,11 @@ int execute_prog(env_t *env, program_t *p)
 	instr_t tmp;
 
 	read_from_mem(env->memory, &tmp, sizeof(instr_t), p->PC);
-	p->PC += sizeof(instr_t);
+	if (tmp.code == 1 || tmp.code == 9 || \
+	tmp.code == 12 || tmp.code == 15)
+		p->PC += 1;
+	else
+		p->PC += sizeof(instr_t);
 	p->info = &tmp;
 	if (tmp.code > 16 || tmp.code < 1)
 		p->cycle = 1;

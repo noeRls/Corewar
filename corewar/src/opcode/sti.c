@@ -13,6 +13,7 @@ void sti(env_t *env, program_t *p, instr_t info)
 	int arg[MAX_ARGS_NUMBER] = {0};
 	int index = 0;
 	int pc_b = p->PC - 2;
+	int tmp = 0;
 
 	if (setup_arg(arg, p, env, TRUE) == 84) {
 		p->cycle = 1;
@@ -25,12 +26,11 @@ void sti(env_t *env, program_t *p, instr_t info)
 		if (get_arg_type(info.desc, i + 1) == IND)
 			arg[i] -= pc_b;
 	}
-	printf("arg 2 :%d, arg 3 :%d\n", arg[1], arg[2]);
 	index += arg[1];
 	index += arg[2];
 	index += pc_b;
-	printf("INDEX : %d\n", index);
-	printf("val index : %d\n", p->reg[arg[0]]);
-	write_to_mem(env->memory, p->reg[arg[0]], sizeof(int), index);
+	tmp = p->reg[arg[0]];
+	swap(&tmp, sizeof(int));
+	write_to_mem(env->memory, &tmp, sizeof(int), index);
 	set_cycle(p, info.code);
 }
