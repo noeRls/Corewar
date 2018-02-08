@@ -25,7 +25,7 @@ typedef struct instr_s {
 typedef enum type_s {
 	NONE = 0,
 	DIR = 2,
-	IND = 3,
+	IND = 4,
 	REG = 1
 } type_arg_t;
 

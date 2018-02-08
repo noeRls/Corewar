@@ -10,10 +10,25 @@
 type_arg_t get_arg_type(char desc, int arg_nbr)
 {
 	char nbr;
+	type_arg_t type;
 
 	nbr = desc >> (4 - arg_nbr) * 2;
 	nbr &= 3;
-	return ((type_arg_t)(nbr));
+	switch (nbr) {
+	case 1:
+		type = REG;
+		break;
+	case 2:
+		type = DIR;
+		break;
+	case 3:
+		type = IND;
+		break;
+	default:
+		type = NONE;
+		break;
+	}
+	return (type);
 }
 
 int up_pc(program_t *p, int size)
@@ -61,7 +76,7 @@ int setup_arg(int *arg, program_t *p, instr_t *info, int idx_mod_ind)
 
 	for (int i = 0; i < op_tab[info->code - 1].nbr_args; i++) {
 		type = get_arg_type(info->desc, i + 1);
-		if (type == NONE)
+		if (!(type & op_tab[info->code - 1].type[i]))
 			return (84);
 		arg[i] = get_arg_data(p, type);
 		if (type == IND) {
