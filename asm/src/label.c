@@ -7,7 +7,7 @@
 
 #include "asm.h"
 
-void fill_label_call(char *str, int fd, label_t *label)
+void fill_label_call(char *str, int fd, int mnemonique, label_t *label)
 {
 	call_t *call = label->call;
 
@@ -25,7 +25,11 @@ void fill_label_call(char *str, int fd, label_t *label)
 	call->abs_pos = label->current_pos;
 	call->rel_pos = -1;
 	call->next = NULL;
-	printf("fill label call, name: %s, abs pos = %d\n", call->name, call->abs_pos);
+	if (str[0] == DIRECT_CHAR)
+		write_direct_arg(str, fd, mnemonique, label);
+	else
+		write_indirect_arg(str, fd, label);
+//	printf("fill label call, name: %s, abs pos = %d\n", call->name, call->abs_pos);
 }
 
 void fill_label_decla(char *str, int fd, label_t *label)
@@ -45,10 +49,10 @@ void fill_label_decla(char *str, int fd, label_t *label)
 	decla->name = my_strdup(str);
 	decla->pos = label->current_pos;
 	decla->next = NULL;
-	printf("fill label decla, name: %s, abs pos = %d\n", decla->name, decla->pos);
+//	printf("fill label decla, name: %s, abs pos = %d\n", decla->name, decla->pos);
 }
 
-void printf_linked_list(call_t *call, decla_t *decla)
+/*void printf_linked_list(call_t *call, decla_t *decla)
 {
 	call = call;
 	decla = decla;
@@ -58,3 +62,4 @@ void printf_linked_list(call_t *call, decla_t *decla)
 	for (decla = decla ; decla ; decla = decla->next)
 		printf("decla de %s pos %d\n", decla->name, decla->pos);
 }
+*/

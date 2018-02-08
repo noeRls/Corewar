@@ -12,7 +12,7 @@ void write_register_arg(char *str, int fd, label_t *label)
 	char c = getnbr(++str);
 
 	write(fd, &c, sizeof(char));
-	label->tmp += 1;
+	label->tmp_pos += 1;
 }
 
 int check_mnemonique_case(int mnemonique)
@@ -44,7 +44,7 @@ void write_direct_arg(char *str, int fd, int mnemonique, label_t *label)
 	c = 0;
 	c ^= tmp & 255;
 	write(fd, &c, sizeof(c));
-	label->tmp += 4;
+	label->tmp_pos += 4;
 }
 
 void write_indirect_arg(char *str, int fd, label_t *label)
@@ -57,7 +57,7 @@ void write_indirect_arg(char *str, int fd, label_t *label)
 	c = 0;
 	c ^= tmp & 255;
 	write(fd, &c, sizeof(c));
-	label->tmp += 2;
+	label->tmp_pos += 2;
 }
 
 void arg_encoder(char **tab, int fd, int mnemonique, label_t *label)
@@ -74,7 +74,7 @@ void arg_encoder(char **tab, int fd, int mnemonique, label_t *label)
 			write_indirect_arg(tab[i], fd, label);
 			break;
 		case LABEL_CALL:
-			fill_label_call(tab[i], fd, label);
+			fill_label_call(tab[i], fd, mnemonique, label);
 			break;
 		case LABEL_DECLARATION:
 			my_puterror("error\n");

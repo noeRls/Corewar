@@ -30,7 +30,7 @@ typedef struct label_call_s {
 } call_t;
 
 typedef struct label_declaration_s {
-	int pos;
+	size_t pos;
 	char *name;
 	struct label_declaration_s *next;
 } decla_t;
@@ -39,7 +39,7 @@ typedef struct label_list_s {
 	decla_t *decla;
 	call_t *call;
 	size_t current_pos;
-	size_t tmp;
+	size_t tmp_pos;
 } label_t;
 
 int write_instruction(char *cmd, int fd, label_t *);
@@ -54,7 +54,8 @@ int fill_header(char **, header_t *);
 void rewrite(int, header_t *);
 void *my_super_memset(void *, int, size_t);
 void write_indirect_arg(char *, int, label_t *);
-void fill_label_call(char *, int, label_t *);
+void write_direct_arg(char *, int, int, label_t *);
+void fill_label_call(char *, int, int, label_t *);
 void fill_label_decla(char *, int, label_t *);
 void printf_linked_list(call_t *, decla_t *);
 
