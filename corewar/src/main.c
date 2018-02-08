@@ -21,6 +21,7 @@ program_t *start_prog(char *path)
 	prgm->carry = 0;
 	prgm->fork = 0;
 	prgm->live_signal = 0;
+	prgm->cycle = 0;
 	return (prgm);
 }
 
@@ -74,6 +75,7 @@ void init(int ac, char **av, env_t *env)
 	env->prgm = start;
 	my_memset(env->memory, 0, MEM_SIZE);
 	ini_prog_memory(env);
+	env->live_counter = 0;
 }
 
 int main(int ac, char **av)
