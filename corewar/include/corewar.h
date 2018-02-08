@@ -23,7 +23,7 @@ typedef struct instr_s {
 } instr_t;
 
 typedef struct program_s {
-	char *reg;
+	int *reg;
 	int id;
 	int fd;
 	int prog_nb;
