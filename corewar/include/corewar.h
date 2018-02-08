@@ -75,7 +75,7 @@ int run(env_t *env);
 /*	src/opcodes	*/
 
 type_arg_t get_arg_type(char desc, int arg_nbr);
-int setup_arg(int *arg, program_t *p, env_t *info, int idx_mod_ind);
+int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind);
 void set_cycle(program_t *p, char code);
 int get_arg_data(env_t *env, program_t *p, type_arg_t type);
 int up_pc(program_t *p, int size);

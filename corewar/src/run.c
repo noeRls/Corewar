@@ -9,7 +9,7 @@
 
 int nbr_prog_alive(env_t *env)
 {
-	int nbr_alive = 0;
+	int nbr_alive = 1;
 
 	for (program_t *prgm = env->prgm; prgm; prgm = prgm->next) {
 		nbr_alive += 1;
@@ -30,6 +30,7 @@ void manage_cycle(env_t *env)
 		env->cycle_to_die -= CYCLE_DELTA;
 		env->live_counter = 0;
 	}
+	env->cycle += 1;
 }
 
 int execute_prog(env_t *env, program_t *p)
@@ -50,9 +51,6 @@ int run(env_t *env) {
 				execute_prog(env, p);
 			}
 		}
-/*read_prog_data();*/ //if cycle == 0 read data
-		/*execute_prog();*/ //if cycle == 0 execute
-		//during execution, don't forget to set the new cycle time
 		manage_cycle(env);
 	}
 }
