@@ -9,11 +9,13 @@
 
 program_t *start_prog(char *path)
 {
+	static int id = 0;
 	int fd = open(path, O_RDONLY);
 	program_t *prgm = malloc(sizeof(program_t));
 
 	if (!fd)
 		exit(84);
+	prgm->cycle = 0;
 	prgm->fd = fd;
 	prgm->prog_nb = 0;
 	prgm->carry = 0;
@@ -24,12 +26,12 @@ program_t *start_prog(char *path)
 
 static void magic_reverse(void *x)
 {
-        *((char *)x) ^= *(((char *)x) + 3);
-        *(((char *)x) + 3) ^= *((char *)x);
-        *((char *)x) ^= *(((char *)x) + 3);
-        *(((char *)x) + 1) ^= *(((char *)x) + 2);
-        *(((char *)x) + 2) ^= *(((char *)x) + 1);
-        *(((char *)x) + 1) ^= *(((char *)x) + 2);
+	*((char *)x) ^= *(((char *)x) + 3);
+	*(((char *)x) + 3) ^= *((char *)x);
+	*((char *)x) ^= *(((char *)x) + 3);
+	*(((char *)x) + 1) ^= *(((char *)x) + 2);
+	*(((char *)x) + 2) ^= *(((char *)x) + 1);
+	*(((char *)x) + 1) ^= *(((char *)x) + 2);
 }
 
 void ini_prog_memory(env_t *env)
@@ -40,6 +42,7 @@ void ini_prog_memory(env_t *env)
 
 	for (program_t *tmp = env->prgm; tmp; tmp = tmp->next) {//assign id
 		tmp->reg = (int *) &(env->memory[tmp->mem_start]);
+		tmp->id = x;
 		tmp->reg[1] = x++; //assign r1 | id
 		tmp->reg[0] = tmp->mem_start + REG_NUMBER * REG_SIZE;//ini_pc
 		read(tmp->fd, &hd, sizeof(header_t));

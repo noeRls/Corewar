@@ -45,10 +45,12 @@ int execute_prog(env_t *env, program_t *p)
 }
 
 int run(env_t *env) {
+	print_hexa_mem(env->memory);
 	while (nbr_prog_alive(env) > 2) {
 		for (program_t *p = env->prgm; p; p = p->next) {
 			if (!p->cycle) {
 				execute_prog(env, p);
+				print_hexa_mem(env->memory);
 			}
 		}
 		manage_cycle(env);
