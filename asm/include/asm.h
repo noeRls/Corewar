@@ -51,7 +51,7 @@ void write_coding_byte(char **, int, label_t *);
 arg_type get_arg_type(char *);
 void arg_encoder(char **, int, int, label_t *);
 int fill_header(char **, header_t *);
-void rewrite(int, header_t *);
+void rewrite_header(int, header_t *);
 void *my_super_memset(void *, int, size_t);
 void write_indirect_arg(char *, int, label_t *);
 void write_direct_arg(char *, int, int, label_t *);

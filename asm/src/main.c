@@ -73,6 +73,7 @@ int main(int ac, char **av)
 		reinit_pos(label);
 	}
 //	printf_linked_list(label->call, label->decla);
-	rewrite(bin, &header);
+//	rewrite_label(bin, label);
+	rewrite_header(bin, &header);
 	return (0);
 }
