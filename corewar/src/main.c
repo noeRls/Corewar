@@ -69,9 +69,7 @@ void init(int ac, char **av, env_t *env)
 	}
 	st->next = 0;
 	env->prgm = start;
-	for (int i = 0; i < MEM_SIZE; i++) {
-		env->memory[i] = 0;
-	}
+	my_memset(env->memory, 0, MEM_SIZE);
 	ini_prog_memory(env);
 }
 
