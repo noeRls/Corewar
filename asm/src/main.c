@@ -12,6 +12,15 @@ void init_header(header_t *header)
 	my_super_memset(header, 0, sizeof(*header));
 }
 
+label_t *init_label(void)
+{
+	label_t *label = malloc(sizeof(label_t));
+
+	label->declaration = NULL;
+	label->call = NULL;
+	return (label);
+}
+
 int main(int ac, char **av)
 {
 	int src = open(av[1], O_RDONLY);
@@ -20,6 +29,7 @@ int main(int ac, char **av)
 	char **tab;
 	int mnemonique;
 	header_t header;
+	label_t *label = init_label();
 
 	(void)ac;
 	if (src == -1 || bin == -1)

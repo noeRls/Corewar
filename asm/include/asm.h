@@ -25,15 +25,20 @@ typedef struct label_call_s {
 	int abs_pos;
 	int rel_pos;
 	int nb_bytes;
-	char *label;
+	char *name;
 	struct label_call_s *next;
-} label_call_t;
+} call_t;
 
 typedef struct label_declaration_s {
 	int pos;
-	char *label;
+	char *name;
 	struct label_declaration_s *next;
-} label_declaration_t;
+} decla_t;
+
+typedef struct label_list_s {
+	decla_t *declaration;
+	call_t *call;
+} label_t;
 
 int write_instruction(char *cmd, int fd);
 void print_tabtab(char **);
