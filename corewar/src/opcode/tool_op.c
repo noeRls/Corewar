@@ -37,7 +37,7 @@ int up_pc(program_t *p, int size)
 	return (0);
 }
 
-int get_arg_data(program_t *p, type_arg_t type)
+int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 {
 	int value = 0;
 	int size = 0;
@@ -74,20 +74,21 @@ void manage_idx_mod(int *value, program_t *p, int idx_mod_ind)
 	}
 }
 
-int setup_arg(int *arg, program_t *p, instr_t *info, int idx_mod_ind)
+int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind)
 {
 	type_arg_t type;
+	instr_t *info = p->info;
 
 	for (int i = 0; i < op_tab[info->code - 1].nbr_args; i++) {
 		type = get_arg_type(info->desc, i + 1);
 		if (!(type & op_tab[info->code - 1].type[i]))
 			return (84);
-		arg[i] = get_arg_data(p, type);
+		arg[i] = get_arg_data(env, p, type);
 		if (type == REG && arg[i] > REG_NUMBER)
 			return (84);
 		if (type == IND) {
 			arg[i] = p->PC + arg[i];
-			manage_idx_mod(&(arg[i]), p, idw_mod_ind);
+			manage_idx_mod(&(arg[i]), p, idx_mod_ind);
 		}
 	}
 	return (0);
