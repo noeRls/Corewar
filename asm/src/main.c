@@ -18,6 +18,8 @@ label_t *init_label(void)
 
 	label->decla = NULL;
 	label->call = NULL;
+	label->tmp = 0;
+	label->current_pos = 0;
 	return (label);
 }
 
@@ -43,9 +45,9 @@ int main(int ac, char **av)
 			continue;
 		if (fill_header(tab, &header))
 			continue;
-		mnemonique = write_instruction(tab[0], bin);
+		mnemonique = write_instruction(tab[0], bin, label);
 		verif_syntax(mnemonique, tab);
-		write_coding_byte(tab, bin);
+		write_coding_byte(tab, bin, label);
 		arg_encoder(tab, bin, mnemonique, label);
 	}
 	rewrite(bin, &header);

@@ -22,7 +22,7 @@ arg_type get_arg_type(char *str)
 	return (INDIRECT);
 }
 
-void write_coding_byte(char **tab, int fd)
+void write_coding_byte(char **tab, int fd, label_t *label)
 {
 	char c = 0;
 	arg_type type;
@@ -40,4 +40,5 @@ void write_coding_byte(char **tab, int fd)
 			c = c ^ (255 & (192 >> (i - 1) * 2));
 	}
 	write(fd, &c, sizeof(char));
+	label->tmp += 1;
 }
