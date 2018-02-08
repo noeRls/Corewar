@@ -56,7 +56,7 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 		return (0);
 	}
 	read_from_mem(env->memory, &value, size, p->PC);
-	swap(value, size);
+	swap(&value, size);
 	up_pc(p, size);
 	return (value);
 }
