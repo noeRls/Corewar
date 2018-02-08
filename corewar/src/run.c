@@ -38,6 +38,7 @@ int execute_prog(env_t *env, program_t *p)
 	instr_t tmp;
 
 	read_from_mem(&(env->memory[p->PC]), &tmp, sizeof(instr_t));
+	p->PC += sizeof(instr_t);
 	fctns[tmp.code](env, p, tmp);
 }
 

@@ -22,6 +22,13 @@ typedef struct instr_s {
 	char desc;
 } instr_t;
 
+typedef enum type_s {
+	NONE = 0,
+	DIR = 2,
+	IND = 3,
+	REG = 1
+} type_arg_t;
+
 typedef struct program_s {
 	int *reg;
 	int id;
@@ -65,6 +72,13 @@ int execute_prog(env_t *env, program_t *p);
 int run(env_t *env);
 
 /*	src/opcodes	*/
+
+type_arg_t get_arg_type(char desc, int arg_nbr);
+int setup_arg(int *arg, program_t *p, char desc);
+void set_cycle(program_t *p, char code);
+int get_arg_value(program_t *p, type_arg_t type);
+int up_pc(program_t *p, int size);
+type_arg_t get_arg_type(char desc, int arg_nbr);
 
 void add(env_t *env, program_t *p, instr_t info);
 void aff(env_t *env, program_t *p, instr_t info);
