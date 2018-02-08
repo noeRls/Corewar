@@ -10,7 +10,6 @@
 void ld(env_t *env, program_t *p, instr_t info)
 {
 	char reg_nbr;
-	int value;
 	int pc_b = p->PC;
 	int arg[MAX_ARGS_NUMBER] = {0};
 
@@ -20,5 +19,5 @@ void ld(env_t *env, program_t *p, instr_t info)
 	}
 	p->carry = 0;
 	set_cycle(p, info.code);
-	p->reg[arg[1]] = value;
+	p->reg[arg[1]] = env->memory[arg[0]];
 }
