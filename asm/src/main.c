@@ -16,7 +16,7 @@ label_t *init_label(void)
 {
 	label_t *label = malloc(sizeof(label_t));
 
-	label->declaration = NULL;
+	label->decla = NULL;
 	label->call = NULL;
 	return (label);
 }
