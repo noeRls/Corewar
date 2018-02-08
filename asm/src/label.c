@@ -9,6 +9,8 @@
 
 void fill_label_call(char *str, int fd, int mnemonique, label_t *label)
 {
+	call_t *call = label->call;
+
 	while (call->next)
 		call = call->next;
 	call->name = my_strdup(str);
@@ -19,6 +21,8 @@ void fill_label_call(char *str, int fd, int mnemonique, label_t *label)
 
 void fill_label_decla(char *str, int fd, int mnemonique, label_t *label)
 {
+	decla_t *decla = label->decla;
+
 	while (decla->next)
 		decla = decla->next;
 }
