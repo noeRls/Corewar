@@ -12,10 +12,12 @@ SRC		=	$(SDIR)main.c			\
 			$(SDIR)str_to_av.c		\
 			$(SDIR)arg_encoder.c		\
 			$(SDIR)write_instruction.c	\
-			$(SDIR)rewrite.c		\
+			$(SDIR)rewrite_header.c		\
 			$(SDIR)file_to_cor.c		\
 			$(SDIR)verif_syntax.c		\
 			$(SDIR)label.c			\
+			$(SDIR)int_to_str.c		\
+			$(SDIR)rewrite_label.c		\
 			$(SDIR)header.c			\
 			$(SDIR)op.c			\
 			$(SDIR)coding_byte.c		\

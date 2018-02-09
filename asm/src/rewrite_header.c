@@ -17,7 +17,7 @@ void magic_reverse(void *x)
 	*(((char *)x) + 1) ^= *(((char *)x) + 2);
 }
 
-void rewrite(int bin, header_t *header)
+void rewrite_header(int bin, header_t *header)
 {
 	int c;
 	char *buffer;
