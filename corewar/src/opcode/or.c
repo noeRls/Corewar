@@ -27,6 +27,6 @@ void or(env_t *env, program_t *p, instr_t info)
 		}
 	}
 	p->carry = 0;
-	p->reg[arg[2]] = arg[0] | arg[1];
+	set_reg_value(env->memory, p, 2, arg[0] | arg[1]);
 	set_cycle(p, info.code);
 }

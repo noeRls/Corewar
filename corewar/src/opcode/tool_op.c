@@ -31,9 +31,20 @@ type_arg_t get_arg_type(char desc, int arg_nbr)
 	return (type);
 }
 
-int up_pc(program_t *p, int size)
+int get_pc(char *memory, program_t *p)
 {
-	p->PC += size;
+	return (get_reg_value(memory, p, 0));
+}
+
+void set_pc(char *memory, program_t *p, int value)
+{
+	write_to_mem(memory, &value, sizeof(int), REG(p, 0));
+}
+int up_pc(char *memory, program_t *p, int size)
+{
+	int value = get_pc(memory, p);
+
+	write_to_mem(memory, &value, sizeof(int), REG(p, 0));
 	return (0);
 }
 
@@ -55,9 +66,9 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 	default:
 		return (0);
 	}
-	read_from_mem(env->memory, &value, size, p->PC);
+	read_from_mem(env->memory, &value, size, get_pc(env->memory, p));
 	swap(&value, size);
-	up_pc(p, size);
+	up_pc(env->memory, p, size);
 	return (value);
 }
 
@@ -93,7 +104,7 @@ int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind)
 			return (84);
 		printf("big pass\n");
 		if (type == IND) {
-			arg[i] = p->PC + arg[i];
+			arg[i] = get_pc(env->memory, p) + arg[i];
 			manage_idx_mod(&(arg[i]), p, idx_mod_ind);
 		}
 	}
