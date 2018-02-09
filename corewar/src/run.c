@@ -62,7 +62,7 @@ int run(env_t *env) {
 				print_hexa_mem(env->memory);
 				printf("\n\n\n\n");
 			}
-			printf("kaka:%d\n", p->cycle);
+			printf("cycle:%d\n", p->cycle);
 		}
 		manage_cycle(env);
 	}

@@ -1,2 +1,7 @@
 get reg value -> big endian -> swap si besoin d'écrire dans la mémoire
 toute value int ou autre lue dans la mémoire est en big endian ! swap si besoin d'utiliser
+
+
+LIVE FULLY WORK
+LD WORK					IND NOT TEST
+STI WORK				IND NOT TEST

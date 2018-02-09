@@ -12,8 +12,8 @@ void sti(env_t *env, program_t *p, instr_t info)
 	printf("STI\n");
 	int arg[MAX_ARGS_NUMBER] = {0};
 	int index = 0;
-	int pc_b = get_pc(env->memory, p) - 2;
 	int tmp = 0;
+	int pc_b = get_pc(env->memory, p) - 2;
 
 	if (setup_arg(arg, p, env, TRUE) == 84) {
 		p->cycle = 1;

@@ -49,17 +49,30 @@ int up_pc(char *memory, program_t *p, int size)
 	return (0);
 }
 
+int is_special_size(char code)
+{
+	static const char special_size[] = {9, 10, 11, 12, 14, 15, 0};
+
+	for (int i = 0; special_size[i]; i++) {
+		if (special_size[i] == code)
+			return (1);
+	}
+	return (0);
+}
+
 int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 {
 	int value = 0;
 	int size = 0;
+	int special_size = is_special_size(p->info->code);
 
+	printf("type : %d\n", type);
 	switch (type) {
 	case DIR:
-		size = T_DIR;
+		size = special_size ? IND_SIZE : DIR_SIZE;
 		break;
 	case IND:
-		size = T_IND;
+		size = IND_SIZE;
 		break;
 	case REG:
 		size = T_REG;
@@ -67,11 +80,10 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 	default:
 		return (0);
 	}
-	printf("getpc:%d\n", get_pc(env->memory, p));
 	read_from_mem(env->memory, &value, size, get_pc(env->memory, p));
-	printf("value bef:%d\n", value);
+	printf("val : %d - PC : %d - size:%d\n\n", value, get_pc(env->memory, p), size);
 	swap(&value, size);
-	printf("value after:%d\n", value);
+	printf("val after : %d\n", value);
 	up_pc(env->memory, p, size);
 	return (value);
 }
