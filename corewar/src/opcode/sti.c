@@ -30,6 +30,7 @@ void sti(env_t *env, program_t *p, instr_t info)
 	index += arg[2];
 	index += pc_b;
 	tmp = get_reg_value(env->memory, p, arg[0]);
+	swap(&tmp, sizeof(int));
 	write_to_mem(env->memory, &tmp, sizeof(int), index);
 	set_cycle(p, info.code);
 }

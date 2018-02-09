@@ -38,13 +38,14 @@ int get_pc(char *memory, program_t *p)
 
 void set_pc(char *memory, program_t *p, int value)
 {
-	write_to_mem(memory, &value, sizeof(int), REG(p, 0));
+	set_reg_value(memory, p, 0, value);
 }
 int up_pc(char *memory, program_t *p, int size)
 {
 	int value = get_pc(memory, p);
 
-	write_to_mem(memory, &value, sizeof(int), REG(p, 0));
+	value += size;
+	set_reg_value(memory, p, 0, value);
 	return (0);
 }
 
@@ -66,8 +67,11 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 	default:
 		return (0);
 	}
+	printf("getpc:%d\n", get_pc(env->memory, p));
 	read_from_mem(env->memory, &value, size, get_pc(env->memory, p));
+	printf("value bef:%d\n", value);
 	swap(&value, size);
+	printf("value after:%d\n", value);
 	up_pc(env->memory, p, size);
 	return (value);
 }

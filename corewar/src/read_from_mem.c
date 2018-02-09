@@ -61,10 +61,15 @@ int get_reg_value(char *memory, program_t *p, int reg_nbr)
 
 	read_from_mem(memory, &res, sizeof(int), REG(p, reg_nbr));
 	swap(&res, sizeof(int));
+	printf("val:%d - regnb:%d\n", res, reg_nbr);
 	return (res);
 }
 
 void set_reg_value(char *memory, program_t *p, int reg_nbr, int value)
 {
-	write_to_mem(memory, &value, sizeof(int), REG(p, reg_nbr));
+	int val = value;
+
+	swap(&val, sizeof(int));
+	printf("IS SET OMG :%d\n", reg_nbr);
+	write_to_mem(memory, &val, sizeof(int), REG(p, reg_nbr));
 }

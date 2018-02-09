@@ -12,6 +12,7 @@ void live(env_t *env, program_t *p, instr_t info)
 	int id = 0;
 
 	read_from_mem(env->memory, &id, sizeof(int), get_pc(env->memory, p));
+	swap(&id, sizeof(int));
 	up_pc(env->memory, p, sizeof(int));
 	set_cycle(p, info.code);
 	for (program_t *p_tmp = env->prgm; p_tmp; p_tmp = p_tmp->next) {
