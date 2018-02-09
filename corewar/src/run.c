@@ -39,6 +39,7 @@ int execute_prog(env_t *env, program_t *p)
 	instr_t tmp;
 
 	read_from_mem(env->memory, &tmp, sizeof(instr_t), get_pc(env->memory, p));
+	p->pc_backup = get_pc(env->memory, p);
 	if (tmp.code == 1 || tmp.code == 9 || \
 	tmp.code == 12 || tmp.code == 15)
 		up_pc(env->memory, p, 1);

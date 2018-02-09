@@ -120,7 +120,7 @@ int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind)
 			return (84);
 		printf("big pass\n");
 		if (type == IND) {
-			arg[i] = get_pc(env->memory, p) + arg[i];
+			arg[i] = p->pc_backup + arg[i];
 			manage_idx_mod(&(arg[i]), p, idx_mod_ind);
 		}
 	}
