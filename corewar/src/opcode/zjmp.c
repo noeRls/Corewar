@@ -11,13 +11,14 @@ void zjmp(env_t *env, program_t *p, instr_t info)
 {
 	char a = 0;
 	char b = 0;
-	int real_pc = p->PC - 1;
+	int real_pc = get_pc(env->memory, p);
 
-	read_from_mem(env->memory, &a, sizeof(char), p->PC);
-	read_from_mem(env->memory, &b, sizeof(char), p->PC + 1);
+	read_from_mem(env->memory, &a, sizeof(char), get_pc(env->memory, p));
+	read_from_mem(env->memory, &b, sizeof(char), \
+	get_pc(env->memory, p) + 1);
 	a = b - a;
 	if (a < 0)
-		p->PC = real_pc - (a + 1);
+		set_pc(env->memory, p, real_pc - (a + 1));
 	else
-		p->PC = real_pc + a;
+		set_pc(env->memory, p, real_pc + 1);
 }

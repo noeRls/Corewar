@@ -39,17 +39,17 @@ void ini_prog_memory(env_t *env)
 {
 	header_t hd;
 	int x = 10;
-	int code_size = 0;
+	int tmp2 = 0;
 
-	for (program_t *tmp = env->prgm; tmp; tmp = tmp->next) {//assign id
-		tmp->reg = (int *) &(env->memory[tmp->mem_start]);
+	for (program_t *tmp = env->prgm; tmp; tmp = tmp->next, ++x) {
 		tmp->id = x;
-		tmp->reg[1] = x++; //assign r1 | id
-		tmp->reg[0] = tmp->mem_start + REG_NUMBER * REG_SIZE;//ini_pc
+		set_reg_value(env->memory, tmp, 1, x);
+		tmp2 = tmp->mem_start + REG_NUMBER * REG_SIZE;
+		set_reg_value(env->memory, tmp, 0, tmp2);
 		read(tmp->fd, &hd, sizeof(header_t));
 		magic_reverse(&(hd.prog_size));
-		code_size = hd.prog_size - sizeof(header_t);
-		read(tmp->fd, &(env->memory[tmp->PC]), hd.prog_size);
+		read(tmp->fd, &(env->memory[get_pc(env->memory, tmp)]), \
+		hd.prog_size);
 	}
 }
 

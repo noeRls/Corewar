@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define PC reg[0]
+#define REG(prgm, nbr) ((prgm)->mem_start + (REG_SIZE * (nbr)))
 
 typedef struct instr_s {
 	char code;
@@ -31,8 +31,8 @@ typedef enum type_s {
 } type_arg_t;
 
 typedef struct program_s {
+	int pc_backup;
 	instr_t *info;
-	int *reg;
 	int id;
 	int fd;
 	int prog_nb;
@@ -69,8 +69,6 @@ void write_to_mem(unsigned char *memory, void *data, int size, int start);
 void print_hexa_mem(unsigned char *mem);
 void swap(void *data, int size);
 
-int get_reg_value(char *memory, program_t *p, int index);
-
 /*	src/run.c	*/
 
 int nbr_prog_alive(env_t *env);
@@ -84,7 +82,12 @@ type_arg_t get_arg_type(char desc, int arg_nbr);
 int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind);
 void set_cycle(program_t *p, char code);
 int get_arg_data(env_t *env, program_t *p, type_arg_t type);
-int up_pc(program_t *p, int size);
+int up_pc(char *memory, program_t *p, int size);
+int get_pc(char *memory, program_t *p);
+void set_pc(char *memory, program_t *p, int value);
+void set_reg_value(char *memory, program_t *p, int reg_nbr, int value);
+int get_reg_value(char *memory, program_t *p, int index);
+
 type_arg_t get_arg_type(char desc, int arg_nbr);
 
 void add(env_t *env, program_t *p, instr_t info);

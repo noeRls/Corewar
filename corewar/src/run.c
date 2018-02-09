@@ -38,12 +38,13 @@ int execute_prog(env_t *env, program_t *p)
 	static void (*fctns[])(env_t *, program_t *, instr_t) = {live, ld, st, add, sub, and, or, xor, zjmp, ldi, sti, fork_op, lld, lldi, lfork, aff};
 	instr_t tmp;
 
-	read_from_mem(env->memory, &tmp, sizeof(instr_t), p->PC);
+	read_from_mem(env->memory, &tmp, sizeof(instr_t), get_pc(env->memory, p));
+	p->pc_backup = get_pc(env->memory, p);
 	if (tmp.code == 1 || tmp.code == 9 || \
 	tmp.code == 12 || tmp.code == 15)
-		p->PC += 1;
+		up_pc(env->memory, p, 1);
 	else
-		p->PC += sizeof(instr_t);
+		up_pc(env->memory, p, sizeof(instr_t));
 	p->info = &tmp;
 	if (tmp.code > 16 || tmp.code < 1)
 		p->cycle = 1;
@@ -62,7 +63,7 @@ int run(env_t *env) {
 				print_hexa_mem(env->memory);
 				printf("\n\n\n\n");
 			}
-			printf("kaka:%d\n", p->cycle);
+			printf("cycle:%d\n", p->cycle);
 		}
 		manage_cycle(env);
 	}
