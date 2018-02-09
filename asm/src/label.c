@@ -59,7 +59,7 @@ void fill_label_decla(char *str, int fd, label_t *label)
 //	printf("fill label decla, name: %s, abs pos = %d\n", decla->name, decla->pos);
 }
 
-void printf_linked_list(call_t *call, decla_t *decla)
+/*void printf_linked_list(call_t *call, decla_t *decla)
 {
 	call = call;
 	decla = decla;
@@ -69,4 +69,4 @@ void printf_linked_list(call_t *call, decla_t *decla)
 	printf("\n\n");
 	for (decla = decla ; decla ; decla = decla->next)
 		printf("decla de %s pos %ld\n", decla->name, decla->pos);
-}
+		}*/

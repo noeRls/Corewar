@@ -9,8 +9,8 @@
 	st r1,:label
 	add r1,r2,r3
 label:	sub r2,r7,r2
-	and %23,40,r1
-	or 12,%1,r12
+	and %:label,40,r1
+	or :label,%1,r12
 	xor %32,%12,r1
 	zjmp %:ok
 	ldi %4,%12,r1
@@ -18,5 +18,5 @@ label:	sub r2,r7,r2
 	fork %16
 	lld %4,r1
 ok:	lldi %4,%12,r1
-	lfork %16
+	lfork %:ok
 	aff r3
