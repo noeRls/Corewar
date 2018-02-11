@@ -14,7 +14,7 @@ void lld(env_t *env, program_t *p, instr_t info)
 	int pc_b = get_pc(env->memory, p);
 	int arg[MAX_ARGS_NUMBER] = {0};
 
-	printf("LD\n");
+	printf("LLD\n");
 	if (setup_arg(arg, p, env, FALSE) == 84) {
 		p->cycle = 1;
 		return;
@@ -26,7 +26,6 @@ void lld(env_t *env, program_t *p, instr_t info)
 		printf("value : %d\n", value);
 		swap(&value, REG_SIZE);
 		printf("value aft: %d\n", value);
-
 		arg[0] = value;
 	}
 	p->carry = 0;

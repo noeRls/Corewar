@@ -98,11 +98,17 @@ void set_cycle(program_t *p, char code)
 	p->cycle = op_tab[code - 1].nbr_cycles;
 }
 
+int do_idx_mod(int value, program_t *p)
+{
+	value = (value - p->mem_start) % IDX_MOD;
+	value = value + p->mem_start;
+	return (value);
+}
+
 void manage_idx_mod(int *value, program_t *p, int idx_mod_ind)
 {
 	if (idx_mod_ind) {
-		*value = (*value - p->mem_start) % IDX_MOD;
-		*value = *value + p->mem_start;
+		*value = do_idx_mod(*value, p);
 	} else {
 		*value = *value % MEM_SIZE;
 	}

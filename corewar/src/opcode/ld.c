@@ -26,7 +26,6 @@ void ld(env_t *env, program_t *p, instr_t info)
 		printf("value : %d\n", value);
 		swap(&value, REG_SIZE);
 		printf("value aft: %d\n", value);
-
 		arg[0] = value;
 	}
 	p->carry = 0;

@@ -4,9 +4,15 @@ toute value int ou autre lue dans la mémoire est en big endian ! swap si besoin
 
 LIVE FULLY WORK
 LD WORK					IND NOT TEST (should work)
+so LLD WORK
 STI WORK
 ST FULLY WORK
+ADD theoretically work			95% confident
+so SUB theoretically work
 AND WORK				IND NOT TEST (should work)
 so XOR WORK
 so OR WORK
 ZJUMP FULLY WORK		DONT CHECK IF THE CARRY IS 1 => EZ TO DEBUG
+LDI theoretically work, not test     	70% confident
+so LLDI theoretically work, not test
+AFF FULLY WORK

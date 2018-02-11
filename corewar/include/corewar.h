@@ -80,6 +80,7 @@ int run(env_t *env);
 
 /*	src/opcodes	*/
 
+int do_idx_mod(int value, program_t *p);
 type_arg_t get_arg_type(char desc, int arg_nbr);
 int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind);
 void set_cycle(program_t *p, char code);
