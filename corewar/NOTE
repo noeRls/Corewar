@@ -3,5 +3,6 @@ toute value int ou autre lue dans la mémoire est en big endian ! swap si besoin
 
 
 LIVE FULLY WORK
-LD WORK					IND NOT TEST
-STI WORK				IND NOT TEST
+LD WORK					IND NOT TEST (should work)
+STI WORK
+ST FULLY WORK
