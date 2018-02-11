@@ -18,6 +18,8 @@
 
 #define REG(prgm, nbr) ((prgm)->mem_start + (REG_SIZE * (nbr)))
 
+#define READ_SIZE_BINARY_OP 1
+
 typedef struct instr_s {
 	char code;
 	char desc;

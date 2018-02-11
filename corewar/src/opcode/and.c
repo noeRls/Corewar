@@ -22,11 +22,13 @@ void and(env_t *env, program_t *p, instr_t info)
 			arg[i] = get_reg_value(env->memory, p, arg[i]);
 		}
 		if (get_arg_type(info.desc, i + 1) == IND) {
-			read_from_mem(env->memory, &tmp, sizeof(char), arg[i]);
+			read_from_mem(env->memory, &tmp, \
+			READ_SIZE_BINARY_OP, arg[i]);
+			swap(&tmp, READ_SIZE_BINARY_OP);
 			arg[i] = tmp;
 		}
 	}
 	p->carry = 0;
-	set_reg_value(env->memory, p, 2, arg[0] & arg[1]);
+	set_reg_value(env->memory, p, arg[2], arg[0] & arg[1]);
 	set_cycle(p, info.code);
 }
