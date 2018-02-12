@@ -46,8 +46,10 @@ typedef struct program_s {
 } program_t;
 
 typedef struct args_s {
+	int curr;
 	char **prog_paths;
 	int dump_cycle;
+	int nb_prog;
 	int *prog_ids;
 	int *mem_start;
 } args_t;

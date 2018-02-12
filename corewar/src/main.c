@@ -6,6 +6,7 @@
 */
 
 #include "corewar.h"
+const char * const params[] = {"-dump", "-n", "-a"};
 
 void add_prog(program_t **start, program_t *to_add)
 {
@@ -104,19 +105,83 @@ void init(int ac, char **av, env_t *env)
 	env->live_counter = 0;
 }
 
-int manage_args(int ac, char **av)
+int handle_for(int *i, int j, args_t *args, char **av)
 {
-	int i = 0;
+	int error = 1;
+	int tmp = *i;
 
-	if (ac <= 3)
-		return (83);
-	for (i = 0; i <
+	if (!my_strcmp(params[j], av[*i])) {
+		error = my_str_isnum(av[*i + 1]);
+		if (!j) {
+			args->dump_cycle = getnbr(av[*i + 1]);
+		} else if (j == 1) {
+			args->prog_ids[args->curr] = getnbr(av[*i + 1]);
+		} else {
+			args->mem_start[args->curr] = getnbr(av[*i + 1]);
+		}
+		(*i)++;
+	}
+	if (!error)
+		exit(84);
+	if (tmp != *i)
+		return (1);
+	else
+		return (0);
+}
+
+args_t *second_part(args_t *args, int ac, char **av)
+{
+	int exists = 0;
+
+	for (int i = 0; i < args->nb_prog; i++) {
+		args->prog_ids[i] = -1;
+		args->mem_start[i] = -1;
+	}
+	for (int i = 1; i < ac; i++) {
+		exists = 0;
+		if (av[i][0] != '-') {
+			args->prog_paths[args->curr] = av[i];
+			args->curr++;
+		}
+		printf("curr : %s\n", av[i]);
+		for (int j = 0; j < 3 && av[i][0] == '-'; j++)
+			exists = max(exists, handle_for(&i, j, args, av));
+		if (!exists && av[i - 1][0] == '-')
+			exit(84);
+	}
+	return (args);
+}
+
+args_t *manage_args(int ac, char **av)
+{
+	int count = 0;
+	args_t *args = malloc(sizeof(args_t));
+
+	for (int i = 1; i < ac; i++)
+		if (av[i][0] != '-' && i && av[i - 1][0] != '-')
+			count++;
+	args->curr = 0;
+	args->nb_prog = count;
+	args->prog_paths = malloc(sizeof(char *) * count);
+	args->prog_ids = malloc(sizeof(int) * count);
+	args->mem_start = malloc(sizeof(int) * count);
+	args->dump_cycle = -1;
+	return (second_part(args, ac, av));
 }
 
 int main(int ac, char **av)
 {
 	env_t env;
+	args_t *args = 0;
 
+	args = manage_args(ac, av);
+	printf("NB PROG : %d\n", args->nb_prog);
+	for (int i = 0; i < args->nb_prog; i++) {
+		printf("\tPROG #%d -> %s\n", i + 1, args->prog_paths[i]);
+		printf("\t\tID : %d\n", args->prog_ids[i]);
+		printf("\t\tSTARTS AT : %d\n", args->mem_start[i]);
+	}
+	printf("DUMP CYCLE : %d\n", args->dump_cycle);
 	init(ac, av, &env);
 	run(&env);
 	return (0);
