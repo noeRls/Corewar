@@ -11,6 +11,7 @@ void live(env_t *env, program_t *p, instr_t info)
 {
 	int id = 0;
 
+	env->live_counter++;
 	read_from_mem(env->memory, &id, sizeof(int), get_pc(env->memory, p));
 	swap(&id, sizeof(int));
 	up_pc(env->memory, p, sizeof(int));
@@ -18,7 +19,7 @@ void live(env_t *env, program_t *p, instr_t info)
 	for (program_t *p_tmp = env->prgm; p_tmp; p_tmp = p_tmp->next) {
 		if (p_tmp->id == id) {
 			p_tmp->live_signal = 0;
-			my_printf("The player %d(%s) is alive\n", p->id, p->name);
+			my_printf("The player %d(%s) is alive\n", p_tmp->id, p_tmp->name);
 		}
 	}
 }
