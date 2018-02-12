@@ -33,20 +33,29 @@ type_arg_t get_arg_type(char desc, int arg_nbr)
 
 int get_pc(char *memory, program_t *p)
 {
-	return (get_reg_value(memory, p, 0));
+	return (p->pc_curr);
+	/* int value = 0; */
+
+	/* read_from_mem(memory, &value, sizeof(int), p->pc); */
+	/* swap(&value, sizeof(int)); */
+	/* return (value); */
 }
 
 void set_pc(char *memory, program_t *p, int value)
 {
-	set_reg_value(memory, p, 0, value);
+	p->pc_curr = value;
+	//write_to_mem(memory, &value, sizeof(int), p->pc);
 }
+
 int up_pc(char *memory, program_t *p, int size)
 {
-	int value = get_pc(memory, p);
-
-	value += size;
-	set_reg_value(memory, p, 0, value);
+	p->pc_curr += size;
 	return (0);
+	/* int value = get_pc(memory, p); */
+
+	/* value += size; */
+	/* set_pc(memory, p, value); */
+	/* return (0); */
 }
 
 int is_special_size(char code)
@@ -66,7 +75,6 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 	int size = 0;
 	int special_size = is_special_size(p->info->code);
 
-	printf("type : %d\n", type);
 	switch (type) {
 	case DIR:
 		size = special_size ? IND_SIZE : DIR_SIZE;
@@ -81,9 +89,10 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 		return (0);
 	}
 	read_from_mem(env->memory, &value, size, get_pc(env->memory, p));
-	printf("val : %d - PC : %d - size:%d\n\n", value, get_pc(env->memory, p), size);
 	swap(&value, size);
-	printf("val after : %d\n", value);
+	if (special_size && (type == DIR || type == IND)) {
+		value = (short int) value;
+	}
 	up_pc(env->memory, p, size);
 	return (value);
 }
@@ -93,11 +102,17 @@ void set_cycle(program_t *p, char code)
 	p->cycle = op_tab[code - 1].nbr_cycles;
 }
 
+int do_idx_mod(int value, program_t *p)
+{
+	value = (value - p->mem_start) % IDX_MOD;
+	value = value + p->mem_start;
+	return (value);
+}
+
 void manage_idx_mod(int *value, program_t *p, int idx_mod_ind)
 {
 	if (idx_mod_ind) {
-		*value = (*value - p->mem_start) % IDX_MOD;
-		*value = *value + p->mem_start;
+		*value = do_idx_mod(*value, p);
 	} else {
 		*value = *value % MEM_SIZE;
 	}
@@ -110,15 +125,12 @@ int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind)
 
 	for (int i = 0; i < op_tab[info->code - 1].nbr_args; i++) {
 		type = get_arg_type(info->desc, i + 1);
-		printf("setup_arg\n");
-		if (!(type & op_tab[info->code - 1].type[i]))
+		if (!(type & op_tab[info->code - 1].type[i])) {
 			return (84);
-		printf("little_pass\n");
+		}
 		arg[i] = get_arg_data(env, p, type);
-		printf("arg[i]:%d\n", arg[i]);
 		if (type == REG && (arg[i] > REG_NUMBER || arg[i] <= 0))
 			return (84);
-		printf("big pass\n");
 		if (type == IND) {
 			arg[i] = p->pc_backup + arg[i];
 			manage_idx_mod(&(arg[i]), p, idx_mod_ind);

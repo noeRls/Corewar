@@ -1,0 +1,20 @@
+.name "npe"
+.comment "thtt"
+
+l2:
+ld %78,r6
+aff r6
+sti r1,%:live,%1
+fork %:live
+live: live %2
+zjmp %:live
+
+#sti r1,%:live,%1
+#live: live %2
+#ld %1,r4
+#ld %2,r3
+#add r4,r3,r2
+#and r2,%2,r1
+#and r1,-1,r2
+#zjmp %-1
+#zjmp %:live

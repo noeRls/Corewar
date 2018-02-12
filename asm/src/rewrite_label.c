@@ -7,21 +7,54 @@
 
 #include "asm.h"
 
+void write_direct_label(int x, int fd)
+{
+	char c = 0;
+	unsigned int tmp = (unsigned int) x;
+
+//	printf("direct: tmp = %d, soit en hexa: %x\n", x, x);
+//	printf("direct: tmp = %u, soit en hexa: %x\n\n", tmp, tmp);
+
+        c ^= tmp & 4278190080;
+	write(fd, &c, sizeof(c));
+        c = 0;
+        c ^= tmp & 16711680;
+        write(fd, &c, sizeof(c));
+        c = 0;
+        c ^= tmp & 65280;
+        write(fd, &c, sizeof(c));
+        c = 0;
+        c ^= tmp & 255;
+	write(fd, &c, sizeof(c));
+}
+
+void write_indirect_label(int x, int fd)
+{
+	char c = 0;
+	short unsigned int tmp = (short unsigned int) x;
+
+//	printf("direct: tmp = %d, soit en hexa: %x\n", x, x);
+//	printf("direct: tmp = %u, soit en hexa: %x\n\n", tmp, tmp);
+
+        c ^= tmp & 65280;
+        write(fd, &c, sizeof(c));
+        c = 0;
+        c ^= tmp & 255;
+        write(fd, &c, sizeof(c));
+}
+
 void change_label(int fd, call_t *call, decla_t *decla, label_t *label)
 {
-	//unsigned short int, printf hd
 	int final_pos;
 	char *tmp = malloc(sizeof(char) * 10);
 
 	if (!my_strcmp(call->name, decla->name)) {
 		final_pos = decla->pos - call->abs_pos;
-//		printf("valeur %hd en %ld\n", final_pos, call->rel_pos);
 		lseek(fd, call->rel_pos, SEEK_SET);
-		if (call->type == DIRECT) {
-			write_direct_arg(int_to_str((unsigned int)final_pos, tmp), fd, 0, label);
-		} else {
-			write_indirect_arg(int_to_str((unsigned short int)final_pos, tmp), fd, label);
-		}
+		if (call->type == DIRECT)
+			write_direct_label(final_pos, fd);
+		else
+			write_indirect_label(final_pos, fd);
 	}
 	free(tmp);
 }

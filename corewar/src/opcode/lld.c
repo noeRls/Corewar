@@ -10,6 +10,7 @@
 void lld(env_t *env, program_t *p, instr_t info)
 {
 	char reg_nbr;
+	int value = 0;
 	int pc_b = get_pc(env->memory, p);
 	int arg[MAX_ARGS_NUMBER] = {0};
 
@@ -17,9 +18,12 @@ void lld(env_t *env, program_t *p, instr_t info)
 		p->cycle = 1;
 		return;
 	}
-	if (get_arg_type(info.desc, 1) == IND)
-		arg[0] = env->memory[arg[0]];
+	if (get_arg_type(info.desc, 1) == IND) {
+		read_from_mem(env->memory, &value, REG_SIZE, arg[0]);
+		swap(&value, REG_SIZE);
+		arg[0] = value;
+	}
 	p->carry = 0;
 	set_cycle(p, info.code);
-	set_reg_value(env->memory, p, 1, (int) env->memory[arg[0]]);
+	set_reg_value(env->memory, p, arg[1], arg[0]);
 }
