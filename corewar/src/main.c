@@ -158,16 +158,18 @@ int get_mem_start(int const *mem_start, int size)
 
 	my_memset(mem, 0, sizeof(int) * (2 + size));
 	mem[0] = 0;
-	for (int i = size - 1; i >= 0; i--) {
-		if (mem_start[i] == -1)
+	for (int i = 0; i < size; i++) {
+		if (mem_start[i] == -1) {
 			size--;
+			i--;
+		}
 		else
 			mem[i + 1] = mem_start[i];
 	}
-	mem[size - 1] = MEM_SIZE;
+	mem[size] = MEM_SIZE;
 	size += 2;
 	my_sort_int_array(mem, size);
-	for (int i = 0; i < size + 1; i++) {
+	for (int i = 0; i < size - 1; i++) {
 		if (mem[i + 1] - mem[i] > last_size) {
 			last_size = mem[i + 1] - mem[i];
 			adress = mem[i] + (mem[i + 1] - mem[i] / 2);
