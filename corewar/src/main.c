@@ -104,6 +104,15 @@ void init(int ac, char **av, env_t *env)
 	env->live_counter = 0;
 }
 
+int manage_args(int ac, char **av)
+{
+	int i = 0;
+
+	if (ac <= 3)
+		return (83);
+	for (i = 0; i <
+}
+
 int main(int ac, char **av)
 {
 	env_t env;

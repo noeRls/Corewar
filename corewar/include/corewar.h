@@ -45,10 +45,18 @@ typedef struct program_s {
 	struct program_s *next;
 } program_t;
 
+typedef struct args_s {
+	char **prog_paths;
+	int dump_cycle;
+	int *prog_ids;
+	int *mem_start;
+} args_t;
+
 typedef struct env_s {
 	unsigned char memory[MEM_SIZE];
 	program_t *prgm;
 
+	int dump_cycle;
 	int nbr_player;
 	int cycle;
 	int live_counter;
