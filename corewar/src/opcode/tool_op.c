@@ -33,19 +33,24 @@ type_arg_t get_arg_type(char desc, int arg_nbr)
 
 int get_pc(char *memory, program_t *p)
 {
-	return (get_reg_value(memory, p, 0));
+	int value = 0;
+
+	read_from_mem(memory, &value, sizeof(int), p->pc);
+	swap(&value, sizeof(int));
+	return (value);
 }
 
 void set_pc(char *memory, program_t *p, int value)
 {
-	set_reg_value(memory, p, 0, value);
+	write_to_mem(memory, &value, sizeof(int), p->pc);
 }
+
 int up_pc(char *memory, program_t *p, int size)
 {
 	int value = get_pc(memory, p);
 
 	value += size;
-	set_reg_value(memory, p, 0, value);
+	set_pc(memory, p, value);
 	return (0);
 }
 

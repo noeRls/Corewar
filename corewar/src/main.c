@@ -22,6 +22,8 @@ program_t *start_prog(char *path)
 	prgm->fork = 0;
 	prgm->live_signal = 0;
 	prgm->cycle = 0;
+	prgm->pc = 0;
+	prgm->pc_backup = 0;
 	return (prgm);
 }
 
@@ -39,13 +41,14 @@ void ini_prog_memory(env_t *env)
 {
 	header_t hd;
 	int x = 10;
-	int tmp2 = 0;
+	int pc_value = 0;
 
 	for (program_t *tmp = env->prgm; tmp; tmp = tmp->next, ++x) {
 		tmp->id = x;
 		set_reg_value(env->memory, tmp, 1, x);
-		tmp2 = tmp->mem_start + REG_NUMBER * REG_SIZE;
-		set_reg_value(env->memory, tmp, 0, tmp2);
+		pc_value = tmp->mem_start + REG_NUMBER * REG_SIZE + sizeof(int);//int for PC
+		tmp->pc = tmp->mem_start + REG_NUMBER * REG_SIZE;
+		set_pc(env->memory, tmp, pc_value);
 		read(tmp->fd, &hd, sizeof(header_t));
 		magic_reverse(&(hd.prog_size));
 		read(tmp->fd, &(env->memory[get_pc(env->memory, tmp)]), \

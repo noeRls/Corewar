@@ -33,6 +33,7 @@ typedef enum type_s {
 } type_arg_t;
 
 typedef struct program_s {
+	int pc; //index of pc
 	int pc_backup;
 	instr_t *info;
 	int id;
