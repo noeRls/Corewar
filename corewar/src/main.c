@@ -181,6 +181,7 @@ int get_mem_start(int const *mem_start, int size)
 
 void finally_setup_arg(args_t *arg)
 {
+	arg->not_mem_default = 0;
 	for (int i = 0; i < arg->nb_prog; i++)
 		if (arg->prog_ids[i] < 0)
 			arg->prog_ids[i] = get_unique_id( \

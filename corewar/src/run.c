@@ -7,24 +7,47 @@
 
 #include "corewar.h"
 
-int nbr_prog_alive(env_t *env)
+int end(program_t *list)
 {
-	int nbr_alive = 1;
+	int last = list->id;
 
-	for (program_t *prgm = env->prgm; prgm; prgm = prgm->next) {
-		nbr_alive += 1;
+	for (program_t *prgm = list; prgm; prgm = prgm->next) {
+		if (last != prgm->id)
+			return (0);
 	}
-	return (nbr_alive);
+	return (1);
+}
+
+void destroy_prog(program_t **list, program_t *p)
+{
+	program_t *prev = 0;
+
+	if (p == *list) {
+		*list = p->next;
+		free(p);
+		return;
+	}
+	for (program_t *tmp = *list; tmp; tmp = tmp->next) {
+		if (tmp == p) {
+			prev->next = tmp->next;
+			free(tmp);
+			break;
+		}
+		prev = tmp;
+	}
 }
 
 void manage_cycle(env_t *env)
 {
-	for (program_t *prgm = env->prgm; prgm; prgm = prgm->next) {
+	program_t *next = 0;
+
+	for (program_t *prgm = env->prgm; prgm; prgm = next) {
 		prgm->live_signal += 1;
+		next = prgm->next;
 		if (prgm->live_signal > env->cycle_to_die)
-			//destroy_program(prgm);
-			;
-		prgm->cycle -= 1;
+			destroy_prog(&(env->prgm), prgm);
+		else
+			prgm->cycle -= 1;
 	}
 	if (env->live_counter >= NBR_LIVE) {
 		env->cycle_to_die -= CYCLE_DELTA;
@@ -57,7 +80,7 @@ int execute_prog(env_t *env, program_t *p)
 }
 
 int run(env_t *env) {
-	while (nbr_prog_alive(env) > 0) {
+	while (!end(env->prgm)) {
 		for (program_t *p = env->prgm; p; p = p->next) {
 			p->cycle ? 0 : execute_prog(env, p);
 		}

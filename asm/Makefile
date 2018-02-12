@@ -5,6 +5,7 @@
 ## compile, et clean
 ##
 
+NAME		=	asm
 
 SDIR		=	$(realpath src)/
 
@@ -25,13 +26,19 @@ SRC		=	$(SDIR)main.c			\
 
 OBJ		=	$(SRC:.c=.o)
 
-NAME		=	asm
+CFLAGS		+=	-Wall -Wextra -Werror
 
-CFLAGS		+=	-Wall -Wextra -I./include -g3
+CPPFLAGS	=	-I $(realpath include)
 
 LDFLAGS		=	-L./lib/my
 
 LDLIBS		=	-lmy
+
+DEBUG		=	false
+
+ifeq ($(DEBUG), true)
+		CFLAGS	+=	-g3
+endif
 
 all:	lib $(NAME)
 
@@ -39,11 +46,11 @@ $(NAME):	$(OBJ)
 	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
 
 lib:
-	make -C lib/my
+	$(MAKE) -C lib/my
 
 clean:
 	$(RM) -f $(OBJ)
-	$(RM) *.cor vg*
+	$(RM) -f *.cor vg*
 	make clean -C lib/my
 
 fclean: clean
@@ -52,6 +59,4 @@ fclean: clean
 
 re:	fclean all
 
-r:	all clean
-
-.PHONY: all lib clean fclean re r
+.PHONY: all lib clean fclean re
