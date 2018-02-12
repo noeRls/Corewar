@@ -25,12 +25,12 @@ void print_hexa_mem(unsigned char *memory)
 	int x = 0;
 
 	for (int i = 0; i < MEM_SIZE; i++) {
-		printf("%02x ", memory[i]);
+		my_printf("%02x ", (int) memory[i]);
 		x++;
 		if (x == 8) {
-			printf(" ");
+			my_printf(" ");
 		} else if (x == 16) {
-			printf("\n");
+			my_printf("\n");
 			x = 0;
 		}
 		free(tmp);

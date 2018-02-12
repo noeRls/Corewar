@@ -16,6 +16,7 @@ int d_bhexa(va_list *ap, char *fl)
 	char *tmp = my_malloc(sizeof (char) * (my_strlen(str) + 3));
 	int count = 0;
 
+	my_memset(tmp, 0, my_strlen(str) + 3);
 	replace(fl, '+', 'A');
 	replace(fl, ' ', 'A');
 	if (contains(fl, '#') && *str != '0') {
