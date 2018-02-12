@@ -33,14 +33,12 @@ typedef enum type_s {
 } type_arg_t;
 
 typedef struct program_s {
-	int pc; //index of pc
+	int pc_curr; //index of pc
 	int pc_backup;
 	instr_t *info;
 	int id;
 	int fd;
-	int prog_nb;
 	int carry;
-	int fork;
 	int live_signal;
 	int cycle;
 	int mem_start; //index of it allowed space
@@ -59,6 +57,8 @@ typedef struct env_s {
 
 /*	src/main.c	*/
 
+void add_prog(program_t **start, program_t *to_add);
+program_t *prog_dup(program_t *prog);
 program_t *start_prog(char *path);
 static void magic_reverse(void *x);
 void ini_prog_memory(env_t *env);

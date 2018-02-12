@@ -33,25 +33,29 @@ type_arg_t get_arg_type(char desc, int arg_nbr)
 
 int get_pc(char *memory, program_t *p)
 {
-	int value = 0;
+	return (p->pc_curr);
+	/* int value = 0; */
 
-	read_from_mem(memory, &value, sizeof(int), p->pc);
-	swap(&value, sizeof(int));
-	return (value);
+	/* read_from_mem(memory, &value, sizeof(int), p->pc); */
+	/* swap(&value, sizeof(int)); */
+	/* return (value); */
 }
 
 void set_pc(char *memory, program_t *p, int value)
 {
-	write_to_mem(memory, &value, sizeof(int), p->pc);
+	p->pc_curr = value;
+	//write_to_mem(memory, &value, sizeof(int), p->pc);
 }
 
 int up_pc(char *memory, program_t *p, int size)
 {
-	int value = get_pc(memory, p);
-
-	value += size;
-	set_pc(memory, p, value);
+	p->pc_curr += size;
 	return (0);
+	/* int value = get_pc(memory, p); */
+
+	/* value += size; */
+	/* set_pc(memory, p, value); */
+	/* return (0); */
 }
 
 int is_special_size(char code)

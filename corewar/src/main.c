@@ -7,9 +7,36 @@
 
 #include "corewar.h"
 
+void add_prog(program_t **start, program_t *to_add)
+{
+	program_t *last = 0;
+
+	if (!(*start))
+		*start = to_add;
+	for (last = (*start); last->next; last = last->next);
+	last->next = to_add;
+	to_add->next = 0;
+}
+
+program_t *prog_dup(program_t *prog)
+{
+	program_t *prgm = malloc(sizeof(program_t));
+
+	prgm->pc_curr = prog->pc_curr;
+	prgm->pc_backup = prog->pc_backup;
+	prgm->info = prog->info;
+	prgm->id = prog->id;
+	prgm->fd = prog->fd;
+	prgm->live_signal = prog->live_signal;
+	prgm->cycle = prog->cycle;
+	prgm->carry = 0;
+	prgm->mem_start = prog->mem_start;
+	prgm->next = 0;
+	return (prgm);
+}
+
 program_t *start_prog(char *path)
 {
-	static int id = 0;
 	int fd = open(path, O_RDONLY);
 	program_t *prgm = malloc(sizeof(program_t));
 
@@ -17,12 +44,10 @@ program_t *start_prog(char *path)
 		exit(84);
 	prgm->cycle = 0;
 	prgm->fd = fd;
-	prgm->prog_nb = 0;
 	prgm->carry = 0;
-	prgm->fork = 0;
 	prgm->live_signal = 0;
 	prgm->cycle = 0;
-	prgm->pc = 0;
+	prgm->pc_curr = 0;
 	prgm->pc_backup = 0;
 	return (prgm);
 }
@@ -46,9 +71,7 @@ void ini_prog_memory(env_t *env)
 	for (program_t *tmp = env->prgm; tmp; tmp = tmp->next, ++x) {
 		tmp->id = x;
 		set_reg_value(env->memory, tmp, 1, x);
-		pc_value = tmp->mem_start + REG_NUMBER * REG_SIZE + sizeof(int);//int for PC
-		tmp->pc = tmp->mem_start + REG_NUMBER * REG_SIZE;
-		set_pc(env->memory, tmp, pc_value);
+		tmp->pc_curr = tmp->mem_start + REG_NUMBER * REG_SIZE;
 		read(tmp->fd, &hd, sizeof(header_t));
 		magic_reverse(&(hd.prog_size));
 		read(tmp->fd, &(env->memory[get_pc(env->memory, tmp)]), \
