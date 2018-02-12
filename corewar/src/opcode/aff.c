@@ -15,6 +15,6 @@ void aff(env_t *env, program_t *p, instr_t info)
 		p->cycle = 1;
 		return;
 	}
-	printf("%c\n", get_reg_value(env->memory, p, arg[0]) % 256);
+	my_printf("%c\n", get_reg_value(env->memory, p, arg[0]) % 256);
 	set_cycle(p, info.code);
 }

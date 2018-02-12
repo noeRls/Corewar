@@ -75,7 +75,6 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 	int size = 0;
 	int special_size = is_special_size(p->info->code);
 
-	printf("type : %d\n", type);
 	switch (type) {
 	case DIR:
 		size = special_size ? IND_SIZE : DIR_SIZE;
@@ -90,13 +89,9 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 		return (0);
 	}
 	read_from_mem(env->memory, &value, size, get_pc(env->memory, p));
-	printf("val : %d - PC : %d - size:%d\n\n", value, get_pc(env->memory, p), size);
 	swap(&value, size);
 	if (special_size && (type == DIR || type == IND)) {
 		value = (short int) value;
-		printf("val after SHORT : %hd\n", value);
-	} else {
-		printf("val after : %d\n", value);
 	}
 	up_pc(env->memory, p, size);
 	return (value);
@@ -130,17 +125,12 @@ int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind)
 
 	for (int i = 0; i < op_tab[info->code - 1].nbr_args; i++) {
 		type = get_arg_type(info->desc, i + 1);
-		printf("setup_arg\n");
 		if (!(type & op_tab[info->code - 1].type[i])) {
-			printf("wrong type :%d\n", type);
 			return (84);
 		}
-		printf("little_pass\n");
 		arg[i] = get_arg_data(env, p, type);
-		printf("arg[i]:%d\n", arg[i]);
 		if (type == REG && (arg[i] > REG_NUMBER || arg[i] <= 0))
 			return (84);
-		printf("big pass\n");
 		if (type == IND) {
 			arg[i] = p->pc_backup + arg[i];
 			manage_idx_mod(&(arg[i]), p, idx_mod_ind);

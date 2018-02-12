@@ -13,7 +13,6 @@ void fork_op(env_t *env, program_t *p, instr_t info)
 	int value = 0;
 	program_t *new_prog = 0;
 
-	printf("FORK\n");
 	p->info->desc = 128;
 	if (setup_arg(arg, p, env, TRUE) == 84) {
 		p->cycle = 1;
