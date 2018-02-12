@@ -243,6 +243,7 @@ int main(int ac, char **av)
 	}
 	printf("DUMP CYCLE : %d\n", args->dump_cycle);
 	finally_setup_arg(args);
+	env.dump_cycle = args->dump_cycle;
 	init(args, &env);
 	return (0);
 }

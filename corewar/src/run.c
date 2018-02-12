@@ -30,6 +30,8 @@ void manage_cycle(env_t *env)
 		env->cycle_to_die -= CYCLE_DELTA;
 		env->live_counter = 0;
 	}
+	if (env->cycle % env->dump_cycle)
+		print_hexa_mem(env->memory);
 	env->cycle += 1;
 }
 
