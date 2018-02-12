@@ -245,5 +245,6 @@ int main(int ac, char **av)
 	finally_setup_arg(args);
 	env.dump_cycle = args->dump_cycle;
 	init(args, &env);
+	run(&env);
 	return (0);
 }
