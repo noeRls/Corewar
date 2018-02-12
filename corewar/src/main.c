@@ -79,22 +79,26 @@ void ini_prog_memory(env_t *env)
 	}
 }
 
-void init(int ac, char **av, env_t *env)
+void init(args_t *arg, env_t *env)
 {
 	program_t *st = 0;
 	program_t *start = 0;
 
-	env->nbr_player = ac - 1;
+	env->nbr_player = arg->nb_prog;
 	env->cycle_to_die = CYCLE_TO_DIE;
 	env->cycle = 0;
 	env->prgm = malloc(sizeof(program_t));
-	st = start_prog(av[1]);
+	st = start_prog(arg->prog_paths[0]);
 	st->mem_start = 0;
 	st->next = 0;
 	start = st;
-	for (int i = 2; i < ac; i++) {
-		st->next = start_prog(av[i]);
-		st->next->mem_start = (i - 1) * (MEM_SIZE / env->nbr_player);
+	for (int i = 1; i < arg->nb_prog; i++) {
+		st->next = start_prog(arg->prog_paths[i]);
+		if (!arg->not_mem_default) { //= mem default
+			st->next->mem_start = (i * (MEM_SIZE / env->nbr_player));
+		} else {
+			st->next->mem_start = arg->mem_start[i];
+		}
 		st = st->next;
 	}
 	st->next = 0;
@@ -110,14 +114,71 @@ int manage_args(int ac, char **av)
 
 	if (ac <= 3)
 		return (83);
-	for (i = 0; i <
+	//for (i = 0; i <;);
+}
+
+int get_unique_id(int const *diff_id, int size)
+{
+	int dflt = 1;
+
+	for (int i = 0; i < size; i++) {
+		if (dflt == diff_id[i]) {
+			dflt++;
+			i = -1;
+		}
+	}
+	return (dflt);
+}
+
+int get_mem_start(int const *mem_start, int size)
+{
+	int *mem = malloc(sizeof(int) * (2 + size));
+	int adress = 0;
+	int last_size = 0;
+
+	mem[0] = 0;
+	mem[size + 1] = MEM_SIZE;
+	for (int i = size; i > 0; i--) {
+		if (mem_start[i] < 0)
+			size--;
+		else
+			mem[i] = mem_start[i];
+	}
+	size += 2;
+	my_sort_int_array(mem, size);
+	for (int i = 0; i < size + 1; i++) {
+		if (mem[i + 1] - mem[i] > last_size) {
+			last_size = mem[i + 1] - mem[i];
+			adress = mem[i] + (mem[i + 1] - mem[i] / 2);
+		}
+	}
+	free(mem);
+	return (adress);
+}
+
+void finally_setup_arg(args_t *arg)
+{
+	for (int i = 0; i < arg->nb_prog; i++)
+		if (arg->prog_ids[i] < 0)
+			arg->prog_ids[i] = get_unique_id( \
+			arg->prog_ids, arg->nb_prog);
+	for (int i = 0; i < arg->nb_prog; i++)
+		if (arg->mem_start[i] > 0) {
+			arg->mem_start[i] = arg->mem_start[i] % MEM_SIZE;
+			arg->not_mem_default = 1;
+		}
+	for (int i = 0; i < arg->nb_prog; i++)
+		if (arg->mem_start[i] < 0)
+			arg->mem_start[i] = get_mem_start(arg->mem_start, arg->nb_prog);
 }
 
 int main(int ac, char **av)
 {
 	env_t env;
+	args_t *arg = 0;
 
-	init(ac, av, &env);
+	finally_setup_arg(arg);
+	init(arg, &env);
 	run(&env);
 	return (0);
 }

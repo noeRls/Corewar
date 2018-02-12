@@ -48,8 +48,10 @@ typedef struct program_s {
 typedef struct args_s {
 	char **prog_paths;
 	int dump_cycle;
+	int nb_prog;
 	int *prog_ids;
 	int *mem_start;
+	int not_mem_default;
 } args_t;
 
 typedef struct env_s {
@@ -70,7 +72,7 @@ program_t *prog_dup(program_t *prog);
 program_t *start_prog(char *path);
 static void magic_reverse(void *x);
 void ini_prog_memory(env_t *env);
-void init(int ac, char **av, env_t *env);
+void init(args_t *arg, env_t *env);
 int main(int ac, char **av);
 
 /*	src/read_from_mem.c	*/

@@ -36,18 +36,18 @@ LDLIBS		=	-lmy
 all:	lib $(NAME)
 
 $(NAME):	$(OBJ)
-	gcc -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
+	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS) $(LDLIBS)
 
 lib:
 	make -C lib/my
 
 clean:
-	rm -f $(OBJ)
-	rm -f *.cor vg*
+	$(RM) -f $(OBJ)
+	$(RM) *.cor vg*
 	make clean -C lib/my
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) -f $(NAME)
 	make fclean -C lib/my
 
 re:	fclean all
