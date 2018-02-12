@@ -27,7 +27,7 @@ void write_coding_byte(char **tab, int fd, label_t *label)
 	char c = 0;
 	arg_type type;
 
-	if (!my_strcmp(tab[0], "live") || !my_strcmp(tab[0], "zjmp")\
+	if (!my_strcmp(tab[0], "live") || !my_strcmp(tab[0], "zjmp")
 	|| !my_strcmp(tab[0], "fork") || !my_strcmp(tab[0], "lfork"))
 		return;
 	for (int i = 1; tab[i]; i++) {

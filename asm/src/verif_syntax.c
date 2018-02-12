@@ -10,7 +10,6 @@
 void verif_nb_arg(int mnemonic, char **tab)
 {
 	int i;
-	extern op_t op_tab[];
 
 	for (i = 0 ; tab[i] ; i++);
 	if (i - 1 != op_tab[mnemonic].nbr_args) {

@@ -21,7 +21,7 @@ int replace_space(char *str)
 			str[i] = '\0';
 			string_mode = 0;
 		}
-		if (string_mode == 0 && (str[i] == ' ' || str[i] == '\t'\
+		if (string_mode == 0 && (str[i] == ' ' || str[i] == '\t'
 					|| str[i] == ','))
 			str[i] = '\0';
 	}
