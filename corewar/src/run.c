@@ -52,7 +52,6 @@ int execute_prog(env_t *env, program_t *p)
 		p->cycle = 1;
 	else
 		fctns[tmp.code - 1](env, p, tmp);
-	printf("code :%d\n", tmp.code);
 }
 
 int run(env_t *env) {
@@ -61,7 +60,6 @@ int run(env_t *env) {
 			if (!p->cycle) {
 				execute_prog(env, p);
 			}
-			printf("cycle:%d\n", p->cycle);
 		}
 		manage_cycle(env);
 	}

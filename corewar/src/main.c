@@ -210,7 +210,6 @@ args_t *second_part(args_t *args, int ac, char **av)
 			args->prog_paths[args->curr] = av[i];
 			args->curr++;
 		}
-		printf("curr : %s\n", av[i]);
 		for (int j = 0; j < 3 && av[i][0] == '-'; j++)
 			exists = max(exists, handle_for(&i, j, args, av));
 		if (!exists && av[i - 1][0] == '-')
