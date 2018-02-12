@@ -32,6 +32,8 @@ program_t *prog_dup(program_t *prog)
 	prgm->cycle = prog->cycle;
 	prgm->carry = 0;
 	prgm->mem_start = prog->mem_start;
+	my_memset(prgm->name, 0, PROG_NAME_LENGTH + 1);
+	my_strcpy(prgm->name, prog->name);
 	prgm->next = 0;
 	return (prgm);
 }
@@ -77,6 +79,8 @@ void ini_prog_memory(env_t *env)
 		magic_reverse(&(hd.prog_size));
 		read(tmp->fd, &(env->memory[get_pc(env->memory, tmp)]), \
 		hd.prog_size);
+		my_memset(tmp->name, 0, PROG_NAME_LENGTH + 1);
+		my_strcpy(tmp->name, hd.prog_name);
 	}
 }
 
@@ -152,14 +156,15 @@ int get_mem_start(int const *mem_start, int size)
 	int adress = 0;
 	int last_size = 0;
 
+	my_memset(mem, 0, sizeof(int) * (2 + size));
 	mem[0] = 0;
-	mem[size + 1] = MEM_SIZE;
-	for (int i = size; i > 0; i--) {
-		if (mem_start[i] < 0)
+	for (int i = size - 1; i >= 0; i--) {
+		if (mem_start[i] == -1)
 			size--;
 		else
-			mem[i] = mem_start[i];
+			mem[i + 1] = mem_start[i];
 	}
+	mem[size - 1] = MEM_SIZE;
 	size += 2;
 	my_sort_int_array(mem, size);
 	for (int i = 0; i < size + 1; i++) {
@@ -235,13 +240,13 @@ int main(int ac, char **av)
 	args_t *args = 0;
 
 	args = manage_args(ac, av);
-	printf("NB PROG : %d\n", args->nb_prog);
+	my_printf("NB PROG : %d\n", args->nb_prog);
 	for (int i = 0; i < args->nb_prog; i++) {
-		printf("\tPROG #%d -> %s\n", i + 1, args->prog_paths[i]);
-		printf("\t\tID : %d\n", args->prog_ids[i]);
-		printf("\t\tSTARTS AT : %d\n", args->mem_start[i]);
+		my_printf("\tPROG #%d -> %s\n", i + 1, args->prog_paths[i]);
+		my_printf("\t\tID : %d\n", args->prog_ids[i]);
+		my_printf("\t\tSTARTS AT : %d\n", args->mem_start[i]);
 	}
-	printf("DUMP CYCLE : %d\n", args->dump_cycle);
+	my_printf("DUMP CYCLE : %d\n", args->dump_cycle);
 	finally_setup_arg(args);
 	env.dump_cycle = args->dump_cycle;
 	init(args, &env);

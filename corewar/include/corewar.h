@@ -42,6 +42,7 @@ typedef struct program_s {
 	int live_signal;
 	int cycle;
 	int mem_start; //index of it allowed space
+	char name[PROG_NAME_LENGTH + 1];
 	struct program_s *next;
 } program_t;
 

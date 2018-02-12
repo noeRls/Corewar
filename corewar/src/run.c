@@ -30,7 +30,7 @@ void manage_cycle(env_t *env)
 		env->cycle_to_die -= CYCLE_DELTA;
 		env->live_counter = 0;
 	}
-	if (env->cycle % env->dump_cycle)
+	if (env->cycle % env->dump_cycle == 0 && env->dump_cycle != -1)
 		print_hexa_mem(env->memory);
 	env->cycle += 1;
 }
@@ -56,14 +56,10 @@ int execute_prog(env_t *env, program_t *p)
 }
 
 int run(env_t *env) {
-	print_hexa_mem(env->memory);
-	printf("\n\n\n");
 	while (nbr_prog_alive(env) > 0) {
 		for (program_t *p = env->prgm; p; p = p->next) {
 			if (!p->cycle) {
 				execute_prog(env, p);
-				print_hexa_mem(env->memory);
-				printf("\n\n\n\n");
 			}
 			printf("cycle:%d\n", p->cycle);
 		}
