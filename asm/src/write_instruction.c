@@ -9,8 +9,6 @@
 
 int write_instruction(char *cmd, int fd, label_t *label)
 {
-	extern op_t op_tab[];
-
 	for (char i = 0; op_tab[(int)i].mnemonique != 0; i++) {
 		if (my_strcmp(cmd, op_tab[(int)i].mnemonique) == 0) {
 			label->tmp_pos += 1;

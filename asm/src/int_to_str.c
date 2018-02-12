@@ -13,9 +13,8 @@ int calc_length(long int x)
 
 	if (x == 0)
 		return (1);
-	if (x < 0) {
+	if (x < 0)
 		result += 1;
-	}
 	while (x != 0) {
 		x /= 10;
 		result += 1;
@@ -29,9 +28,8 @@ char *int_to_str(long int y, char *result)
 	int i = calc_length(y);
 	int negativ = (y < 0 ? -1 : 1);
 
-	if (y == -2147483648) {
+	if (y == -2147483648)
 		return (my_strdup("-2147483648"));
-	}
 	if (y < 0) {
 		result[0] = '-';
 		y *= -1;
