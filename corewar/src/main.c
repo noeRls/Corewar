@@ -99,7 +99,7 @@ void init(args_t *arg, env_t *env)
 	start = st;
 	for (int i = 1; i < arg->nb_prog; i++) {
 		st->next = start_prog(arg->prog_paths[i]);
-		if (!arg->not_mem_default) { //= mem default
+		if (!arg->not_mem_default) {
 			st->next->mem_start = (i * (MEM_SIZE / env->nbr_player));
 		} else {
 			st->next->mem_start = arg->mem_start[i];

@@ -60,7 +60,9 @@ void manage_cycle(env_t *env)
 
 int execute_prog(env_t *env, program_t *p)
 {
-	static void (*fctns[])(env_t *, program_t *, instr_t) = {live, ld, st, add, sub, and, or, xor, zjmp, ldi, sti, fork_op, lld, lldi, lfork, aff};
+	static void (*fctns[])(env_t *, program_t *, instr_t) = {live, ld, \
+	st, add, sub, and, or, xor, zjmp, ldi, sti, fork_op, lld, \
+	lldi, lfork, aff};
 	instr_t tmp;
 
 	read_from_mem(env->memory, &tmp, sizeof(instr_t), get_pc(env->memory, p));
@@ -80,13 +82,9 @@ int execute_prog(env_t *env, program_t *p)
 int run(env_t *env) {
 	while (!end(env->prgm)) {
 		for (program_t *p = env->prgm; p; p = p->next) {
-			if (!p->cycle) {
-				execute_prog(env, p);
-				for (program_t *p = env->prgm; p; p = p->next) {
-					//printf("NAME : %s\nLIVE SIGNAL : %d", p->name, p->live_signal);
-					//printf("\n\n");
-				}
-			}
+			p->cycle ? 0 : execute_prog(env, p);
+			//printf("NAME : %s\nLIVE SIGNAL : %d", p->name, p->live_signal);
+			//printf("\n\n");
 		}
 		manage_cycle(env);
 	}

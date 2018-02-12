@@ -17,7 +17,7 @@ static int setup(env_t *env, program_t *p, instr_t info, int *arg)
 			sum += (short int) arg[i];
 		if (get_arg_type(info.desc, i + 1) == IND) {
 			read_from_mem(env->memory, &tmp, IND_SIZE, arg[i]);
-			swap(&tmp, IND_SIZE); //ind size 2 => short int
+			swap(&tmp, IND_SIZE);
 			sum += tmp;
 		}
 	}
