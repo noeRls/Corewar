@@ -42,12 +42,12 @@ void manage_cycle(env_t *env)
 	program_t *next = 0;
 
 	for (program_t *prgm = env->prgm; prgm; prgm = next) {
-		prgm->live_signal += 1;
 		next = prgm->next;
 		if (prgm->live_signal > env->cycle_to_die)
 			destroy_prog(&(env->prgm), prgm);
 		else
 			prgm->cycle -= 1;
+		prgm->live_signal += 1;
 	}
 	if (env->live_counter >= NBR_LIVE) {
 		env->cycle_to_die -= CYCLE_DELTA;
@@ -83,8 +83,8 @@ int run(env_t *env) {
 			if (!p->cycle) {
 				execute_prog(env, p);
 				for (program_t *p = env->prgm; p; p = p->next) {
-					printf("NAME : %s\n", p->name);
-					printf("\n\n");
+					//printf("NAME : %s\nLIVE SIGNAL : %d", p->name, p->live_signal);
+					//printf("\n\n");
 				}
 			}
 		}
