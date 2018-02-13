@@ -16,8 +16,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define REG(prgm, nbr) ((prgm)->mem_start + (REG_SIZE * (nbr)))
-
 #define READ_SIZE_BINARY_OP 1
 
 typedef struct instr_s {
@@ -33,10 +31,10 @@ typedef enum type_s {
 } type_arg_t;
 
 typedef struct program_s {
-	int pc_curr; //index of pc
 	int pc_backup;
 	instr_t *info;
 	int id;
+	int reg[REG_NUMBER + 1];
 	int fd;
 	int carry;
 	int live_signal;
@@ -101,8 +99,6 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type);
 int up_pc(char *memory, program_t *p, int size);
 int get_pc(char *memory, program_t *p);
 void set_pc(char *memory, program_t *p, int value);
-void set_reg_value(char *memory, program_t *p, int reg_nbr, int value);
-int get_reg_value(char *memory, program_t *p, int index);
 
 type_arg_t get_arg_type(char desc, int arg_nbr);
 

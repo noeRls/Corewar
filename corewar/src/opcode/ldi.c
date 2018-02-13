@@ -39,6 +39,6 @@ void ldi(env_t *env, program_t *p, instr_t info)
 	sum = do_idx_mod(sum, p);
 	read_from_mem(env->memory, &value, REG_SIZE, sum);
 	swap(&value, REG_SIZE);
-	set_reg_value(env->memory, p, arg[2], value);
+	p->reg[arg[2]] = value;
 	set_cycle(p, info.code);
 }

@@ -17,8 +17,8 @@ void sub(env_t *env, program_t *p, instr_t info)
 		p->cycle = 1;
 		return;
 	}
-	value1 = get_reg_value(env->memory, p, arg[0]);
-	value2 = get_reg_value(env->memory, p, arg[1]);
-	set_reg_value(env->memory, p, arg[2], value1 - value2);
+	value1 = p->reg[arg[0]];
+	value2 = p->reg[arg[1]];
+	p->reg[arg[2]] = value1 - value2;
 	set_cycle(p, info.code);
 }

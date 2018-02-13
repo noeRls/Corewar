@@ -14,7 +14,7 @@ static void setup(env_t *env, program_t *p, instr_t info, int *arg)
 	for (int i = 0; i < 2; i++) {
 		tmp = 0;
 		if (get_arg_type(info.desc, i + 1) == REG) {
-			arg[i] = get_reg_value(env->memory, p, arg[i]);
+			arg[i] = p->reg[arg[i]];
 		}
 		if (get_arg_type(info.desc, i + 1) == IND) {
 			read_from_mem(env->memory, &tmp, \
@@ -35,6 +35,6 @@ void or(env_t *env, program_t *p, instr_t info)
 	}
 	setup(env, p, info, arg);
 	p->carry = 0;
-	set_reg_value(env->memory, p, arg[2], arg[0] | arg[1]);
+	p->reg[arg[2]] = arg[0] | arg[1];
 	set_cycle(p, info.code);
 }

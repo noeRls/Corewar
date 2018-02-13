@@ -43,11 +43,14 @@ void manage_cycle(env_t *env)
 
 	for (program_t *prgm = env->prgm; prgm; prgm = next) {
 		next = prgm->next;
-		if (prgm->live_signal > env->cycle_to_die)
+		if (prgm->live_signal > env->cycle_to_die) {
+			my_printf("DESTROY : %s\n", prgm->name);
 			destroy_prog(&(env->prgm), prgm);
+		}
 		else
 			prgm->cycle -= 1;
 		prgm->live_signal += 1;
+		my_printf("ls :%d, name : %s\n", prgm->live_signal, prgm->name);
 	}
 	if (env->live_counter >= NBR_LIVE) {
 		env->cycle_to_die -= CYCLE_DELTA;
@@ -56,6 +59,7 @@ void manage_cycle(env_t *env)
 	if (env->cycle % env->dump_cycle == 0 && env->dump_cycle != -1)
 		print_hexa_mem(env->memory);
 	env->cycle += 1;
+	my_printf("cycle to die : %d\n", env->cycle_to_die);
 }
 
 int execute_prog(env_t *env, program_t *p)

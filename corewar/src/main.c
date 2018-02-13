@@ -23,6 +23,9 @@ program_t *prog_dup(program_t *prog)
 {
 	program_t *prgm = malloc(sizeof(program_t));
 
+	for (int i = 0; i < REG_NUMBER + 1; i++) {
+		prgm->reg[i] = prog->reg[i];
+	}
 	prgm->pc_curr = prog->pc_curr;
 	prgm->pc_backup = prog->pc_backup;
 	prgm->info = prog->info;
@@ -45,6 +48,7 @@ program_t *start_prog(char *path)
 
 	if (!fd)
 		exit(84);
+	my_memset(prgm->reg, 0, sizeof(int) * (REG_NUMBER + 1));
 	prgm->cycle = 0;
 	prgm->fd = fd;
 	prgm->carry = 0;
@@ -73,8 +77,8 @@ void ini_prog_memory(env_t *env)
 
 	for (program_t *tmp = env->prgm; tmp; tmp = tmp->next, ++x) {
 		tmp->id = x;
-		set_reg_value(env->memory, tmp, 1, x);
-		tmp->pc_curr = tmp->mem_start + REG_NUMBER * REG_SIZE;
+		tmp->reg[1] = x;
+		tmp->pc_curr = tmp->mem_start;
 		read(tmp->fd, &hd, sizeof(header_t));
 		magic_reverse(&(hd.prog_size));
 		read(tmp->fd, &(env->memory[get_pc(env->memory, tmp)]), \
