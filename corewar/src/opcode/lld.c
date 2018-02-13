@@ -11,7 +11,7 @@ void lld(env_t *env, program_t *p, instr_t info)
 {
 	char reg_nbr;
 	int value = 0;
-	int pc_b = get_pc(env->memory, p);
+	int pc_b = p->PC;
 	int arg[MAX_ARGS_NUMBER] = {0};
 
 	if (setup_arg(arg, p, env, FALSE) == 84) {
@@ -26,6 +26,6 @@ void lld(env_t *env, program_t *p, instr_t info)
 	}
 	p->carry = 0;
 	set_cycle(p, info.code);
-	set_reg_value(env->memory, p, arg[1], arg[0]);
+	p->reg[arg[1]] = arg[0];
 	p->carry = 0;
 }

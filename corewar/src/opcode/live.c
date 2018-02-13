@@ -14,9 +14,9 @@ void live(env_t *env, program_t *p, instr_t info)
 	program_t *pa = 0;
 
 	env->live_counter++;
-	read_from_mem(env->memory, &id, sizeof(int), get_pc(env->memory, p));
+	read_from_mem(env->memory, &id, sizeof(int), p->PC);
 	swap(&id, sizeof(int));
-	up_pc(env->memory, p, sizeof(int));
+	up_pc(p, sizeof(int));
 	set_cycle(p, info.code);
 	for (program_t *p_tmp = env->prgm; p_tmp; p_tmp = p_tmp->next) {
 		if (p_tmp->id == id) {
