@@ -25,12 +25,12 @@ void print_hexa_mem(unsigned char *memory)
 	int x = 0;
 
 	for (int i = 0; i < MEM_SIZE; i++) {
-		printf("%02x ", memory[i]);
+		my_printf("%02x ", (int) memory[i]);
 		x++;
 		if (x == 8) {
-			printf(" ");
+			my_printf(" ");
 		} else if (x == 16) {
-			printf("\n");
+			my_printf("\n");
 			x = 0;
 		}
 		free(tmp);
@@ -55,19 +55,19 @@ void read_from_mem(unsigned char *memory, void *data, int size, int start)
 	}
 }
 
-int get_reg_value(char *memory, program_t *p, int reg_nbr)
-{
-	int res = 0;
+/* int get_reg_value(char *memory, program_t *p, int reg_nbr) */
+/* { */
+/* 	int res = 0; */
 
-	read_from_mem(memory, &res, sizeof(int), REG(p, reg_nbr));
-	swap(&res, sizeof(int));
-	return (res);
-}
+/* 	read_from_mem(memory, &res, sizeof(int), REG(p, reg_nbr)); */
+/* 	swap(&res, sizeof(int)); */
+/* 	return (res); */
+/* } */
 
-void set_reg_value(char *memory, program_t *p, int reg_nbr, int value)
-{
-	int val = value;
+/* void set_reg_value(char *memory, program_t *p, int reg_nbr, int value) */
+/* { */
+/* 	int val = value; */
 
-	swap(&val, sizeof(int));
-	write_to_mem(memory, &val, sizeof(int), REG(p, reg_nbr));
-}
+/* 	swap(&val, sizeof(int)); */
+/* 	write_to_mem(memory, &val, sizeof(int), REG(p, reg_nbr)); */
+/* } */

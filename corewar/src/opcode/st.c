@@ -16,9 +16,9 @@ void st(env_t *env, program_t *p, instr_t info)
 		p->cycle = 1;
 		return;
 	}
-	value = get_reg_value(env->memory, p, arg[0]);
+	value = p->reg[arg[0]];
 	if (get_arg_type(info.desc, 2) == REG) {
-		set_reg_value(env->memory, p, arg[1], value);
+		p->reg[arg[1]] = value;
 	} else {
 		swap(&value, sizeof(int));
 		write_to_mem(env->memory, &value, sizeof(int), arg[1]);

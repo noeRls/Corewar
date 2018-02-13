@@ -31,21 +31,15 @@ type_arg_t get_arg_type(char desc, int arg_nbr)
 	return (type);
 }
 
-int get_pc(char *memory, program_t *p)
-{
-	return (get_reg_value(memory, p, 0));
-}
-
 void set_pc(char *memory, program_t *p, int value)
 {
-	set_reg_value(memory, p, 0, value);
+	p->PC = value;
+	//write_to_mem(memory, &value, sizeof(int), p->pc);
 }
-int up_pc(char *memory, program_t *p, int size)
-{
-	int value = get_pc(memory, p);
 
-	value += size;
-	set_reg_value(memory, p, 0, value);
+int up_pc(program_t *p, int size)
+{
+	p->PC += size;
 	return (0);
 }
 
@@ -66,7 +60,6 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 	int size = 0;
 	int special_size = is_special_size(p->info->code);
 
-	printf("type : %d\n", type);
 	switch (type) {
 	case DIR:
 		size = special_size ? IND_SIZE : DIR_SIZE;
@@ -80,16 +73,12 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 	default:
 		return (0);
 	}
-	read_from_mem(env->memory, &value, size, get_pc(env->memory, p));
-	printf("val : %d - PC : %d - size:%d\n\n", value, get_pc(env->memory, p), size);
+	read_from_mem(env->memory, &value, size, p->PC);
 	swap(&value, size);
 	if (special_size && (type == DIR || type == IND)) {
 		value = (short int) value;
-		printf("val after SHORT : %hd\n", value);
-	} else {
-		printf("val after : %d\n", value);
 	}
-	up_pc(env->memory, p, size);
+	up_pc(p, size);
 	return (value);
 }
 
@@ -121,17 +110,12 @@ int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind)
 
 	for (int i = 0; i < op_tab[info->code - 1].nbr_args; i++) {
 		type = get_arg_type(info->desc, i + 1);
-		printf("setup_arg\n");
 		if (!(type & op_tab[info->code - 1].type[i])) {
-			printf("wrong type :%d\n", type);
 			return (84);
 		}
-		printf("little_pass\n");
 		arg[i] = get_arg_data(env, p, type);
-		printf("arg[i]:%d\n", arg[i]);
 		if (type == REG && (arg[i] > REG_NUMBER || arg[i] <= 0))
 			return (84);
-		printf("big pass\n");
 		if (type == IND) {
 			arg[i] = p->pc_backup + arg[i];
 			manage_idx_mod(&(arg[i]), p, idx_mod_ind);

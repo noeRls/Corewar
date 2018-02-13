@@ -32,7 +32,7 @@ OBJ =	$(SRC:.c=.o)
 
 CPPFLAGS = -Llib/my -lmy -Iinclude -g3
 
-NAME =	test
+NAME =	corewar
 
 all:	lib $(NAME)
 

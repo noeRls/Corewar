@@ -18,7 +18,7 @@ void write_register_arg(char *str, int fd, label_t *label)
 int check_mnemonique_case(int mnemonique)
 {
 	mnemonique++;
-	if (mnemonique == 9 || mnemonique == 10 || mnemonique == 11\
+	if (mnemonique == 9 || mnemonique == 10 || mnemonique == 11
 	|| mnemonique == 12 || mnemonique == 14 || mnemonique == 15)
 		return (1);
 	return (0);

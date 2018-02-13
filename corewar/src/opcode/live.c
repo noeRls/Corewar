@@ -10,15 +10,21 @@
 void live(env_t *env, program_t *p, instr_t info)
 {
 	int id = 0;
+	int lived = 0;
+	program_t *pa = 0;
 
-	read_from_mem(env->memory, &id, sizeof(int), get_pc(env->memory, p));
+	env->live_counter++;
+	read_from_mem(env->memory, &id, sizeof(int), p->PC);
 	swap(&id, sizeof(int));
-	up_pc(env->memory, p, sizeof(int));
+	up_pc(p, sizeof(int));
 	set_cycle(p, info.code);
 	for (program_t *p_tmp = env->prgm; p_tmp; p_tmp = p_tmp->next) {
 		if (p_tmp->id == id) {
 			p_tmp->live_signal = 0;
-			printf("id:%d est en vie\n", p->id);
+			lived += 1;
+			pa = p_tmp;
 		}
 	}
+	if (lived)
+		my_printf("The player %d(%s) is alive\n", pa->id, pa->name);
 }

@@ -16,8 +16,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define REG(prgm, nbr) ((prgm)->mem_start + (REG_SIZE * (nbr)))
-
+#define PC reg[0]
 #define READ_SIZE_BINARY_OP 1
 
 typedef struct instr_s {
@@ -36,20 +35,31 @@ typedef struct program_s {
 	int pc_backup;
 	instr_t *info;
 	int id;
+	int reg[REG_NUMBER + 1];
 	int fd;
-	int prog_nb;
 	int carry;
-	int fork;
 	int live_signal;
 	int cycle;
 	int mem_start; //index of it allowed space
+	char name[PROG_NAME_LENGTH + 1];
 	struct program_s *next;
 } program_t;
+
+typedef struct args_s {
+	int curr;
+	char **prog_paths;
+	int dump_cycle;
+	int nb_prog;
+	int *prog_ids;
+	int *mem_start;
+	int not_mem_default;
+} args_t;
 
 typedef struct env_s {
 	unsigned char memory[MEM_SIZE];
 	program_t *prgm;
 
+	int dump_cycle;
 	int nbr_player;
 	int cycle;
 	int live_counter;
@@ -58,10 +68,12 @@ typedef struct env_s {
 
 /*	src/main.c	*/
 
+void add_prog(program_t **start, program_t *to_add);
+program_t *prog_dup(program_t *prog);
 program_t *start_prog(char *path);
 static void magic_reverse(void *x);
 void ini_prog_memory(env_t *env);
-void init(int ac, char **av, env_t *env);
+void init(args_t *arg, env_t *env);
 int main(int ac, char **av);
 
 /*	src/read_from_mem.c	*/
@@ -85,11 +97,8 @@ type_arg_t get_arg_type(char desc, int arg_nbr);
 int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind);
 void set_cycle(program_t *p, char code);
 int get_arg_data(env_t *env, program_t *p, type_arg_t type);
-int up_pc(char *memory, program_t *p, int size);
-int get_pc(char *memory, program_t *p);
+int up_pc(program_t *p, int size);
 void set_pc(char *memory, program_t *p, int value);
-void set_reg_value(char *memory, program_t *p, int reg_nbr, int value);
-int get_reg_value(char *memory, program_t *p, int index);
 
 type_arg_t get_arg_type(char desc, int arg_nbr);
 

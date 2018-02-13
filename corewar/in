@@ -6,6 +6,7 @@ ld %78,r6
 aff r6
 sti r1,%:live,%1
 live: live %2
+fork %:live
 zjmp %:live
 
 #sti r1,%:live,%1

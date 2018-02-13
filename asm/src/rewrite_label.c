@@ -35,7 +35,7 @@ void write_direct_label(int x, int fd)
 void write_indirect_label(int x, int fd)
 {
 	char c = 0;
-	short unsigned int tmp = (short unsigned int) x;
+	unsigned short int tmp = (unsigned short int) x;
 
 //	printf("direct: tmp = %d, soit en hexa: %x\n", x, x);
 //	printf("direct: tmp = %u, soit en hexa: %x\n\n", tmp, tmp);
@@ -62,14 +62,14 @@ void change_label(int fd, call_t *call, decla_t *decla, label_t *label)
 		else
 			write_indirect_label(final_pos, fd);
 	}
+	(void)label;
 	free(tmp);
 }
 
 void rewrite_label(int fd, label_t *label)
 {
 	for (call_t *call = label->call ; call ; call = call->next) {
-		for (decla_t *decla = label->decla ; decla ; decla = decla->next) {
+		for (decla_t *decla = label->decla; decla; decla = decla->next)
 			change_label(fd, call, decla, label);
-		}
 	}
 }

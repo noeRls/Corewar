@@ -44,7 +44,7 @@ void my_sort_int_array(int *array, int size);
 
 /*	mem/my_sys_utils.c	*/
 
-void my_memset(char *str, char c, int len);
+void my_memset(void *str, char c, int len);
 void my_swap(int *a, int *b);
 void my_swap_char(char *a, char *b);
 
