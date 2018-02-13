@@ -246,13 +246,6 @@ int main(int ac, char **av)
 	args_t *args = 0;
 
 	args = manage_args(ac, av);
-	my_printf("NB PROG : %d\n", args->nb_prog);
-	for (int i = 0; i < args->nb_prog; i++) {
-		my_printf("\tPROG #%d -> %s\n", i + 1, args->prog_paths[i]);
-		my_printf("\t\tID : %d\n", args->prog_ids[i]);
-		my_printf("\t\tSTARTS AT : %d\n", args->mem_start[i]);
-	}
-	my_printf("DUMP CYCLE : %d\n", args->dump_cycle);
 	finally_setup_arg(args);
 	env.dump_cycle = args->dump_cycle;
 	init(args, &env);
