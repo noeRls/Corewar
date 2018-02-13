@@ -59,4 +59,6 @@ fclean: clean
 
 re:	fclean all
 
-.PHONY: all lib clean fclean re
+r:	all clean
+
+.PHONY: all lib clean fclean re r
