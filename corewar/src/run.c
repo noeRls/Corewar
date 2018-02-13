@@ -43,11 +43,13 @@ void manage_cycle(env_t *env)
 
 	for (program_t *prgm = env->prgm; prgm; prgm = next) {
 		next = prgm->next;
-		if (prgm->live_signal > env->cycle_to_die)
+		if (prgm->live_signal > env->cycle_to_die) {
 			destroy_prog(&(env->prgm), prgm);
-		else
+			my_printf("DESTROY\n");
+		} else {
 			prgm->cycle -= 1;
-		prgm->live_signal += 1;
+			prgm->live_signal += 1;
+		}
 	}
 	if (env->live_counter >= NBR_LIVE) {
 		env->cycle_to_die -= CYCLE_DELTA;
