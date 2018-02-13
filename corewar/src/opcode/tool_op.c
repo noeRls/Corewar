@@ -31,31 +31,16 @@ type_arg_t get_arg_type(char desc, int arg_nbr)
 	return (type);
 }
 
-int get_pc(char *memory, program_t *p)
-{
-	return (p->pc_curr);
-	/* int value = 0; */
-
-	/* read_from_mem(memory, &value, sizeof(int), p->pc); */
-	/* swap(&value, sizeof(int)); */
-	/* return (value); */
-}
-
 void set_pc(char *memory, program_t *p, int value)
 {
 	p->pc_curr = value;
 	//write_to_mem(memory, &value, sizeof(int), p->pc);
 }
 
-int up_pc(char *memory, program_t *p, int size)
+int up_pc(program_t *p, int size)
 {
 	p->pc_curr += size;
 	return (0);
-	/* int value = get_pc(memory, p); */
-
-	/* value += size; */
-	/* set_pc(memory, p, value); */
-	/* return (0); */
 }
 
 int is_special_size(char code)
@@ -88,12 +73,12 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 	default:
 		return (0);
 	}
-	read_from_mem(env->memory, &value, size, get_pc(env->memory, p));
+	read_from_mem(env->memory, &value, size, p->PC);
 	swap(&value, size);
 	if (special_size && (type == DIR || type == IND)) {
 		value = (short int) value;
 	}
-	up_pc(env->memory, p, size);
+	up_pc(p, size);
 	return (value);
 }
 

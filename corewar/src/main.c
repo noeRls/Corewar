@@ -81,7 +81,7 @@ void ini_prog_memory(env_t *env)
 		tmp->pc_curr = tmp->mem_start;
 		read(tmp->fd, &hd, sizeof(header_t));
 		magic_reverse(&(hd.prog_size));
-		read(tmp->fd, &(env->memory[get_pc(env->memory, tmp)]), \
+		read(tmp->fd, &(env->memory[tmp->PC), \
 		hd.prog_size);
 		my_memset(tmp->name, 0, PROG_NAME_LENGTH + 1);
 		my_strcpy(tmp->name, hd.prog_name);

@@ -11,7 +11,7 @@ void ld(env_t *env, program_t *p, instr_t info)
 {
 	char reg_nbr;
 	int value = 0;
-	int pc_b = get_pc(env->memory, p);
+	int pc_b = p->PC;
 	int arg[MAX_ARGS_NUMBER] = {0};
 
 	if (setup_arg(arg, p, env, TRUE) == 84) {
