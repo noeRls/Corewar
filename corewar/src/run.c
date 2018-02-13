@@ -47,10 +47,11 @@ void manage_cycle(env_t *env)
 			my_printf("DESTROY : %s\n", prgm->name);
 			destroy_prog(&(env->prgm), prgm);
 		}
-		else
+		else {
 			prgm->cycle -= 1;
-		prgm->live_signal += 1;
-		my_printf("ls :%d, name : %s\n", prgm->live_signal, prgm->name);
+			prgm->live_signal += 1;
+			my_printf("ls :%d, name : %s\n", prgm->live_signal, prgm->name);
+		}
 	}
 	if (env->live_counter >= NBR_LIVE) {
 		env->cycle_to_die -= CYCLE_DELTA;

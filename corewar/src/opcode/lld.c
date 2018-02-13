@@ -16,6 +16,7 @@ void lld(env_t *env, program_t *p, instr_t info)
 
 	if (setup_arg(arg, p, env, FALSE) == 84) {
 		p->cycle = 1;
+		p->carry = 1;
 		return;
 	}
 	if (get_arg_type(info.desc, 1) == IND) {
@@ -23,7 +24,7 @@ void lld(env_t *env, program_t *p, instr_t info)
 		swap(&value, REG_SIZE);
 		arg[0] = value;
 	}
-	p->carry = 0;
 	set_cycle(p, info.code);
 	p->reg[arg[1]] = arg[0];
+	p->carry = 0;
 }

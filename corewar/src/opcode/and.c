@@ -31,6 +31,7 @@ void and(env_t *env, program_t *p, instr_t info)
 
 	if (setup_arg(arg, p, env, TRUE) == 84) {
 		p->cycle = 1;
+		p->carry = 1;
 		return;
 	}
 	setup(env, p, info, arg);
