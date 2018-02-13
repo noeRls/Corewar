@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define PC reg[0]
 #define READ_SIZE_BINARY_OP 1
 
 typedef struct instr_s {

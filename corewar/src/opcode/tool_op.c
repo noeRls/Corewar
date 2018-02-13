@@ -33,13 +33,13 @@ type_arg_t get_arg_type(char desc, int arg_nbr)
 
 void set_pc(char *memory, program_t *p, int value)
 {
-	p->pc_curr = value;
+	p->PC = value;
 	//write_to_mem(memory, &value, sizeof(int), p->pc);
 }
 
 int up_pc(program_t *p, int size)
 {
-	p->pc_curr += size;
+	p->PC += size;
 	return (0);
 }
 

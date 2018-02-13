@@ -26,7 +26,7 @@ program_t *prog_dup(program_t *prog)
 	for (int i = 0; i < REG_NUMBER + 1; i++) {
 		prgm->reg[i] = prog->reg[i];
 	}
-	prgm->pc_curr = prog->pc_curr;
+	prgm->PC = prog->PC;
 	prgm->pc_backup = prog->pc_backup;
 	prgm->info = prog->info;
 	prgm->id = prog->id;
@@ -54,7 +54,7 @@ program_t *start_prog(char *path)
 	prgm->carry = 0;
 	prgm->live_signal = 0;
 	prgm->cycle = 0;
-	prgm->pc_curr = 0;
+	prgm->PC = 0;
 	prgm->pc_backup = 0;
 	return (prgm);
 }
@@ -78,10 +78,10 @@ void ini_prog_memory(env_t *env)
 	for (program_t *tmp = env->prgm; tmp; tmp = tmp->next, ++x) {
 		tmp->id = x;
 		tmp->reg[1] = x;
-		tmp->pc_curr = tmp->mem_start;
+		tmp->PC = tmp->mem_start;
 		read(tmp->fd, &hd, sizeof(header_t));
 		magic_reverse(&(hd.prog_size));
-		read(tmp->fd, &(env->memory[tmp->PC), \
+		read(tmp->fd, &(env->memory[tmp->PC]),	\
 		hd.prog_size);
 		my_memset(tmp->name, 0, PROG_NAME_LENGTH + 1);
 		my_strcpy(tmp->name, hd.prog_name);
