@@ -49,10 +49,9 @@ void write_indirect_label(int x, int fd)
         write(fd, &c, sizeof(c));
 }
 
-void change_label(int fd, call_t *call, decla_t *decla, label_t *label)
+void change_label(int fd, call_t *call, decla_t *decla)
 {
 	int final_pos;
-	char *tmp = malloc(sizeof(char) * 10);
 
 	if (!my_strcmp(call->name, decla->name)) {
 		final_pos = decla->pos - call->abs_pos;
@@ -62,14 +61,12 @@ void change_label(int fd, call_t *call, decla_t *decla, label_t *label)
 		else
 			write_indirect_label(final_pos, fd);
 	}
-	(void)label;
-	free(tmp);
 }
 
 void rewrite_label(int fd, label_t *label)
 {
 	for (call_t *call = label->call ; call ; call = call->next) {
 		for (decla_t *decla = label->decla; decla; decla = decla->next)
-			change_label(fd, call, decla, label);
+			change_label(fd, call, decla);
 	}
 }
