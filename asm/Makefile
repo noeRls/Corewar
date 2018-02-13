@@ -60,5 +60,6 @@ fclean: clean
 re:	fclean all
 
 r:	all clean
+	clear && echo "GUILLAUME NTM" && sleep 2 && ./label.sh
 
 .PHONY: all lib clean fclean re r
