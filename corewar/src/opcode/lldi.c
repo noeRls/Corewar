@@ -32,6 +32,7 @@ void lldi(env_t *env, program_t *p, instr_t info)
 
 	if (setup_arg(arg, p, env, FALSE) == 84) {
 		p->cycle = 1;
+		p->carry = 1;
 		return;
 	}
 	sum = setup(env, p, info, arg);
@@ -40,4 +41,5 @@ void lldi(env_t *env, program_t *p, instr_t info)
 	swap(&value, REG_SIZE);
 	set_reg_value(env->memory, p, arg[2], value);
 	set_cycle(p, info.code);
+	p->carry = 0;
 }
