@@ -14,16 +14,21 @@ void write_direct_label(int x, int fd)
 
 //	printf("direct: tmp = %d, soit en hexa: %x\n", x, x);
 //	printf("direct: tmp = %u, soit en hexa: %x\n\n", tmp, tmp);
-	c ^= tmp & 4278190080;
+
+        c ^= tmp & 4278190080;
+//	printf("direct char = %d\n", c);
 	write(fd, &c, sizeof(c));
-	c = 0;
-	c ^= tmp & 16711680;
-	write(fd, &c, sizeof(c));
-	c = 0;
-	c ^= tmp & 65280;
-	write(fd, &c, sizeof(c));
-	c = 0;
-	c ^= tmp & 255;
+        c = 0;
+        c ^= tmp & 16711680;
+//	printf("direct char = %d\n", c);
+        write(fd, &c, sizeof(c));
+        c = 0;
+        c ^= tmp & 65280;
+//	printf("direct char = %d\n", c);
+        write(fd, &c, sizeof(c));
+        c = 0;
+        c ^= tmp & 255;
+//	printf("direct char = %d\n\n", c);
 	write(fd, &c, sizeof(c));
 }
 
@@ -34,11 +39,14 @@ void write_indirect_label(int x, int fd)
 
 //	printf("direct: tmp = %d, soit en hexa: %x\n", x, x);
 //	printf("direct: tmp = %u, soit en hexa: %x\n\n", tmp, tmp);
-	c ^= tmp & 65280;
-	write(fd, &c, sizeof(c));
-	c = 0;
-	c ^= tmp & 255;
-	write(fd, &c, sizeof(c));
+
+        c ^= tmp & 65280;
+//	printf("indirect char = %d\n", c);
+        write(fd, &c, sizeof(c));
+        c = 0;
+        c ^= tmp & 255;
+//	printf("indirect char = %d\n\n", c);
+        write(fd, &c, sizeof(c));
 }
 
 void change_label(int fd, call_t *call, decla_t *decla, label_t *label)
