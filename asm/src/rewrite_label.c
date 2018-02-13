@@ -16,15 +16,19 @@ void write_direct_label(int x, int fd)
 //	printf("direct: tmp = %u, soit en hexa: %x\n\n", tmp, tmp);
 
         c ^= tmp & 4278190080;
+//	printf("direct char = %d\n", c);
 	write(fd, &c, sizeof(c));
         c = 0;
         c ^= tmp & 16711680;
+//	printf("direct char = %d\n", c);
         write(fd, &c, sizeof(c));
         c = 0;
         c ^= tmp & 65280;
+//	printf("direct char = %d\n", c);
         write(fd, &c, sizeof(c));
         c = 0;
         c ^= tmp & 255;
+//	printf("direct char = %d\n\n", c);
 	write(fd, &c, sizeof(c));
 }
 
@@ -37,9 +41,11 @@ void write_indirect_label(int x, int fd)
 //	printf("direct: tmp = %u, soit en hexa: %x\n\n", tmp, tmp);
 
         c ^= tmp & 65280;
+//	printf("indirect char = %d\n", c);
         write(fd, &c, sizeof(c));
         c = 0;
         c ^= tmp & 255;
+//	printf("indirect char = %d\n\n", c);
         write(fd, &c, sizeof(c));
 }
 
