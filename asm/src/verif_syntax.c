@@ -18,7 +18,15 @@ void verif_nb_arg(int mnemonic, char **tab)
 	}
 }
 
+void verif_arg_type(int mnemonic, char **tab)
+{
+	for (int i = 1 ; tab[i] ; i++) {
+
+	}
+}
+
 void verif_syntax(int mnemonic, char **tab)
 {
 	verif_nb_arg(mnemonic, tab);
+	verif_arg_type(mnemonic, tab);
 }
