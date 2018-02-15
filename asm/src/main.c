@@ -58,8 +58,6 @@ int main(int ac, char **av)
 		if (!(*s))
 			continue;
 		tab = str_to_av(s);
-		if (tab[0][0] == COMMENT_CHAR)
-			continue;
 		if (fill_header(tab, &header))
 			continue;
 		if (get_arg_type(tab[0]) == LABEL_DECLARATION) {
