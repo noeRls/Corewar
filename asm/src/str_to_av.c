@@ -38,13 +38,25 @@ int count_av(char *str, int size)
 	return (nb);
 }
 
+void clear_comment(char *str)
+{
+	for (size_t i = 0; str[i]; i++) {
+		if (str[i] == COMMENT_CHAR) {
+			str[i] = '\0';
+			return;
+		}
+	}
+}
+
 char **str_to_av(char *str)
 {
 	int size = replace_space(str);
 	int nb_av = count_av(str, size);
-	char **av = malloc(sizeof(char *) * (nb_av + 1));
+	char **av;
 	int j = 0;
 
+	clear_comment(str);
+	av = malloc(sizeof(char *) * (nb_av + 1));
 	if (str[0] != '\0') {
 		av[j] = str;
 		j++;
