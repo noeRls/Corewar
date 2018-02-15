@@ -43,6 +43,7 @@ typedef struct label_list_s {
 	size_t tmp_pos;
 } label_t;
 
+void clear_comment(char *);
 int write_instruction(char *cmd, int fd, label_t *);
 void print_tabtab(char **);
 char **str_to_av(char *);

@@ -57,9 +57,11 @@ int main(int ac, char **av)
 		reinit_pos(label);
 		if (!(*s))
 			continue;
+		clear_comment(s);
 		tab = str_to_av(s);
-		print_tabtab(tab);
-		if (!(**tab) || fill_header(tab, &header))
+		if (tab[0] == NULL)
+			continue;
+		if (fill_header(tab, &header))
 			continue;
 		if (get_arg_type(tab[0]) == LABEL_DECLARATION) {
 			fill_label_decla(tab[0], bin, label);
