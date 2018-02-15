@@ -20,7 +20,7 @@ void add_prog(program_t **start, program_t *to_add)
 
 program_t *prog_dup(program_t *prog)
 {
-	program_t *prgm = malloc(sizeof(program_t));
+	program_t *prgm = my_malloc(sizeof(program_t));
 
 	for (int i = 0; i < REG_NUMBER + 1; i++) {
 		prgm->reg[i] = prog->reg[i];
@@ -43,7 +43,7 @@ program_t *prog_dup(program_t *prog)
 program_t *start_prog(char *path)
 {
 	int fd = open(path, O_RDONLY);
-	program_t *prgm = malloc(sizeof(program_t));
+	program_t *prgm = my_malloc(sizeof(program_t));
 
 	if (!fd)
 		exit(84);

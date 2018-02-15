@@ -12,7 +12,7 @@ void init_progs(args_t const *arg, env_t *env)
 	program_t *st = 0;
 	program_t *start = 0;
 
-	env->prgm = malloc(sizeof(program_t));
+	env->prgm = my_malloc(sizeof(program_t));
 	st = start_prog(arg->prog_paths[0]);
 	st->mem_start = 0;
 	st->next = NULL;
