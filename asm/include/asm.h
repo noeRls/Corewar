@@ -62,5 +62,7 @@ void printf_linked_list(call_t *, decla_t *);
 void rewrite_label(int, label_t *);
 int check_mnemonique_case(int);
 char *int_to_str(long int, char *);
+void magic_reverse(void *);
+void short_magic_reverse(void *);
 
 #endif

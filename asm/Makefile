@@ -50,7 +50,8 @@ lib:
 
 clean:
 	$(RM) -f $(OBJ)
-	$(RM) -f *.cor vg*
+	$(RM) -f vg*
+	$(RM) -f tests/*.cor
 	make clean -C lib/my
 
 fclean: clean
@@ -60,6 +61,5 @@ fclean: clean
 re:	fclean all
 
 r:	all clean
-	clear && echo "GUILLAUME NTM" && sleep 2 && ./label.sh
 
 .PHONY: all lib clean fclean re r

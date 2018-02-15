@@ -66,6 +66,8 @@ int main(int ac, char **av)
 			fill_label_decla(tab[0], bin, label);
 			tab = shift_tab(tab);
 		}
+		if (tab[0] == NULL)
+			continue;
 		mnemonique = write_instruction(tab[0], bin, label);
 //		verif_syntax(mnemonique, tab);
 		write_coding_byte(tab, bin, label);

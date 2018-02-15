@@ -17,6 +17,13 @@ void magic_reverse(void *x)
 	*(((char *)x) + 1) ^= *(((char *)x) + 2);
 }
 
+void short_magic_reverse(void *x)
+{
+	*((char *)x) ^= *(((char *)x) + 1);
+	*(((char *)x) + 1) ^= *((char *)x);
+	*((char *)x) ^= *(((char *)x) + 1);
+}
+
 void rewrite_header(int bin, header_t *header)
 {
 	int c;

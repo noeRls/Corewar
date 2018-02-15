@@ -26,7 +26,6 @@ int check_mnemonique_case(int mnemonique)
 
 void write_direct_arg(char *str, int fd, int mnemonique, label_t *label)
 {
-	char c = 0;
 	size_t tmp;
 
 	if (str[0] == DIRECT_CHAR)
@@ -36,30 +35,17 @@ void write_direct_arg(char *str, int fd, int mnemonique, label_t *label)
 		write_indirect_arg(str, fd, label);
 		return;
 	}
-	c ^= tmp & 4278190080;
-	write(fd, &c, sizeof(c));
-	c = 0;
-	c ^= tmp & 16711680;
-	write(fd, &c, sizeof(c));
-	c = 0;
-	c ^= tmp & 65280;
-	write(fd, &c, sizeof(c));
-	c = 0;
-	c ^= tmp & 255;
-	write(fd, &c, sizeof(c));
+	magic_reverse(&tmp);
+	write(fd, &tmp, sizeof(int));
 	label->tmp_pos += 4;
 }
 
 void write_indirect_arg(char *str, int fd, label_t *label)
 {
-	char c = 0;
-	int tmp = getnbr(str);
+	short int tmp = (short int) getnbr(str);
 
-	c ^= tmp & 65280;
-	write(fd, &c, sizeof(c));
-	c = 0;
-	c ^= tmp & 255;
-	write(fd, &c, sizeof(c));
+	short_magic_reverse(&tmp);
+	write(fd, &tmp, sizeof(short int));
 	label->tmp_pos += 2;
 }
 
