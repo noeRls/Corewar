@@ -51,7 +51,7 @@ lib:
 clean:
 	$(RM) -f $(OBJ)
 	$(RM) -f vg*
-	$(RM) -f tests/*.cor
+	$(RM) -f *.cor
 	make clean -C lib/my
 
 fclean: clean

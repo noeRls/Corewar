@@ -6,7 +6,7 @@
 
 	live %1
 	ld %4,r1
-	st r1,23
+	st r1,23#salut
 	add r1,r2,r3
 	sub r2,r7,r2
 	and %23,40,r1
