@@ -60,7 +60,6 @@ fclean: clean
 
 re:	fclean all
 
-r:	fclean
-	clear && echo "GUILLAUM LE FDP" && sleep 1 && ./label.sh
+r:	all clean
 
 .PHONY: all lib clean fclean re r
