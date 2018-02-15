@@ -7,6 +7,12 @@
 
 #include "asm.h"
 
+void verif_gram(int mnemonic, char **tab)
+{
+	mnemonic = mnemonic;
+	tab = tab;
+}
+
 void verif_nb_arg(int mnemonic, char **tab)
 {
 	int i;
@@ -44,4 +50,5 @@ void verif_syntax(int mnemonic, char **tab)
 {
 	verif_nb_arg(mnemonic, tab);
 	verif_arg_type(mnemonic, tab);
+	verif_gram(mnemonic, tab);
 }
