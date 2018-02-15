@@ -72,8 +72,7 @@ static void magic_reverse(void *x)
 void ini_prog_memory(env_t *env)
 {
 	header_t hd;
-	int x = 10;
-	int pc_value = 0;
+	int x = 0;
 
 	for (program_t *tmp = env->prgm; tmp; tmp = tmp->next, ++x) {
 		tmp->id = x;
@@ -88,31 +87,40 @@ void ini_prog_memory(env_t *env)
 	}
 }
 
-void init(args_t *arg, env_t *env)
+void init_progs(args_t *arg, env_t *env)
 {
 	program_t *st = 0;
 	program_t *start = 0;
 
-	env->nbr_player = arg->nb_prog;
-	env->cycle_to_die = CYCLE_TO_DIE;
-	env->cycle = 0;
 	env->prgm = malloc(sizeof(program_t));
 	st = start_prog(arg->prog_paths[0]);
 	st->mem_start = 0;
-	st->next = 0;
+	st->next = NULL;
 	start = st;
 	for (int i = 1; i < arg->nb_prog; i++) {
 		st->next = start_prog(arg->prog_paths[i]);
 		if (!arg->not_mem_default) {
-			st->next->mem_start = (i * (MEM_SIZE / env->nbr_player));
+			st->next->mem_start =				\
+			(i * (MEM_SIZE / env->nbr_player));
 		} else {
 			st->next->mem_start = arg->mem_start[i];
 		}
 		st = st->next;
 	}
-	st->next = 0;
+	st->next = NULL;
 	env->prgm = start;
+}
+
+void init(args_t *arg, env_t *env)
+{
+	env->nbr_player = arg->nb_prog;
+	env->cycle_to_die = CYCLE_TO_DIE;
+	env->cycle = 0;
+	env->end = 0;
+	env->last_id = 0;
+	my_memset(env->last_name, 0, PROG_NAME_LENGTH + 1);
 	my_memset(env->memory, 0, MEM_SIZE);
+	init_progs(arg, env);
 	ini_prog_memory(env);
 	env->live_counter = 0;
 }
@@ -156,30 +164,25 @@ int get_unique_id(int const *diff_id, int size)
 
 int get_mem_start(int const *mem_start, int size)
 {
-	int *mem = malloc(sizeof(int) * (2 + size));
+	int mem[2 + size];
 	int adress = 0;
 	int last_size = 0;
 
 	my_memset(mem, 0, sizeof(int) * (2 + size));
-	mem[0] = 0;
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < size; i++)
 		if (mem_start[i] == -1) {
 			size--;
 			i--;
-		}
-		else
+		} else
 			mem[i + 1] = mem_start[i];
-	}
 	mem[size] = MEM_SIZE;
 	size += 2;
 	my_sort_int_array(mem, size);
-	for (int i = 0; i < size - 1; i++) {
+	for (int i = 0; i < size - 1; i++)
 		if (mem[i + 1] - mem[i] > last_size) {
 			last_size = mem[i + 1] - mem[i];
 			adress = mem[i] + (mem[i + 1] - mem[i] / 2);
 		}
-	}
-	free(mem);
 	return (adress);
 }
 
@@ -197,7 +200,8 @@ void finally_setup_arg(args_t *arg)
 		}
 	for (int i = 0; i < arg->nb_prog; i++)
 		if (arg->mem_start[i] < 0)
-			arg->mem_start[i] = get_mem_start(arg->mem_start, arg->nb_prog);
+			arg->mem_start[i] = get_mem_start(	\
+			arg->mem_start, arg->nb_prog);
 }
 
 
@@ -249,6 +253,5 @@ int main(int ac, char **av)
 	finally_setup_arg(args);
 	env.dump_cycle = args->dump_cycle;
 	init(args, &env);
-	run(&env);
-	return (0);
+	return (run(&env));
 }

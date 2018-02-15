@@ -9,9 +9,7 @@
 
 void lld(env_t *env, program_t *p, instr_t info)
 {
-	char reg_nbr;
 	int value = 0;
-	int pc_b = p->PC;
 	int arg[MAX_ARGS_NUMBER] = {0};
 
 	if (setup_arg(arg, p, env, FALSE) == 84) {

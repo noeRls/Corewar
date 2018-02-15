@@ -30,6 +30,8 @@ SRC =	./src/main.c			\
 
 OBJ =	$(SRC:.c=.o)
 
+CFLAGS = -Wall -Wextra
+
 CPPFLAGS = -Llib/my -lmy -Iinclude -g3
 
 NAME =	corewar

@@ -54,20 +54,3 @@ void read_from_mem(unsigned char *memory, void *data, int size, int start)
 		tmp[i] = memory[(start + i) % MEM_SIZE];
 	}
 }
-
-/* int get_reg_value(char *memory, program_t *p, int reg_nbr) */
-/* { */
-/* 	int res = 0; */
-
-/* 	read_from_mem(memory, &res, sizeof(int), REG(p, reg_nbr)); */
-/* 	swap(&res, sizeof(int)); */
-/* 	return (res); */
-/* } */
-
-/* void set_reg_value(char *memory, program_t *p, int reg_nbr, int value) */
-/* { */
-/* 	int val = value; */
-
-/* 	swap(&val, sizeof(int)); */
-/* 	write_to_mem(memory, &val, sizeof(int), REG(p, reg_nbr)); */
-/* } */
