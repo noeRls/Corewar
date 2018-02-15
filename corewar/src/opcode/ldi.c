@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-static int setup(env_t *env, program_t *p, instr_t info, int *arg)
+static int setup(env_t *env, instr_t info, int *arg)
 {
 	int sum = 0;
 	short int tmp = 0;
@@ -35,7 +35,7 @@ void ldi(env_t *env, program_t *p, instr_t info)
 		p->carry = 1;
 		return;
 	}
-	sum = setup(env, p, info, arg);
+	sum = setup(env, info, arg);
 	sum += p->pc_backup;
 	sum = do_idx_mod(sum, p);
 	read_from_mem(env->memory, &value, REG_SIZE, sum);

@@ -23,7 +23,7 @@ void fork_op(env_t *env, program_t *p, instr_t info)
 	value = do_idx_mod(value, p);
 	new_prog = prog_dup(p);
 	add_prog(&(env->prgm), new_prog);
-	set_pc(env->memory, new_prog, value);
+	set_pc(new_prog, value);
 	set_cycle(p, info.code);
 	new_prog->cycle = 1;
 }

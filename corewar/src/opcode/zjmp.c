@@ -19,6 +19,6 @@ void zjmp(env_t *env, program_t *p, instr_t info)
 	}
 	index = arg[0];
 	index += p->pc_backup;
-	set_pc(env->memory, p, index);
+	set_pc(p, index);
 	set_cycle(p, info.code);
 }

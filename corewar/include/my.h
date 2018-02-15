@@ -23,7 +23,7 @@ char lowchar(char c);
 
 /*	int/getnbr.c	*/
 
-int getnbr(char *str);
+int getnbr(char const *str);
 
 /*	int/my_compute.c	*/
 

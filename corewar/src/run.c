@@ -7,21 +7,33 @@
 
 #include "corewar.h"
 
-int end(program_t *list)
+int end(env_t *env, program_t *list)
 {
-	int last = list->id;
+	int last = 0;
 
+	if (list == NULL)
+		return (1);
+	else
+		last = list->id;
 	for (program_t *prgm = list; prgm; prgm = prgm->next) {
 		if (last != prgm->id)
 			return (0);
 	}
+	env->end = 1;
+	env->last_id = last;
+	my_strcpy(env->last_name, list->name);
 	return (1);
 }
 
-void destroy_prog(program_t **list, program_t *p)
+void destroy_prog(env_t *env, program_t **list, program_t *p)
 {
 	program_t *prev = 0;
 
+	if ((*list)->next == NULL) {
+		env->end = 1;
+		env->last_id = (*list)->id;
+		my_strcpy(env->last_name, (*list)->name);
+	}
 	if (p == *list) {
 		*list = p->next;
 		free(p);
@@ -44,7 +56,7 @@ void manage_cycle(env_t *env)
 	for (program_t *prgm = env->prgm; prgm; prgm = next) {
 		next = prgm->next;
 		if (prgm->live_signal > env->cycle_to_die) {
-			destroy_prog(&(env->prgm), prgm);
+			destroy_prog(env, &(env->prgm), prgm);
 		}
 		else {
 			prgm->cycle -= 1;
@@ -60,7 +72,7 @@ void manage_cycle(env_t *env)
 	env->cycle += 1;
 }
 
-int execute_prog(env_t *env, program_t *p)
+void execute_prog(env_t *env, program_t *p)
 {
 	static void (*fctns[])(env_t *, program_t *, instr_t) = {live, ld, \
 	st, add, sub, and, or, xor, zjmp, ldi, sti, fork_op, lld, \
@@ -82,11 +94,14 @@ int execute_prog(env_t *env, program_t *p)
 }
 
 int run(env_t *env) {
-	while (!end(env->prgm)) {
+	while (!(env->end) && !end(env, env->prgm)) {
 		for (program_t *p = env->prgm; p; p = p->next) {
 			p->cycle ? 0 : execute_prog(env, p);
 		}
 		manage_cycle(env);
 	}
-	my_printf("The player %d(%s) has won\n", env->prgm->id, env->prgm->name);
+	my_printf("The player %d(%s) has won\n",	\
+		env->last_id, env->last_name);
+	clean_progs(env->prgm);
+	return (0);
 }

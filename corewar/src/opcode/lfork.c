@@ -22,7 +22,7 @@ void lfork(env_t *env, program_t *p, instr_t info)
 	value += p->pc_backup;
 	new_prog = prog_dup(p);
 	add_prog(&(env->prgm), new_prog);
-	set_pc(env->memory, new_prog, value);
+	set_pc(new_prog, value);
 	set_cycle(p, info.code);
 	new_prog->cycle = 1;
 }
