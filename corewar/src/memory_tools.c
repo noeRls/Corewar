@@ -19,7 +19,7 @@ void swap(void *data, int size)
 	}
 }
 
-void print_hexa_mem(unsigned char *memory)
+void print_hexa_mem(unsigned char const *memory)
 {
 	unsigned char *tmp = 0;
 	int x = 0;
@@ -37,7 +37,7 @@ void print_hexa_mem(unsigned char *memory)
 	}
 }
 
-void write_to_mem(unsigned char *memory, void *data, int size, int start)
+void write_to_mem(unsigned char *memory, void const *data, int size, int start)
 {
 	char *tmp = (char *) data;
 
@@ -46,7 +46,7 @@ void write_to_mem(unsigned char *memory, void *data, int size, int start)
 	}
 }
 
-void read_from_mem(unsigned char *memory, void *data, int size, int start)
+void read_from_mem(unsigned char const *memory, void *data, int size, int start)
 {
 	unsigned char *tmp = (unsigned char *) data;
 

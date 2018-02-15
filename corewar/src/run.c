@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-int end(program_t *list)
+int end(env_t *env, program_t *list)
 {
 	int last = 0;
 
@@ -19,6 +19,9 @@ int end(program_t *list)
 		if (last != prgm->id)
 			return (0);
 	}
+	env->end = 1;
+	env->last_id = last;
+	my_strcpy(env->last_name, list->name);
 	return (1);
 }
 
@@ -91,7 +94,7 @@ void execute_prog(env_t *env, program_t *p)
 }
 
 int run(env_t *env) {
-	while (!(env->end)) {
+	while (!(env->end) && !end(env, env->prgm)) {
 		for (program_t *p = env->prgm; p; p = p->next) {
 			p->cycle ? 0 : execute_prog(env, p);
 		}
@@ -99,5 +102,6 @@ int run(env_t *env) {
 	}
 	my_printf("The player %d(%s) has won\n",	\
 		env->last_id, env->last_name);
+	clean_progs(env->prgm);
 	return (0);
 }

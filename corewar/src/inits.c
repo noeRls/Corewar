@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void init_progs(args_t *arg, env_t *env)
+void init_progs(args_t const *arg, env_t *env)
 {
 	program_t *st = 0;
 	program_t *start = 0;
@@ -49,7 +49,7 @@ void ini_prog_memory(env_t *env)
 	}
 }
 
-void init(args_t *arg, env_t *env)
+void init(args_t const *arg, env_t *env)
 {
 	env->nbr_player = arg->nb_prog;
 	env->cycle_to_die = CYCLE_TO_DIE;

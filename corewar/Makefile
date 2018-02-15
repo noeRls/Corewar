@@ -13,6 +13,7 @@ SRC =	./src/main.c			\
 	./src/op.c			\
 	./src/run.c			\
 	./src/memory_tools.c		\
+	./src/cleans.c			\
 	./src/opcode/pc_tools.c		\
 	./src/opcode/arg_data.c		\
 	./src/opcode/live.c		\

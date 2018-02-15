@@ -51,7 +51,7 @@ int handle_for(int *i, int j, args_t *args, char **av)
 		return (0);
 }
 
-args_t *second_part(args_t *args, int ac, char **av)
+void second_part(args_t *args, int ac, char **av)
 {
 	int exists = 0;
 
@@ -70,13 +70,11 @@ args_t *second_part(args_t *args, int ac, char **av)
 		if (!exists && av[i - 1][0] == '-')
 			exit(84);
 	}
-	return (args);
 }
 
-args_t *manage_args(int ac, char **av)
+void manage_args(int ac, char **av, args_t *args)
 {
 	int count = 0;
-	args_t *args = malloc(sizeof(args_t));
 
 	for (int i = 1; i < ac; i++)
 		if (av[i][0] != '-' && i && av[i - 1][0] != '-')
@@ -87,5 +85,5 @@ args_t *manage_args(int ac, char **av)
 	args->prog_ids = malloc(sizeof(int) * count);
 	args->mem_start = malloc(sizeof(int) * count);
 	args->dump_cycle = -1;
-	return (second_part(args, ac, av));
+	second_part(args, ac, av);
 }

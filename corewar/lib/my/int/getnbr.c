@@ -7,9 +7,9 @@
 
 #include "my.h"
 
-int getnbr(char *str)
+int getnbr(char const *str)
 {
-	char *tmp = str;
+	char const *tmp = str;
 	int nb = 0;
 	int tmpnb;
 	int neg = 1;

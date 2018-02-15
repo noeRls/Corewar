@@ -9,7 +9,7 @@
 
 int get_unique_id(int const *diff_id, int size)
 {
-	int dflt = 1;
+	int dflt = 0;
 
 	for (int i = 0; i < size; i++) {
 		if (dflt == diff_id[i]) {
@@ -47,11 +47,12 @@ int get_mem_start(int const *mem_start, int size)
 int main(int ac, char **av)
 {
 	env_t env;
-	args_t *args = 0;
+	args_t args;
 
-	args = manage_args(ac, av);
-	finally_setup_arg(args);
-	env.dump_cycle = args->dump_cycle;
-	init(args, &env);
+	manage_args(ac, av, &args);
+	finally_setup_arg(&args);
+	env.dump_cycle = args.dump_cycle;
+	init(&args, &env);
+	clean_args(&args);
 	return (run(&env));
 }
