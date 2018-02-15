@@ -7,9 +7,14 @@
 
 
 SRC =	./src/main.c			\
+	./src/inits.c			\
+	./src/prog_tools.c		\
+	./src/manage_args.c		\
 	./src/op.c			\
 	./src/run.c			\
-	./src/read_from_mem.c		\
+	./src/memory_tools.c		\
+	./src/opcode/pc_tools.c		\
+	./src/opcode/arg_data.c		\
 	./src/opcode/live.c		\
 	./src/opcode/zjmp.c		\
 	./src/opcode/ld.c		\
