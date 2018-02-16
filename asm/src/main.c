@@ -62,17 +62,13 @@ int check_main(int ac, char **av)
 int main(int ac, char **av)
 {
 	int src = check_main(ac, av);
-	int bin = open(file_to_cor(av[1]), O_RDWR | O_CREAT, 0666);
+	int bin = verif_syntax(av[1]);
 	char *s;
 	char **tab;
 	int mnemonique;
 	header_t header;
 	label_t *label = init_label();
 
-	(void)ac;
-	if (src == -1 || bin == -1)
-		return (84);
-	verif_syntax(av[1]);
 	init_header(&header);
 	while ((s = get_next_line(src))) {
 		reinit_pos(label);

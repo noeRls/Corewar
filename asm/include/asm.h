@@ -48,7 +48,7 @@ int write_instruction(char *cmd, int fd, label_t *);
 void print_tabtab(char **);
 char **str_to_av(char *);
 char *file_to_cor(char *);
-void verif_syntax(char *);
+int verif_syntax(char *);
 void write_coding_byte(char **, int, label_t *);
 arg_type get_arg_type(char *);
 void arg_encoder(char **, int, int, label_t *);

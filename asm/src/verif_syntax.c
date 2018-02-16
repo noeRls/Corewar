@@ -93,7 +93,7 @@ int get_mnemonique(char *tab)
 	return (-1);
 }
 
-void verif_syntax(char *path)
+int verif_syntax(char *path)
 {
 	char *s;
 	char **tab;
@@ -120,4 +120,6 @@ void verif_syntax(char *path)
 		verif_arg_type(mnemonique, tab);
 		verif_gram(&tab[1]);
 	}
+	close(fd);
+	return (open(file_to_cor(path), O_RDWR | O_CREAT, 0666));
 }
