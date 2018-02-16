@@ -7,10 +7,47 @@
 
 #include "asm.h"
 
-void verif_gram(int mnemonic, char **tab)
+void check_label_gramm(char *tab)
 {
-	mnemonic = mnemonic;
-	tab = tab;
+	if (my_strlen(tab) == 0) {
+		my_puterror("Empty label\n");
+		exit(84);
+	}
+	for (int i = 0 ; tab[i] ; i++) {
+		if (!contains(LABEL_CHARS, tab[i])) {
+			my_puterror("Labels should be written only with"
+				" LABEL_CHAR\n");
+			exit(84);
+		}
+	}
+}
+
+void check_gram(char *tab)
+{
+	if (my_strlen(tab) < 1) {
+		my_puterror("Wrong arg\n");
+		exit(84);
+	}
+	for (int i = 0 ; tab[i] ; i++)
+		if (tab[i] < '0' || tab[i] > '9') {
+			my_puterror("Directs and indirects args should be only"
+				" composed of numericals characters\n");
+			exit(84);
+		}
+}
+
+void verif_gram(char **tab)
+{
+	for (int i = 0 ; tab[i] ; i++) {
+		if (tab[i][0] == LABEL_CHAR ||\
+		    (tab[i][0] == DIRECT_CHAR && tab[i][1] == LABEL_CHAR)) {
+			check_label_gramm(tab[i] + 2);
+			continue;
+		}
+		if ((tab[i][0] == 'r' || tab[i][0] == DIRECT_CHAR) && tab[i][1] != '\0')
+			tab[i]++;
+		check_gram(tab[i]);
+	}
 }
 
 void verif_nb_arg(int mnemonic, char **tab)
@@ -46,9 +83,43 @@ void verif_arg_type(int mnemonic, char **tab)
 	}
 }
 
-void verif_syntax(int mnemonic, char **tab)
+int get_mnemonique(char *tab)
 {
-	verif_nb_arg(mnemonic, tab);
-	verif_arg_type(mnemonic, tab);
-	verif_gram(mnemonic, tab);
+	for (int i = 0; op_tab[i].mnemonique != 0; i++)
+		if (my_strcmp(tab, op_tab[i].mnemonique) == 0)
+			return (i);
+	my_puterror("Opcode unrecognized\n");
+	exit(84);
+	return (-1);
+}
+
+int verif_syntax(char *path)
+{
+	char *s;
+	char **tab;
+	int mnemonique;
+	int fd = open(path, O_RDONLY);
+
+	verif_header(fd);
+	while ((s = get_next_line(fd))) {
+		if (!(*s))
+			continue;
+		clear_comment(s);
+		tab = str_to_av(s);
+		if (tab[0] == NULL)
+			continue;
+		if (get_arg_type(tab[0]) == LABEL_DECLARATION) {
+			tab[0][my_strlen(tab[0]) - 1] = '\0';
+			check_label_gramm(tab[0]);
+			tab = shift_tab(tab);
+		}
+		if (tab[0] == NULL)
+			continue;
+		mnemonique = get_mnemonique(tab[0]);
+		verif_nb_arg(mnemonique, tab);
+		verif_arg_type(mnemonique, tab);
+		verif_gram(&tab[1]);
+	}
+	close(fd);
+	return (open(file_to_cor(path), O_RDWR | O_CREAT, 0666));
 }

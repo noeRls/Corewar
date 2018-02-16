@@ -9,5 +9,5 @@
 
 #ifndef GETNEXTLINE_H_
 	#define GETNEXTLINE_H_
-	#define READ_SIZE 30
+	#define READ_SIZE 1
 #endif /* !GETNEXTLINE_H_ */
