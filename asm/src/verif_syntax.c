@@ -7,10 +7,43 @@
 
 #include "asm.h"
 
-void verif_gram(int mnemonic, char **tab)
+void check_label_gramm(char *tab)
 {
-	mnemonic = mnemonic;
-	tab = tab;
+	for (int i = 0 ; tab[i] ; i++) {
+		if (!contains(LABEL_CHARS, tab[i])) {
+			my_puterror("Labels should be written only with"
+				" LABEL_CHAR\n");
+			exit(84);
+		}
+	}
+}
+
+void check_gram(char *tab)
+{
+	if (my_strlen(tab) < 1) {
+		my_puterror("Wrong arg\n");
+		exit(84);
+	}
+	for (int i = 0 ; tab[i] ; i++)
+		if (tab[i] < '0' || tab[i] > '9') {
+			my_puterror("Directs and indirects args should be only"
+				" composed of numericals characters\n");
+			exit(84);
+		}
+}
+
+void verif_gram(char **tab)
+{
+	for (int i = 0 ; tab[i] ; i++) {
+		if (tab[i][0] == LABEL_CHAR ||\
+		    (tab[i][0] == DIRECT_CHAR && tab[i][1] == LABEL_CHAR)) {
+			check_label_gramm(tab[i]);
+			continue;
+		}
+		if ((tab[i][0] == 'r' || tab[i][0] == DIRECT_CHAR) && tab[i][1] != '\0')
+			tab[i]++;
+		check_gram(tab[i]);
+	}
 }
 
 void verif_nb_arg(int mnemonic, char **tab)
@@ -73,6 +106,6 @@ void verif_syntax(char *path)
 		mnemonique = get_mnemonique(tab[0]);
 		verif_nb_arg(mnemonique, tab);
 		verif_arg_type(mnemonique, tab);
-		verif_gram(mnemonique, tab);
+		verif_gram(&tab[1]);
 	}
 }
