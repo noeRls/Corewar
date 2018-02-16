@@ -15,7 +15,7 @@ int write_instruction(char *cmd, int fd, label_t *label)
 			++i;
 			write(fd, &i, sizeof(i));
 			--i;
-			return (int)i;
+			return ((int)i);
 		}
 	}
 	return (-1);

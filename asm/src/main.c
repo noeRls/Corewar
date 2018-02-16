@@ -52,6 +52,7 @@ int main(int ac, char **av)
 	(void)ac;
 	if (src == -1 || bin == -1)
 		return (84);
+	verif_syntax(av[1]);
 	init_header(&header);
 	while ((s = get_next_line(src))) {
 		reinit_pos(label);
@@ -70,7 +71,7 @@ int main(int ac, char **av)
 		if (tab[0] == NULL)
 			continue;
 		mnemonique = write_instruction(tab[0], bin, label);
-		verif_syntax(mnemonique, tab);
+//		verif_syntax(mnemonique, tab);
 		write_coding_byte(tab, bin, label);
 		arg_encoder(tab, bin, mnemonique, label);
 		reinit_pos(label);

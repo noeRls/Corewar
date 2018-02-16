@@ -46,9 +46,33 @@ void verif_arg_type(int mnemonic, char **tab)
 	}
 }
 
-void verif_syntax(int mnemonic, char **tab)
+int get_mnemonique(char *tab)
 {
-	verif_nb_arg(mnemonic, tab);
-	verif_arg_type(mnemonic, tab);
-	verif_gram(mnemonic, tab);
+	for (int i = 0; op_tab[i].mnemonique != 0; i++)
+		if (my_strcmp(tab, op_tab[i].mnemonique) == 0)
+			return (i);
+	my_puterror("Opcode unrecognized\n");
+	exit(84);
+	return (-1);
+}
+
+void verif_syntax(char *path)
+{
+	char *s;
+	char **tab;
+	int mnemonique;
+	int fd = open(path, O_RDONLY);
+
+	while ((s = get_next_line(fd))) {
+		if (!(*s))
+			continue;
+		clear_comment(s);
+		tab = str_to_av(s);
+		if (tab[0] == NULL)
+			continue;
+		mnemonique = get_mnemonique(tab[0]);
+		verif_nb_arg(mnemonique, tab);
+		verif_arg_type(mnemonique, tab);
+		verif_gram(mnemonique, tab);
+	}
 }
