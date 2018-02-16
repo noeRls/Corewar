@@ -22,6 +22,7 @@ SRC		=	$(SDIR)main.c			\
 			$(SDIR)header.c			\
 			$(SDIR)op.c			\
 			$(SDIR)coding_byte.c		\
+			$(SDIR)verif_header.c		\
 			$(SDIR)my_memset.c
 
 OBJ		=	$(SRC:.c=.o)
