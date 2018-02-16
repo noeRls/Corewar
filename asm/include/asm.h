@@ -66,5 +66,6 @@ char *int_to_str(long int, char *);
 void magic_reverse(void *);
 void short_magic_reverse(void *);
 char *verif_header(int);
+char **shift_tab(char **);
 
 #endif

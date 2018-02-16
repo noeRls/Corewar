@@ -109,6 +109,12 @@ void verif_syntax(char *path)
 		tab = str_to_av(s);
 		if (tab[0] == NULL)
 			continue;
+		if (get_arg_type(tab[0]) == LABEL_DECLARATION) {
+			//check syntax of label decla
+			tab = shift_tab(tab);
+		}
+		if (tab[0] == NULL)
+			continue;
 		mnemonique = get_mnemonique(tab[0]);
 		verif_nb_arg(mnemonique, tab);
 		verif_arg_type(mnemonique, tab);
