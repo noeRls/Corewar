@@ -56,5 +56,5 @@ void verif_header(int fd)
 		my_putstr("error: The comment can only be defined once.\n");
 		exit(84);
 	}
-//	lseek(fd, my_strlen(s) * -1, SEEK_CUR);
+	lseek(fd, my_strlen(s) * -1, SEEK_CUR);
 }
