@@ -110,12 +110,12 @@ void verif_syntax(char *path)
 		tab = str_to_av(s);
 		if (tab[0] == NULL)
 			continue;
-//		if (get_arg_type(tab[0]) == LABEL_DECLARATION) {
+		if (get_arg_type(tab[0]) == LABEL_DECLARATION) {
 //			printf("OK!\n");
-//			tab[0][my_strlen(tab[0]) - 1] = '\0';
-//			check_label_gramm(tab[0]);
-//			tab = shift_tab(tab);
-//		}
+			tab[0][my_strlen(tab[0]) - 1] = '\0';
+			check_label_gramm(tab[0]);
+			tab = shift_tab(tab);
+		}
 		if (tab[0] == NULL)
 			continue;
 		print_tabtab(tab);
