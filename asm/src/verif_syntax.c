@@ -110,6 +110,8 @@ void verif_syntax(char *path)
 		if (tab[0] == NULL)
 			continue;
 		if (get_arg_type(tab[0]) == LABEL_DECLARATION) {
+			tab[0][my_strlen(tab[0]) - 1] = '\0';
+			check_label_gramm(tab[0]);
 			//check syntax of label decla
 			tab = shift_tab(tab);
 		}
