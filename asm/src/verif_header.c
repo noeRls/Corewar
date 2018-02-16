@@ -21,6 +21,10 @@ char *verif_header(int fd)
 			continue;
 		if (!my_strcmp(tab[0], NAME_CMD_STRING)) {
 			name++;
+			if (my_strlen(tab[1]) > PROG_NAME_LENGTH) {
+				my_putstr("error: prog name too long.\n");
+				exit(84);
+			}
 			continue;
 		}
 		if (!my_strcmp(tab[0], COMMENT_CMD_STRING) && !name) {
@@ -30,6 +34,10 @@ char *verif_header(int fd)
 		}
 		if (!my_strcmp(tab[0], COMMENT_CMD_STRING)) {
 			comment++;
+			if (my_strlen(tab[1]) > COMMENT_LENGTH) {
+				my_putstr("error: comment too long.\n");
+				exit(84);
+			}
 			continue;
 		}
 		break;
