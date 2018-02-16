@@ -7,7 +7,7 @@
 
 #include "asm.h"
 
-char *verif_header(int fd)
+void verif_header(int fd)
 {
 	int name = 0;
 	int comment = 0;
@@ -56,5 +56,5 @@ char *verif_header(int fd)
 		my_putstr("error: The comment can only be defined once.\n");
 		exit(84);
 	}
-	return (s);
+	lseek(fd, my_strlen(s) * -1, SEEK_CUR);
 }
