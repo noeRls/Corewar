@@ -9,6 +9,10 @@
 
 void check_label_gramm(char *tab)
 {
+	if (my_strlen(tab) == 0) {
+		my_puterror("Empty label\n");
+		exit(84);
+	}
 	for (int i = 0 ; tab[i] ; i++) {
 		if (!contains(LABEL_CHARS, tab[i])) {
 			my_puterror("Labels should be written only with"
@@ -37,7 +41,7 @@ void verif_gram(char **tab)
 	for (int i = 0 ; tab[i] ; i++) {
 		if (tab[i][0] == LABEL_CHAR ||\
 		    (tab[i][0] == DIRECT_CHAR && tab[i][1] == LABEL_CHAR)) {
-			check_label_gramm(tab[i]);
+			check_label_gramm(tab[i] + 2);
 			continue;
 		}
 		if ((tab[i][0] == 'r' || tab[i][0] == DIRECT_CHAR) && tab[i][1] != '\0')
