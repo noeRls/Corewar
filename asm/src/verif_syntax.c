@@ -106,19 +106,16 @@ void verif_syntax(char *path)
 		if (!(*s))
 			continue;
 		clear_comment(s);
-		printf("mla string: '%s'\n", s);
 		tab = str_to_av(s);
 		if (tab[0] == NULL)
 			continue;
 		if (get_arg_type(tab[0]) == LABEL_DECLARATION) {
-//			printf("OK!\n");
 			tab[0][my_strlen(tab[0]) - 1] = '\0';
 			check_label_gramm(tab[0]);
 			tab = shift_tab(tab);
 		}
 		if (tab[0] == NULL)
 			continue;
-		print_tabtab(tab);
 		mnemonique = get_mnemonique(tab[0]);
 		verif_nb_arg(mnemonique, tab);
 		verif_arg_type(mnemonique, tab);
