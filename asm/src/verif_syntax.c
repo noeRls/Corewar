@@ -101,7 +101,6 @@ void verif_syntax(char *path)
 	int fd = open(path, O_RDONLY);
 
 	verif_header(fd);
-	//TODO: verif the line returned by the function
 	while ((s = get_next_line(fd))) {
 		if (!(*s))
 			continue;
