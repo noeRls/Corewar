@@ -10,13 +10,13 @@ NAME		=	asm
 SDIR		=	$(realpath src)/
 
 SRC		=	$(SDIR)main.c					\
-			$(SDIR)arg_encoder.c				\
-			$(SDIR)write_instruction.c			\
-			$(SDIR)rewrite_header.c				\
-			$(SDIR)label.c					\
-			$(SDIR)rewrite_label.c				\
-			$(SDIR)header.c					\
-			$(SDIR)coding_byte.c				\
+			$(SDIR)write_file/arg_encoder.c			\
+			$(SDIR)write_file/write_instruction.c		\
+			$(SDIR)write_file/rewrite_header.c		\
+			$(SDIR)write_file/label.c			\
+			$(SDIR)write_file/rewrite_label.c		\
+			$(SDIR)write_file/header.c			\
+			$(SDIR)write_file/coding_byte.c			\
 			$(SDIR)error_handling/verif_syntax.c		\
 			$(SDIR)error_handling/verif_header.c		\
 			$(SDIR)error_handling/verif.c			\
