@@ -58,7 +58,7 @@ void *my_super_memset(void *, int, size_t);
 void write_indirect_arg(char *, int, label_t *);
 void write_direct_arg(char *, int, int, label_t *);
 void fill_label_call(char *, int, int, label_t *);
-void fill_label_decla(char *, int, label_t *);
+char **fill_label_decla(char **, label_t *);
 void printf_linked_list(call_t *, decla_t *);
 void rewrite_label(int, label_t *);
 int check_mnemonique_case(int);

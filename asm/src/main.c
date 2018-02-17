@@ -59,17 +59,21 @@ int check_main(int ac, char **av)
 	return (fd);
 }
 
-int main(int ac, char **av)
+void write_file(char **tab, int bin, label_t *label)
 {
-	int src = check_main(ac, av);
-	int bin = verif_syntax(av[1]);
+	int mnemonique;
+
+	mnemonique = write_instruction(tab[0], bin, label);
+	write_coding_byte(tab, bin, label);
+	arg_encoder(tab, bin, mnemonique, label);
+	reinit_pos(label);
+}
+
+void loop(label_t *label, header_t *header, int src, int bin)
+{
 	char *s;
 	char **tab;
-	int mnemonique;
-	header_t header;
-	label_t *label = init_label();
 
-	init_header(&header);
 	while ((s = get_next_line(src))) {
 		reinit_pos(label);
 		if (!(*s))
@@ -78,19 +82,25 @@ int main(int ac, char **av)
 		tab = str_to_av(s);
 		if (tab[0] == NULL)
 			continue;
-		if (fill_header(tab, &header))
+		if (fill_header(tab, header))
 			continue;
-		if (get_arg_type(tab[0]) == LABEL_DECLARATION) {
-			fill_label_decla(tab[0], bin, label);
-			tab = shift_tab(tab);
-		}
+		if (get_arg_type(tab[0]) == LABEL_DECLARATION)
+			tab = fill_label_decla(tab, label);
 		if (tab[0] == NULL)
 			continue;
-		mnemonique = write_instruction(tab[0], bin, label);
-		write_coding_byte(tab, bin, label);
-		arg_encoder(tab, bin, mnemonique, label);
-		reinit_pos(label);
+		write_file(tab, bin, label);
 	}
+}
+
+int main(int ac, char **av)
+{
+	int src = check_main(ac, av);
+	int bin = verif_syntax(av[1]);
+	header_t header;
+	label_t *label = init_label();
+
+	init_header(&header);
+	loop(label, &header, src, bin);
 	rewrite_label(bin, label);
 	rewrite_header(bin, &header);
 	return (0);

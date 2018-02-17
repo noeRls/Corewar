@@ -35,14 +35,13 @@ void fill_label_call(char *str, int fd, int mnemonique, label_t *label)
 		call->type = INDIRECT;
 		write_indirect_arg(str, fd, label);
 	}
-//	printf("fill label call, name: %s, abs pos = %d\n", call->name, call->abs_pos);
 }
 
-void fill_label_decla(char *str, int fd, label_t *label)
+char **fill_label_decla(char **tab, label_t *label)
 {
 	decla_t *decla = label->decla;
+	char *str = tab[0];
 
-	fd = fd;
 	if (decla == NULL) {
 		label->decla = malloc(sizeof(decla_t));
 		decla = label->decla;
@@ -56,17 +55,5 @@ void fill_label_decla(char *str, int fd, label_t *label)
 	decla->name = my_strdup(str);
 	decla->pos = label->current_pos;
 	decla->next = NULL;
-//	printf("fill label decla, name: %s, abs pos = %d\n", decla->name, decla->pos);
+	return (shift_tab(tab));
 }
-
-/*void printf_linked_list(call_t *call, decla_t *decla)
-{
-	call = call;
-	decla = decla;
-
-	for (call = call ; call ; call = call->next)
-		printf("call de %s pos %ld\n", call->name, call->abs_pos);
-	printf("\n\n");
-	for (decla = decla ; decla ; decla = decla->next)
-		printf("decla de %s pos %ld\n", decla->name, decla->pos);
-		}*/
