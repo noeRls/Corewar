@@ -27,7 +27,7 @@ static void verif_comment_before_name(char **tab, int name)
 
 static void verif_comment(char **tab, int *comment)
 {
-	comment++;
+	(*comment)++;
 	if (my_strlen(tab[1]) > COMMENT_LENGTH) {
 		my_puterror(ERROR"comment too long.\n");
 		exit(84);
@@ -71,7 +71,7 @@ void verif_header(int fd)
 		}
 		verif_comment_before_name(tab, name);
 		if (!my_strcmp(tab[0], COMMENT_CMD_STRING)) {
-			verif_comment(tab, &name);
+			verif_comment(tab, &comment);
 			continue;
 		}
 		break;
