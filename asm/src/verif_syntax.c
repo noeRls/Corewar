@@ -40,11 +40,12 @@ void verif_gram(char **tab)
 {
 	for (int i = 0 ; tab[i] ; i++) {
 		if (tab[i][0] == LABEL_CHAR ||\
-		    (tab[i][0] == DIRECT_CHAR && tab[i][1] == LABEL_CHAR)) {
+		(tab[i][0] == DIRECT_CHAR && tab[i][1] == LABEL_CHAR)) {
 			check_label_gramm(tab[i] + 2);
 			continue;
 		}
-		if ((tab[i][0] == 'r' || tab[i][0] == DIRECT_CHAR) && tab[i][1] != '\0')
+		if ((tab[i][0] == 'r' || tab[i][0] == DIRECT_CHAR)\
+		&& tab[i][1] != '\0')
 			tab[i]++;
 		check_gram(tab[i]);
 	}
