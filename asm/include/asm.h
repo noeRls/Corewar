@@ -70,5 +70,7 @@ void short_magic_reverse(void *);
 void verif_header(int);
 char **shift_tab(char **);
 void init_header(header_t *);
+int check_main(int, char **);
+void loop(label_t *, header_t *, int, int);
 
 #endif

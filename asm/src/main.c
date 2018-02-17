@@ -7,6 +7,20 @@
 
 #include "asm.h"
 
+int main(int ac, char **av)
+{
+ 	int src = check_main(ac, av);
+	int bin = verif_syntax(av[1]);
+	header_t header;
+	label_t *label = init_label();
+
+	init_header(&header);
+	loop(label, &header, src, bin);
+	rewrite_label(bin, label);
+	rewrite_header(bin, &header);
+	return (0);
+}
+
 int check_main(int ac, char **av)
 {
 	int fd;
@@ -58,18 +72,4 @@ void loop(label_t *label, header_t *header, int src, int bin)
 			continue;
 		write_file(tab, bin, label);
 	}
-}
-
-int main(int ac, char **av)
-{
-	int src = check_main(ac, av);
-	int bin = verif_syntax(av[1]);
-	header_t header;
-	label_t *label = init_label();
-
-	init_header(&header);
-	loop(label, &header, src, bin);
-	rewrite_label(bin, label);
-	rewrite_header(bin, &header);
-	return (0);
 }
