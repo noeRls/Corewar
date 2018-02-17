@@ -10,7 +10,7 @@
 int main(int ac, char **av)
 {
  	int src = check_main(ac, av);
-	int bin = verif_syntax(av[1]);
+	int bin = verif(av[1]);
 	header_t header;
 	label_t *label = init_label();
 
@@ -18,6 +18,8 @@ int main(int ac, char **av)
 	loop(label, &header, src, bin);
 	rewrite_label(bin, label);
 	rewrite_header(bin, &header);
+	close(src);
+	close(bin);
 	return (0);
 }
 

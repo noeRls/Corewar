@@ -9,23 +9,26 @@ NAME		=	asm
 
 SDIR		=	$(realpath src)/
 
-SRC		=	$(SDIR)main.c			\
-			$(SDIR)str_to_av.c		\
-			$(SDIR)arg_encoder.c		\
-			$(SDIR)write_instruction.c	\
-			$(SDIR)rewrite_header.c		\
-			$(SDIR)file_to_cor.c		\
-			$(SDIR)shift_tab.c		\
-			$(SDIR)verif_syntax.c		\
-			$(SDIR)label.c			\
-			$(SDIR)int_to_str.c		\
-			$(SDIR)rewrite_label.c		\
-			$(SDIR)header.c			\
-			$(SDIR)op.c			\
-			$(SDIR)magic_reverse.c		\
-			$(SDIR)coding_byte.c		\
-			$(SDIR)verif_header.c		\
-			$(SDIR)my_memset.c
+SRC		=	$(SDIR)main.c					\
+			$(SDIR)write_file/arg_encoder.c			\
+			$(SDIR)write_file/write_instruction.c		\
+			$(SDIR)write_file/rewrite_header.c		\
+			$(SDIR)write_file/label.c			\
+			$(SDIR)write_file/rewrite_label.c		\
+			$(SDIR)write_file/header.c			\
+			$(SDIR)write_file/coding_byte.c			\
+			$(SDIR)error_handling/verif_syntax.c		\
+			$(SDIR)error_handling/verif_header.c		\
+			$(SDIR)error_handling/verif.c			\
+			$(SDIR)error_handling/verif_grammar.c		\
+			$(SDIR)tools/file_to_cor.c			\
+			$(SDIR)tools/int_to_str.c			\
+			$(SDIR)tools/shift_tab.c			\
+			$(SDIR)tools/get_mnemonique.c			\
+			$(SDIR)tools/magic_reverse.c			\
+			$(SDIR)tools/op.c				\
+			$(SDIR)tools/str_to_av.c			\
+			$(SDIR)tools/my_memset.c
 
 OBJ		=	$(SRC:.c=.o)
 
