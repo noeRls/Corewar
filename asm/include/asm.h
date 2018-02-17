@@ -43,6 +43,7 @@ typedef struct label_list_s {
 	size_t tmp_pos;
 } label_t;
 
+int get_mnemonique(char *);
 void reinit_pos(label_t *);
 label_t *init_label(void);
 void clear_comment(char *);

@@ -84,16 +84,6 @@ void verif_arg_type(int mnemonic, char **tab)
 	}
 }
 
-int get_mnemonique(char *tab)
-{
-	for (int i = 0; op_tab[i].mnemonique != 0; i++)
-		if (my_strcmp(tab, op_tab[i].mnemonique) == 0)
-			return (i);
-	my_puterror("Opcode unrecognized\n");
-	exit(84);
-	return (-1);
-}
-
 int verif_syntax(char *path)
 {
 	char *s;

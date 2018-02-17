@@ -18,6 +18,8 @@ int main(int ac, char **av)
 	loop(label, &header, src, bin);
 	rewrite_label(bin, label);
 	rewrite_header(bin, &header);
+	close(src);
+	close(bin);
 	return (0);
 }
 
