@@ -43,6 +43,14 @@ typedef struct label_list_s {
 	size_t tmp_pos;
 } label_t;
 
+/*ERROR_HANDLING*/
+int verif(char *);
+void verif_nb_arg(int, char **);
+void verif_arg_type(int, char **);
+void verif_gram(char **);
+void check_label_gram(char *);
+void check_gram(char *);
+
 int get_mnemonique(char *);
 void reinit_pos(label_t *);
 label_t *init_label(void);

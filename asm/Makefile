@@ -16,7 +16,6 @@ SRC		=	$(SDIR)main.c			\
 			$(SDIR)rewrite_header.c		\
 			$(SDIR)file_to_cor.c		\
 			$(SDIR)shift_tab.c		\
-			$(SDIR)verif_syntax.c		\
 			$(SDIR)label.c			\
 			$(SDIR)get_mnemonique.c		\
 			$(SDIR)int_to_str.c		\
@@ -25,7 +24,10 @@ SRC		=	$(SDIR)main.c			\
 			$(SDIR)op.c			\
 			$(SDIR)magic_reverse.c		\
 			$(SDIR)coding_byte.c		\
-			$(SDIR)verif_header.c		\
+			$(SDIR)error_handling/verif_syntax.c		\
+			$(SDIR)error_handling/verif_header.c		\
+			$(SDIR)error_handling/verif.c		\
+			$(SDIR)error_handling/verif_grammar.c		\
 			$(SDIR)my_memset.c
 
 OBJ		=	$(SRC:.c=.o)
