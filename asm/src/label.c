@@ -7,6 +7,23 @@
 
 #include "asm.h"
 
+void reinit_pos(label_t *label)
+{
+	label->current_pos += label->tmp_pos;
+	label->tmp_pos = 0;
+}
+
+label_t *init_label(void)
+{
+	label_t *label = malloc(sizeof(label_t));
+
+	label->decla = NULL;
+	label->call = NULL;
+	label->tmp_pos = 0;
+	label->current_pos = 0;
+	return (label);
+}
+
 void fill_label_call(char *str, int fd, int mnemonique, label_t *label)
 {
 	call_t *call = label->call;

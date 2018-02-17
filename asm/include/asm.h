@@ -43,6 +43,8 @@ typedef struct label_list_s {
 	size_t tmp_pos;
 } label_t;
 
+void reinit_pos(label_t *);
+label_t *init_label(void);
 void clear_comment(char *);
 int write_instruction(char *cmd, int fd, label_t *);
 void print_tabtab(char **);
@@ -67,5 +69,6 @@ void magic_reverse(void *);
 void short_magic_reverse(void *);
 void verif_header(int);
 char **shift_tab(char **);
+void init_header(header_t *);
 
 #endif

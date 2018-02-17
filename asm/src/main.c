@@ -7,38 +7,6 @@
 
 #include "asm.h"
 
-void init_header(header_t *header)
-{
-	my_super_memset(header, 0, sizeof(*header));
-}
-
-void reinit_pos(label_t *label)
-{
-	label->current_pos += label->tmp_pos;
-	label->tmp_pos = 0;
-}
-
-label_t *init_label(void)
-{
-	label_t *label = malloc(sizeof(label_t));
-
-	label->decla = NULL;
-	label->call = NULL;
-	label->tmp_pos = 0;
-	label->current_pos = 0;
-	return (label);
-}
-
-char **shift_tab(char **tab)
-{
-	int i;
-
-	for (i = 1 ; tab[i] ; i++)
-		tab[i - 1] = tab[i];
-	tab[i - 1] = tab[i];
-	return (tab);
-}
-
 int check_main(int ac, char **av)
 {
 	int fd;
