@@ -22,7 +22,7 @@ int replace_space(char *str)
 			string_mode = 0;
 		}
 		if (string_mode == 0 && (str[i] == ' ' || str[i] == '\t'
-					|| str[i] == ','))
+					|| str[i] == SEPARATOR_CHAR))
 			str[i] = '\0';
 	}
 	return (i);
