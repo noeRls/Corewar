@@ -24,20 +24,24 @@ label_t *init_label(void)
 	return (label);
 }
 
+void goto_last_label_call(call_t **call, label_t *label)
+{
+	if (*call == NULL) {
+		label->call = malloc(sizeof(call_t));
+		*call = label->call;
+	} else {
+		while ((*call)->next)
+			*call = (*call)->next;
+		(*call)->next = malloc(sizeof(call_t));
+		(*call) = (*call)->next;
+	}
+}
+
 void fill_label_call(char *str, int fd, int mnemonique, label_t *label)
 {
 	call_t *call = label->call;
 
-	fd = fd;
-	if (call == NULL) {
-		label->call = malloc(sizeof(call_t));
-		call = label->call;
-	} else {
-		while (call->next)
-			call = call->next;
-		call->next = malloc(sizeof(call_t));
-		call = call->next;
-	}
+	goto_last_label_call(&call, label);
 	if (str[0] == LABEL_CHAR)
 		call->name = my_strdup(str + 1);
 	else
