@@ -34,14 +34,14 @@
 
 typedef char    args_type_t;
 
-# define T_REG           1       /* register */
-# define T_DIR           2       /* direct  (ld  #1,r1  put 1 into r1) */
-# define T_IND           4       /* indirect always relative
-                                   ( ld 1,r1 put what's in the address (1+pc)
-                                   into r1 (4 bytes )) */
-# define T_LAB           8       /* LABEL */
+# define T_REG		 1	 /* register */
+# define T_DIR		 2	 /* direct  (ld	 #1,r1	put 1 into r1) */
+# define T_IND		 4	 /* indirect always relative
+				   ( ld 1,r1 put what's in the address (1+pc)
+				   into r1 (4 bytes )) */
+# define T_LAB		 8	 /* LABEL */
 
-struct  op_s
+struct	op_s
 {
    char         *mnemonique;
    char         nbr_args;
