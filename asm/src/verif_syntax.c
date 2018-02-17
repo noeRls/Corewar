@@ -10,12 +10,12 @@
 void check_label_gramm(char *tab)
 {
 	if (my_strlen(tab) == 0) {
-		my_puterror("Empty label\n");
+		my_puterror(ERROR"Empty label\n");
 		exit(84);
 	}
 	for (int i = 0 ; tab[i] ; i++) {
 		if (!contains(LABEL_CHARS, tab[i])) {
-			my_puterror("Labels should be written only with"
+			my_puterror(ERROR"Labels should be written only with"
 				" LABEL_CHAR\n");
 			exit(84);
 		}
@@ -25,12 +25,12 @@ void check_label_gramm(char *tab)
 void check_gram(char *tab)
 {
 	if (my_strlen(tab) < 1) {
-		my_puterror("Wrong arg\n");
+		my_puterror(ERROR"Wrong arg\n");
 		exit(84);
 	}
 	for (int i = 0 ; tab[i] ; i++)
 		if (tab[i] < '0' || tab[i] > '9') {
-			my_puterror("Directs and indirects args should be only"
+			my_puterror(ERROR"Directs and indirects args should be only"
 				" composed of numericals characters\n");
 			exit(84);
 		}
@@ -57,7 +57,7 @@ void verif_nb_arg(int mnemonic, char **tab)
 
 	for (i = 0 ; tab[i] ; i++);
 	if (i - 1 != op_tab[mnemonic].nbr_args) {
-		my_puterror("invalid number of arguments\n");
+		my_puterror(ERROR"invalid number of arguments\n");
 		exit(84);
 	}
 }
@@ -67,17 +67,17 @@ void verif_arg_type(int mnemonic, char **tab)
 	for (int i = 1 ; tab[i] ; i++) {
 		if (tab[i][0] == DIRECT_CHAR) {
 			if ((op_tab[mnemonic].type[i - 1] & T_DIR) == 0) {
-				my_puterror("Invalid type of arguments\n");
+				my_puterror(ERROR"Invalid type of arguments\n");
 				exit(84);
 			}
 		} else if (tab[i][0] == 'r') {
 			if ((op_tab[mnemonic].type[i - 1] & T_REG) == 0) {
-				my_puterror("Invalid type of arguments\n");
+				my_puterror(ERROR"Invalid type of arguments\n");
 				exit(84);
 			}
 		} else {
 			if ((op_tab[mnemonic].type[i - 1] & T_IND) == 0) {
-				my_puterror("Invalid type of arguments\n");
+				my_puterror(ERROR"Invalid type of arguments\n");
 				exit(84);
 			}
 		}
@@ -89,7 +89,7 @@ int get_mnemonique(char *tab)
 	for (int i = 0; op_tab[i].mnemonique != 0; i++)
 		if (my_strcmp(tab, op_tab[i].mnemonique) == 0)
 			return (i);
-	my_puterror("Opcode unrecognized\n");
+	my_puterror(ERROR"Opcode unrecognized\n");
 	exit(84);
 	return (-1);
 }
