@@ -7,13 +7,17 @@
 
 #include "asm.h"
 
-static void verif_name(char **tab, int *name)
+static int verif_name(char **tab, int *name)
 {
-	(*name)++;
-	if (my_strlen(tab[1]) > PROG_NAME_LENGTH) {
-		my_puterror(ERROR"prog name too long.\n");
-		exit(84);
+	if (!my_strcmp(tab[0], NAME_CMD_STRING)) {
+		(*name)++;
+		if (my_strlen(tab[1]) > PROG_NAME_LENGTH) {
+			my_puterror(ERROR"prog name too long.\n");
+			exit(84);
+		}
+		return (1);
 	}
+	return (0);
 }
 
 static void verif_comment_before_name(char **tab, int name)
@@ -65,10 +69,8 @@ void verif_header(int fd)
 		tab = str_to_av(s);
 		if (!tab[0])
 			continue;
-		if (!my_strcmp(tab[0], NAME_CMD_STRING)) {
-			verif_name(tab, &name);
+		if (verif_name(tab, &name))
 			continue;
-		}
 		verif_comment_before_name(tab, name);
 		if (!my_strcmp(tab[0], COMMENT_CMD_STRING)) {
 			verif_comment(tab, &comment);
