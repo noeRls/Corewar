@@ -39,7 +39,8 @@ void check_gram(char *tab)
 	if (tab[0] == 'r') {
 		tab++;
 		if (getnbr(tab) < 1 || getnbr(tab) > 16) {
-			my_puterror(ERROR"Registers shall be between r1 and REG_NUMBER\n");
+			my_puterror(ERROR"Registers shall ");
+			my_puterror("be between r1 and REG_NUMBER\n");
 			exit(84);
 		}
 	} else if (tab[0] == DIRECT_CHAR)
@@ -50,8 +51,8 @@ void check_gram(char *tab)
 	}
 	for (int i = 0 ; tab[i] ; i++)
 		if (tab[i] < '0' || tab[i] > '9') {
-			my_puterror(ERROR"Directs and indirects args should be only"
-				" composed of numericals characters\n");
+			my_puterror(ERROR"Directs and indirects args should "
+				"be only composed of numericals characters\n");
 			exit(84);
 		}
 }
