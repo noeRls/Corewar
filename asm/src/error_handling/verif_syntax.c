@@ -13,7 +13,7 @@ void verif_nb_arg(int mnemonic, char **tab)
 
 	for (i = 0 ; tab[i] ; i++);
 	if (i - 1 != op_tab[mnemonic].nbr_args) {
-		my_puterror(ERROR"invalid number of arguments\n");
+		my_puterror(ERROR"Invalid number of arguments\n");
 		exit(84);
 	}
 }

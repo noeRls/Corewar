@@ -15,9 +15,6 @@ void verif_gram(char **tab)
 			check_label_gram(tab[i] + 2);
 			continue;
 		}
-		if ((tab[i][0] == 'r' || tab[i][0] == DIRECT_CHAR)\
-		&& tab[i][1] != '\0')
-			tab[i]++;
 		check_gram(tab[i]);
 	}
 }
@@ -39,8 +36,16 @@ void check_label_gram(char *tab)
 
 void check_gram(char *tab)
 {
+	if (tab[0] == 'r') {
+		tab++;
+		if (getnbr(tab) < 1 || getnbr(tab) > 16) {
+			my_puterror(ERROR"Registers shall be between r1 and REG_NUMBER\n");
+			exit(84);
+		}
+	} else if (tab[0] == DIRECT_CHAR)
+		tab++;
 	if (my_strlen(tab) < 1) {
-		my_puterror(ERROR"Wrong arg\n");
+		my_puterror(ERROR"Empty arg\n");
 		exit(84);
 	}
 	for (int i = 0 ; tab[i] ; i++)
