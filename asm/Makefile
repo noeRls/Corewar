@@ -21,10 +21,10 @@ SRC		=	$(SDIR)main.c					\
 			$(SDIR)error_handling/verif_header.c		\
 			$(SDIR)error_handling/verif.c			\
 			$(SDIR)error_handling/verif_grammar.c		\
+			$(SDIR)error_handling/get_mnemonique.c		\
 			$(SDIR)tools/file_to_cor.c			\
 			$(SDIR)tools/int_to_str.c			\
 			$(SDIR)tools/shift_tab.c			\
-			$(SDIR)tools/get_mnemonique.c			\
 			$(SDIR)tools/magic_reverse.c			\
 			$(SDIR)tools/op.c				\
 			$(SDIR)tools/str_to_av.c			\
