@@ -58,12 +58,13 @@ typedef struct label_list_s {
 
 /*ERROR_HANDLING*/
 int verif(char *);
-void verif_nb_arg(int, char **);
+void verif_nb_arg(int, char **, label_t *);
 void verif_arg_type(int, char **);
 void verif_gram(char **);
 void check_label_gram(char *);
 void check_gram(char *);
 void verif_header(int);
+void verif_label(label_t *);
 
 /*WRITE_FILE*/
 int write_instruction(char *cmd, int fd, label_t *);
@@ -93,6 +94,7 @@ void reinit_pos(label_t *);
 void fill_label_call(char *, int, int, label_t *);
 char **fill_label_decla(char **, label_t *);
 void rewrite_label(int, label_t *);
+void goto_last_label_call(call_t **, label_t *);
 
 /*HEADER*/
 void init_header(header_t *);

@@ -19,6 +19,7 @@ SRC		=	$(SDIR)main.c					\
 			$(SDIR)write_file/coding_byte.c			\
 			$(SDIR)error_handling/verif_syntax.c		\
 			$(SDIR)error_handling/verif_header.c		\
+			$(SDIR)error_handling/verif_label.c		\
 			$(SDIR)error_handling/verif.c			\
 			$(SDIR)error_handling/verif_grammar.c		\
 			$(SDIR)error_handling/get_mnemonique.c		\
@@ -32,7 +33,7 @@ SRC		=	$(SDIR)main.c					\
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS		+=	-Wall -Wextra -Werror
+CFLAGS		+=	-Wall -Wextra
 
 CPPFLAGS	=	-I $(realpath include)
 

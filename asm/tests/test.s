@@ -1,8 +1,8 @@
 	# test de l encodage de toutes les fonctions basiques
 	#
 	#bismillah
-#	.name "romain bosa"
-#	.comment "just a basic prog to kick u from tek"
+	.name "romain bosa"
+	.comment "just a basic prog to kick u from tek"
 
 	live %1
 	ld %4,r1

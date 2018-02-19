@@ -7,11 +7,26 @@
 
 #include "asm.h"
 
-void verif_nb_arg(int mnemonic, char **tab)
+void add_label_call(char *str, label_t *label)
+{
+	call_t *call = label->call;
+
+	goto_last_label_call(&call, label);
+	if (str[0] == LABEL_CHAR)
+		call->name = my_strdup(str + 1);
+	else
+		call->name = my_strdup(str + 2);
+	call->next = NULL;
+}
+
+void verif_nb_arg(int mnemonic, char **tab, label_t *label)
 {
 	int i;
 
-	for (i = 0 ; tab[i] ; i++);
+	for (i = 0 ; tab[i] ; i++) {
+		if (get_arg_type(tab[i]) == LABEL_CALL)
+			add_label_call(tab[i], label);
+	}
 	if (i - 1 != op_tab[mnemonic].nbr_args) {
 		my_puterror(ERROR"Invalid number of arguments\n");
 		exit(84);

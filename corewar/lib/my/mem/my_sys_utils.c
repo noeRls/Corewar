@@ -5,9 +5,9 @@
 ** basic tools
 */
 
-void my_memset(void *str, int c, int len)
+void my_memset(void *ptr, int c, int len)
 {
-	char *s = (char *) str;
+	char *s = (char *) ptr;
 
 	for (int i = 0; i < len; i++) {
 		s[i] = c;
