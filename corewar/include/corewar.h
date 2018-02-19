@@ -74,6 +74,10 @@ typedef struct env_s {
 	char last_name[PROG_NAME_LENGTH + 1];
 } env_t;
 
+/*	checks.c	*/
+
+void check_init(env_t *env);
+
 /*	cleans.c	*/
 
 void clean_args(args_t *args);
@@ -81,9 +85,9 @@ void clean_progs(program_t *list);
 
 /*	inits.c */
 
-void init_progs(args_t const *arg, env_t *env);
+void init_progs(args_t *arg, env_t *env);
 void ini_prog_memory(env_t *env);
-void init(args_t const *arg, env_t *env);
+void init(args_t *arg, env_t *env);
 
 /*	main.c	*/
 

@@ -14,6 +14,7 @@ SRC =	./src/main.c			\
 	./src/run.c			\
 	./src/memory_tools.c		\
 	./src/cleans.c			\
+	./src/checks.c			\
 	./src/opcode/pc_tools.c		\
 	./src/opcode/arg_data.c		\
 	./src/opcode/live.c		\
@@ -36,7 +37,7 @@ SRC =	./src/main.c			\
 
 OBJ =	$(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra #-Werror
 
 CPPFLAGS = -Llib/my -lmy -Iinclude -g3
 
