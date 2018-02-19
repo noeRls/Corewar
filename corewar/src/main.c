@@ -31,11 +31,10 @@ int get_mem_start(int const *mem_start, int size)
 
 	my_memset(mem, 0, sizeof(int) * (2 + size));
 	for (int i = 0; i < tmp_size; i++)
-		if (mem_start[i] == -1) {
+		if (mem_start[i] == -1)
 			size--;
-		} else {
+		else
 			mem[++tmp_var] = mem_start[i];
-		}
 	mem[size + 1] = MEM_SIZE;
 	size += 2;
 	my_sort_int_array(mem, size);
