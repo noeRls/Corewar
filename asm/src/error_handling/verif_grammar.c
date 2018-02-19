@@ -28,7 +28,7 @@ void check_label_gram(char *tab)
 	for (int i = 0 ; tab[i] ; i++) {
 		if (!contains(LABEL_CHARS, tab[i])) {
 			my_puterror(ERROR"Labels should be written only with"
-				" LABEL_CHAR\n");
+				" LABEL_CHARS\n");
 			exit(84);
 		}
 	}
@@ -46,7 +46,7 @@ void check_gram(char *tab)
 	} else if (tab[0] == DIRECT_CHAR)
 		tab++;
 	if (my_strlen(tab) < 1) {
-		my_puterror(ERROR"Empty arg\n");
+		my_puterror(ERROR"Empty argument\n");
 		exit(84);
 	}
 	for (int i = 0 ; tab[i] ; i++)

@@ -12,7 +12,7 @@ static int verif_name(char **tab, int *name)
 	if (!my_strcmp(tab[0], NAME_CMD_STRING)) {
 		(*name)++;
 		if (my_strlen(tab[1]) > PROG_NAME_LENGTH) {
-			my_puterror(ERROR"prog name too long.\n");
+			my_puterror(ERROR"Program name too long.\n");
 			exit(84);
 		}
 		return (1);
@@ -23,8 +23,8 @@ static int verif_name(char **tab, int *name)
 static void verif_comment_before_name(char **tab, int name)
 {
 	if (!my_strcmp(tab[0], COMMENT_CMD_STRING) && !name) {
-		my_puterror(ERROR"The name must be specified\n");
-		my_puterror(" just before the comment.\n");
+		my_puterror(ERROR"The name must be specified"
+			" just before the comment.\n");
 		exit(84);
 	}
 }
@@ -33,7 +33,7 @@ static void verif_comment(char **tab, int *comment)
 {
 	(*comment)++;
 	if (my_strlen(tab[1]) > COMMENT_LENGTH) {
-		my_puterror(ERROR"comment too long.\n");
+		my_puterror(ERROR"Comment too long.\n");
 		exit(84);
 	}
 }
@@ -41,7 +41,7 @@ static void verif_comment(char **tab, int *comment)
 static void verif_comment_name(char *s, int comment, int name, int fd)
 {
 	if (!comment)
-		my_puterror(WARNING"no comment specify\n");
+		my_puterror(WARNING"No comment specified\n");
 	if (!name) {
 		my_puterror(ERROR"No name specified\n");
 		exit(84);

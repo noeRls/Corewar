@@ -66,7 +66,8 @@ void arg_encoder(char **tab, int fd, int mnemonique, label_t *label)
 			fill_label_call(tab[i], fd, mnemonique, label);
 			break;
 		case LABEL_DECLARATION:
-			my_puterror("error\n");
+			my_puterror(ERROR"Unknow error occured\n"
+				"Please contact TheWanderingCat\n");
 			break;
 		}
 	}
