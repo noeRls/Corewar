@@ -57,8 +57,7 @@ void manage_cycle(env_t *env)
 		next = prgm->next;
 		if (prgm->live_signal > env->cycle_to_die) {
 			destroy_prog(env, &(env->prgm), prgm);
-		}
-		else {
+		} else {
 			prgm->cycle -= 1;
 			prgm->live_signal += 1;
 		}
@@ -67,8 +66,10 @@ void manage_cycle(env_t *env)
 		env->cycle_to_die -= CYCLE_DELTA;
 		env->live_counter = 0;
 	}
-	if (env->cycle % env->dump_cycle == 0 && env->dump_cycle != -1)
+	if (env->cycle % env->dump_cycle == 0 && env->dump_cycle != -1) {
 		print_hexa_mem(env->memory);
+		exit(0);
+	}
 	env->cycle += 1;
 }
 

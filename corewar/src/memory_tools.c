@@ -21,20 +21,20 @@ void swap(void *data, int size)
 
 void print_hexa_mem(unsigned char const *memory)
 {
-	unsigned char *tmp = 0;
 	int x = 0;
-
+	int line = 0;
+	
 	for (int i = 0; i < MEM_SIZE; i++) {
-		my_printf("%02x ", (int) memory[i]);
+		my_printf("%02X ", (int) memory[i]);
 		x++;
-		if (x == 8) {
+		if (x % 8 == 0 && x != BYTES_PER_LINE) {
 			my_printf(" ");
-		} else if (x == 16) {
-			my_printf("\n");
+		} else if (x == BYTES_PER_LINE && i != MEM_SIZE - 1) {
+			my_printf("\n0x%08X: ", line++);
 			x = 0;
 		}
-		free(tmp);
 	}
+	my_putchar('\n');
 }
 
 void write_to_mem(unsigned char *memory, void const *data, int size, int start)

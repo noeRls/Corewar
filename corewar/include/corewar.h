@@ -19,6 +19,8 @@
 #define PC reg[0]
 #define READ_SIZE_BINARY_OP 1
 
+#define BYTES_PER_LINE 32
+
 #define TRUE 1
 #define FALSE 0
 

@@ -7,6 +7,7 @@
 
 #include <unistd.h>
 
+char *get_next_line(int fd);
 #ifndef GETNEXTLINE_H_
 	#define GETNEXTLINE_H_
 	#define READ_SIZE 30

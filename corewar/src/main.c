@@ -6,6 +6,7 @@
 */
 
 #include "corewar.h"
+#include "errors.h"
 
 int get_unique_id(int const *diff_id, int size)
 {
@@ -44,11 +45,29 @@ int get_mem_start(int const *mem_start, int size)
 	return (adress);
 }
 
+int print_usage(void)
+{
+	char *line = 0;
+	int fd = open("./usage", O_RDONLY);
+
+	if (fd == -1) {
+		my_printf(USAGE_RM);
+		return (84);
+	}
+	while ((line = get_next_line(fd))) {
+		my_printf("%s\n", line);
+		free(line);
+	}
+	return (0);
+}
+
 int main(int ac, char **av)
 {
 	env_t env;
 	args_t args;
 
+	if (ac == 1 || !my_strcmp(av[1], "-h"))
+		return (print_usage());
 	manage_args(ac, av, &args);
 	finally_setup_arg(&args);
 	env.dump_cycle = args.dump_cycle;
