@@ -49,7 +49,8 @@ int main(int ac, char **av)
 	header_t header;
 	label_t *label = init_label();
 
-	(void)ac;
+	if (ac != 2)
+		return (84);
 	if (src == -1 || bin == -1)
 		return (84);
 	init_header(&header);

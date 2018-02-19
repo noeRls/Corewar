@@ -26,7 +26,7 @@ SRC		=	$(SDIR)main.c			\
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS		+=	-Wall -Wextra -Werror
+CFLAGS		+=	-Wall -Wextra
 
 CPPFLAGS	=	-I $(realpath include)
 
