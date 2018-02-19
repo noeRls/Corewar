@@ -9,5 +9,15 @@
 
 void verif_label(label_t *label)
 {
-	label = label;
+	decla_t *decla;
+
+	for (call_t *call = label->call ; call ; call = call->next) {
+		for (decla = label->decla; decla; decla = decla->next)
+			if (!my_strcmp(call->name, decla->name))
+				break;
+		if (!decla) {
+			my_puterror(ERROR"Label undeclared\n");
+			exit(84);
+		}
+	}
 }
