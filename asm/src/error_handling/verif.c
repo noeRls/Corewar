@@ -21,7 +21,6 @@ char **add_label_decla(char **tab, label_t *label)
 		decla->next = malloc(sizeof(decla_t));
 		decla = decla->next;
 	}
-	str[my_strlen(str) - 1] = '\0';
 	decla->name = my_strdup(str);
 	decla->next = NULL;
 	return (shift_tab(tab));
