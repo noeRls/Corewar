@@ -13,7 +13,7 @@ void init_progs(args_t const *arg, env_t *env)
 	program_t *start = 0;
 
 	st = start_prog(arg->prog_paths[0]);
-	st->mem_start = 0;
+	st->mem_start = !arg->not_mem_default ? 0 : arg->mem_start[0];
 	st->next = NULL;
 	start = st;
 	for (int i = 1; i < arg->nb_prog; i++) {
