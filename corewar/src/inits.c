@@ -13,8 +13,8 @@ void init_progs(args_t *arg, env_t *env)
 	program_t *start = 0;
 
 	st = start_prog(arg->prog_paths[0]);
-	st->mem_start = 0;
 	st->id = arg->prog_ids[0];
+	st->mem_start = !arg->not_mem_default ? 0 : arg->mem_start[0];
 	start = st;
 	for (int i = 1; i < arg->nb_prog; i++) {
 		st->next = start_prog(arg->prog_paths[i]);
@@ -29,7 +29,6 @@ void init_progs(args_t *arg, env_t *env)
 	}
 	st->next = NULL;
 	env->prgm = start;
-	my_printf("player at end ini_progs : %d\n", env->nbr_player);
 }
 
 int get_default_id(env_t *env)
@@ -51,7 +50,7 @@ int get_default_id(env_t *env)
 void ini_prog_memory(env_t *env)
 {
 	header_t hd;
-	int i = 0;
+	unsigned char *stock = 0;
 	
 	for (program_t *tmp = env->prgm; tmp; tmp = tmp->next) {
 		if (tmp->id == -1)
@@ -61,11 +60,11 @@ void ini_prog_memory(env_t *env)
 		if (read(tmp->fd, &hd, sizeof(header_t)) != sizeof(header_t))
 			exit(84);
 		swap(&(hd.prog_size), sizeof(hd.prog_size));
-		printf("#%d - NB PLAYER : %d\n", i, env->nbr_player);
-		if (read(tmp->fd, &(env->memory[tmp->PC]),	\
-		hd.prog_size) != hd.prog_size)
+		stock = malloc(sizeof(unsigned char) * hd.prog_size);
+		if (read(tmp->fd, stock, hd.prog_size) != hd.prog_size)
 			exit(84);
-		printf("#%d - NB PLAYER : %d\n", i++, env->nbr_player);
+		write_to_mem(env->memory, stock, hd.prog_size, tmp->PC);
+		free(stock);
 		my_memset(tmp->name, 0, PROG_NAME_LENGTH + 1);
 		my_strcpy(tmp->name, hd.prog_name);
 	}

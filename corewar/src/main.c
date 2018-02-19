@@ -26,21 +26,23 @@ int get_mem_start(int const *mem_start, int size)
 	int mem[2 + size];
 	int adress = 0;
 	int last_size = 0;
+	int tmp_size = size;
+	int tmp_var = 0;
 
 	my_memset(mem, 0, sizeof(int) * (2 + size));
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < tmp_size; i++)
 		if (mem_start[i] == -1) {
 			size--;
-			i--;
-		} else
-			mem[i + 1] = mem_start[i];
-	mem[size] = MEM_SIZE;
+		} else {
+			mem[++tmp_var] = mem_start[i];
+		}
+	mem[size + 1] = MEM_SIZE;
 	size += 2;
 	my_sort_int_array(mem, size);
 	for (int i = 0; i < size - 1; i++)
 		if (mem[i + 1] - mem[i] > last_size) {
 			last_size = mem[i + 1] - mem[i];
-			adress = mem[i] + (mem[i + 1] - mem[i] / 2);
+			adress = mem[i] + ((mem[i + 1] - mem[i]) / 2);
 		}
 	return (adress);
 }

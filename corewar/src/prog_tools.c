@@ -55,5 +55,6 @@ program_t *start_prog(char *path)
 	prgm->cycle = 0;
 	prgm->PC = 0;
 	prgm->pc_backup = 0;
+	prgm->next = 0;
 	return (prgm);
 }
