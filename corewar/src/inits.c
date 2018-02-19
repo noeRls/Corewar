@@ -12,7 +12,7 @@ void init_progs(args_t const *arg, env_t *env)
 	program_t *st = 0;
 	program_t *start = 0;
 
-	env->prgm = malloc(sizeof(program_t));
+	env->prgm = my_malloc(sizeof(program_t));
 	st = start_prog(arg->prog_paths[0]);
 	st->mem_start = 0;
 	st->next = NULL;
@@ -40,10 +40,12 @@ void ini_prog_memory(env_t *env)
 		tmp->id = x;
 		tmp->reg[1] = x;
 		tmp->PC = tmp->mem_start;
-		read(tmp->fd, &hd, sizeof(header_t));
+		if (read(tmp->fd, &hd, sizeof(header_t)) != sizeof(header_t))
+			exit(84);
 		swap(&(hd.prog_size), sizeof(hd.prog_size));
-		read(tmp->fd, &(env->memory[tmp->PC]),	\
-		hd.prog_size);
+		if (read(tmp->fd, &(env->memory[tmp->PC]),	\
+		hd.prog_size) != hd.prog_size)
+			exit(84);
 		my_memset(tmp->name, 0, PROG_NAME_LENGTH + 1);
 		my_strcpy(tmp->name, hd.prog_name);
 	}

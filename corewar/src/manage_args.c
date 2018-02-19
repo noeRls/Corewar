@@ -81,9 +81,9 @@ void manage_args(int ac, char **av, args_t *args)
 			count++;
 	args->curr = 0;
 	args->nb_prog = count;
-	args->prog_paths = malloc(sizeof(char *) * count);
-	args->prog_ids = malloc(sizeof(int) * count);
-	args->mem_start = malloc(sizeof(int) * count);
+	args->prog_paths = my_malloc(sizeof(char *) * count);
+	args->prog_ids = my_malloc(sizeof(int) * count);
+	args->mem_start = my_malloc(sizeof(int) * count);
 	args->dump_cycle = -1;
 	second_part(args, ac, av);
 }

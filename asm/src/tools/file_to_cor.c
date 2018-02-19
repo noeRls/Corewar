@@ -7,11 +7,27 @@
 
 #include "asm.h"
 
+char *set_string(char *s)
+{
+	size_t slash = 0;
+
+	for (size_t i = 0; s[i]; i++) {
+		if (s[i] == '/')
+			slash++;
+	}
+	for (; slash && *s; s++) {
+		if (*s == '/')
+			--slash;
+	}
+	return (s);
+}
+
 char *file_to_cor(char *s)
 {
 	char *new = 0;
 	int last = my_strlen(s);
 
+	s = set_string(s);
 	for (int i = 0; s[i]; i++)
 		if (s[i] == '.')
 			last = i;

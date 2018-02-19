@@ -16,7 +16,7 @@ Test(read_from_mem, 1)
 	int fd = open("test", O_RDWR | O_CREAT, 0666);
 	int a = 12;
 	int b = 26;
-	d_int_t *data = malloc(sizeof(d_int_t));
+	d_int_t *data = my_malloc(sizeof(d_int_t));
 
 	memory[0] = 1;
 	memory[4] = 2;

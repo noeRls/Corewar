@@ -22,7 +22,7 @@ int replace_space(char *str)
 			string_mode = 0;
 		}
 		if (string_mode == 0 && (str[i] == ' ' || str[i] == '\t'
-					|| str[i] == ','))
+					|| str[i] == SEPARATOR_CHAR))
 			str[i] = '\0';
 	}
 	return (i);
@@ -36,6 +36,16 @@ int count_av(char *str, int size)
 		if (str[i] == '\0' && str[i - 1] != '\0')
 			nb++;
 	return (nb);
+}
+
+void clear_comment(char *str)
+{
+	for (size_t i = 0; str[i]; i++) {
+		if (str[i] == COMMENT_CHAR) {
+			str[i] = '\0';
+			return;
+		}
+	}
 }
 
 char **str_to_av(char *str)
