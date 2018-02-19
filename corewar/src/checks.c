@@ -30,5 +30,9 @@ void check_init(env_t *env)
 			check_equal(j, k, ids);
 		}
 	}
+	if (env->dump_cycle != -1 && env->dump_cycle <= 0) {
+		my_printf(WRONG_DUMP_CYCLE);
+		exit(84);
+	}
 	free(ids);
 }
