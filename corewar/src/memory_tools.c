@@ -24,6 +24,7 @@ void print_hexa_mem(unsigned char const *memory)
 	int x = 0;
 	int line = 0;
 	
+	my_printf("\n0x%08X: ", line++);
 	for (int i = 0; i < MEM_SIZE; i++) {
 		my_printf("%02X ", (int) memory[i]);
 		x++;
