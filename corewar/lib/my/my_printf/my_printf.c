@@ -89,8 +89,8 @@ int my_printf(char *str, ...)
 {
 	va_list ap;
 	int result = 0;
-	int (*fctns[14])(va_list *, char *) = {&d_int, &d_int, &d_oct, &d_u,\
-					&d_hexa, &d_bhexa, &d_char, \
+	static int (*fctns[14])(va_list *, char *) = {&d_int, &d_int, &d_oct,\
+					&d_u, &d_hexa, &d_bhexa, &d_char, \
 					&d_str, &d_cnp, &d_snp, &d_p,\
 					&d_mod, &d_mod, &d_bin};
 

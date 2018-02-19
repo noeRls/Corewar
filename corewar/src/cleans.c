@@ -14,6 +14,11 @@ void clean_args(args_t *args)
 	free(args->mem_start);
 }
 
+void clean_env(env_t *env)
+{
+	free(env->prgm);
+}
+
 void clean_progs(program_t *list)
 {
 	program_t *next = 0;

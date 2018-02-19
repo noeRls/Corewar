@@ -11,7 +11,7 @@
 char *get_nbr_base(long long nb, char const *base)
 {
 	long long basenb = my_strlen(base);
-	char *final = my_malloc(50);
+	char *final = nb ? my_malloc(50) : 0;
 	int index = 0;
 	long long tmp = 0;
 	int neg = (nb < 0 ? 1 : 0);
@@ -22,12 +22,10 @@ char *get_nbr_base(long long nb, char const *base)
 	while (nb) {
 		tmp = nb;
 		nb = nb / basenb;
-		final[index] = base[tmp % basenb];
-		index++;
+		final[index++] = base[tmp % basenb];
 	}
 	if (neg)
 		final[index++] = '-';
 	final[index] = 0;
-	my_revstr(final);
-	return (final);
+	return (my_revstr(final));
 }

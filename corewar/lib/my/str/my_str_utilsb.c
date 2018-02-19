@@ -54,7 +54,7 @@ char *my_strupcase(char *str)
 
 char *my_revstr(char *str)
 {
-	int strlen;
+	int strlen = 0;
 
 	if (my_strlen(str) > 1) {
 		strlen = my_strlen(str) - 1;
