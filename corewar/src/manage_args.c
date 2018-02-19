@@ -67,7 +67,7 @@ void second_part(args_t *args, int ac, char **av)
 		}
 		for (int j = 0; j < 3 && av[i][0] == '-'; j++)
 			exists = max(exists, handle_for(&i, j, args, av));
-		if (!exists && av[i - 1][0] == '-')
+		if (!exists && av[i][0] == '-')
 			exit(84);
 	}
 }
@@ -85,5 +85,6 @@ void manage_args(int ac, char **av, args_t *args)
 	args->prog_ids = my_malloc(sizeof(int) * count);
 	args->mem_start = my_malloc(sizeof(int) * count);
 	args->dump_cycle = -1;
+	printf("NB PROG : %d\n", args->nb_prog);
 	second_part(args, ac, av);
 }
