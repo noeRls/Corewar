@@ -66,11 +66,11 @@ void manage_cycle(env_t *env)
 		env->cycle_to_die -= CYCLE_DELTA;
 		env->live_counter = 0;
 	}
-	if (env->cycle % env->dump_cycle == 0 && env->dump_cycle != -1) {
+	if (env->cycle % env->dump_cycle == 0 &&	\
+	env->dump_cycle != -1 && env->cycle) {
 		print_hexa_mem(env->memory);
 		exit(0);
 	}
-	env->cycle += 1;
 }
 
 void execute_prog(env_t *env, program_t *p)
@@ -100,6 +100,7 @@ int run(env_t *env) {
 			p->cycle ? 0 : execute_prog(env, p);
 		}
 		manage_cycle(env);
+		env->cycle += 1;
 	}
 	my_printf("The player %d(%s) has won\n",	\
 		env->last_id, env->last_name);

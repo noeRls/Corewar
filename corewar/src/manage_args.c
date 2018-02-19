@@ -85,6 +85,5 @@ void manage_args(int ac, char **av, args_t *args)
 	args->prog_ids = my_malloc(sizeof(int) * count);
 	args->mem_start = my_malloc(sizeof(int) * count);
 	args->dump_cycle = -1;
-	printf("NB PROG : %d\n", args->nb_prog);
 	second_part(args, ac, av);
 }
