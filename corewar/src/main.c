@@ -74,6 +74,6 @@ int main(int ac, char **av)
 	finally_setup_arg(&args);
 	env.dump_cycle = args.dump_cycle;
 	init(&args, &env);
-//	clean_args(&args);
+	clean_args(&args);
 	return (run(&env));
 }

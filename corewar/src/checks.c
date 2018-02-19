@@ -21,7 +21,6 @@ void check_init(env_t *env)
 	int *ids = my_malloc(sizeof(int) * (env->nbr_player));
 	int i = 0;
 
-	printf("NB PLAYER : %d\n", env->nbr_player);
 	for (program_t *p = env->prgm; p; p = p->next) {
 		ids[i] = p->id;
 		i++;
