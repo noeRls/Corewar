@@ -39,6 +39,7 @@ void ini_prog_memory(env_t *env)
 		tmp->id = x;
 		tmp->reg[1] = x;
 		tmp->PC = tmp->mem_start;
+		printf("mem start : %d PC : %d\n", tmp->mem_start, tmp->PC);
 		if (read(tmp->fd, &hd, sizeof(header_t)) != sizeof(header_t))
 			exit(84);
 		swap(&(hd.prog_size), sizeof(hd.prog_size));

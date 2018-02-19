@@ -23,15 +23,17 @@ void print_hexa_mem(unsigned char const *memory)
 {
 	int x = 0;
 	int line = 0;
-	
-	my_printf("\n0x%08X: ", line++);
+
+	my_printf("\n0x%08X: ", line);
+	line += 32;
 	for (int i = 0; i < MEM_SIZE; i++) {
 		my_printf("%02X ", (int) memory[i]);
 		x++;
 		if (x % 8 == 0 && x != BYTES_PER_LINE) {
 			my_printf(" ");
 		} else if (x == BYTES_PER_LINE && i != MEM_SIZE - 1) {
-			my_printf("\n0x%08X: ", line++);
+			my_printf("\n0x%08X: ", line);
+			line += 32;
 			x = 0;
 		}
 	}
