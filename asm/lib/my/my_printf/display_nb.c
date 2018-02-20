@@ -62,7 +62,7 @@ int d_int(va_list *ap, char *fl)
 	else
 		str = get_nbr_base(va_arg(*ap, int), "0123456789");
 	count = display_nb(str, fl, 0);
-	free(str);
+	FREE(str);
 	return (count);
 }
 
@@ -73,14 +73,14 @@ int d_u(va_list *ap, char *fl)
 	replace(fl, '+', 'A');
 	replace(fl, ' ', 'A');
 	display_nb(str, fl, 0);
-	free(str);
+	FREE(str);
 	return (1);
 }
 
 int d_hexa(va_list *ap, char *fl)
 {
 	char *str = get_nbr_base(va_arg(*ap, long long), "0123456789abcdef");
-	char *tmp = my_malloc(sizeof (char) * (my_strlen(str) + 3));
+	char *tmp = MALLOC(sizeof (char) * (my_strlen(str) + 3));
 	int count = 0;
 
 	replace(fl, '+', 'A');
@@ -93,7 +93,7 @@ int d_hexa(va_list *ap, char *fl)
 	for (int i = 0; i < my_strlen(str); i++)
 		tmp[i + count] = str[i];
 	count += display_nb(tmp, fl, 0);
-	free(str);
-	free(tmp);
+	FREE(str);
+	FREE(tmp);
 	return (count);
 }

@@ -2,15 +2,15 @@
 ** EPITECH PROJECT, 2018
 ** my_ammloc
 ** File description:
-** my_malloc
+** MALLOC
 */
 
 #include <stdlib.h>
 #include <stdio.h>
 
-void *my_malloc(int size)
+void *MALLOC(int size)
 {
-	void *res = malloc(size);
+	void *res = MALLOC(size);
 
 	if (!res)
 		exit(84);

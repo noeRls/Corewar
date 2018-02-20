@@ -31,7 +31,7 @@ char *file_to_cor(char *s)
 	for (int i = 0; s[i]; i++)
 		if (s[i] == '.')
 			last = i;
-	new = malloc(sizeof(char) * (last + 5));
+	new = MALLOC(sizeof(char) * (last + 5));
 	if (!new)
 		exit(84);
 	my_strncpy(new, s, last);

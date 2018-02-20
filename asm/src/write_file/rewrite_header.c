@@ -15,7 +15,7 @@ void rewrite_header(int bin, header_t *header)
 	lseek(bin, 0, SEEK_SET);
 	for (header->prog_size = 0 ; read(bin, &c, 1) ; (header->prog_size)++);
 	lseek(bin, 0, SEEK_SET);
-	buffer = malloc(header->prog_size);
+	buffer = MALLOC(header->prog_size);
 	if (read(bin, buffer, header->prog_size) == -1)
 		exit(84);
 	lseek(bin, 0, SEEK_SET);

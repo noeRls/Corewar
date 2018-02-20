@@ -13,12 +13,12 @@ char **add_label_decla(char **tab, label_t *label)
 	char *str = tab[0];
 
 	if (decla == NULL) {
-		label->decla = malloc(sizeof(decla_t));
+		label->decla = MALLOC(sizeof(decla_t));
 		decla = label->decla;
 	} else {
 		while (decla->next)
 			decla = decla->next;
-		decla->next = malloc(sizeof(decla_t));
+		decla->next = MALLOC(sizeof(decla_t));
 		decla = decla->next;
 	}
 	decla->name = my_strdup(str);

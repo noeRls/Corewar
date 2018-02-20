@@ -7,6 +7,7 @@
 
 #include <stdarg.h>
 #include <unistd.h>
+#include "freezer.h"
 
 void *my_malloc(int size);
 

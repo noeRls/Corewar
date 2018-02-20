@@ -60,7 +60,7 @@ char *my_strdup(char const *src)
 	char *str;
 	int i = 0;
 
-	str = my_malloc(sizeof(char) * (my_strlen(src) + 1));
+	str = MALLOC(sizeof(char) * (my_strlen(src) + 1));
 	for (i = 0; src[i]; i++) {
 		str[i] = src[i];
 	}

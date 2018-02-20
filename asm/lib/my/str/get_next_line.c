@@ -16,7 +16,7 @@ char *add_char(char *str, int *size, char c)
 
 	for (s; *size && str[s]; s++);
 	if (s + 1 >= *size || *size == 0) {
-		new = malloc(sizeof (char) * (*size + READ_SIZE + 1));
+		new = MALLOC(sizeof (char) * (*size + READ_SIZE + 1));
 		for (int i = 0; new && *size && i < *size; i++)
 			new[i] = str[i];
 		*size += READ_SIZE + 1;
@@ -26,7 +26,7 @@ char *add_char(char *str, int *size, char c)
 		return (0);
 	}
 	if (new != str)
-		free(str);
+		FREE(str);
 	new[s] = c;
 	new[s + 1] = 0;
 	return (new);
@@ -74,6 +74,6 @@ char *get_next_line(int fd)
 	if (res && res[0])
 		return (res);
 	if (res)
-		free(res);
+		FREE(res);
 	return (NULL);
 }
