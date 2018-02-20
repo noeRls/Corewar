@@ -23,6 +23,8 @@ SRC		=	$(SDIR)main.c					\
 			$(SDIR)error_handling/verif.c			\
 			$(SDIR)error_handling/verif_grammar.c		\
 			$(SDIR)error_handling/get_mnemonique.c		\
+			$(SDIR)freezer/freezer.c			\
+			$(SDIR)freezer/freezer_core.c			\
 			$(SDIR)tools/file_to_cor.c			\
 			$(SDIR)tools/int_to_str.c			\
 			$(SDIR)tools/shift_tab.c			\
@@ -33,7 +35,7 @@ SRC		=	$(SDIR)main.c					\
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS		+=	-Wall -Wextra
+CFLAGS		+=	-Wall -Wextra -Werror
 
 CPPFLAGS	=	-I $(realpath include)
 

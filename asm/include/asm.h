@@ -12,6 +12,7 @@
 #include "get_next_line.h"
 #include "my.h"
 #include "op.h"
+#include "freezer.h"
 
 #define KNRM "\x1B[0m"
 #define KRED "\x1B[31m\x1B[5m"
