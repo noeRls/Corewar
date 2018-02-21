@@ -7,9 +7,9 @@
 
 #include "my.h"
 
-int getnbr(char const *str)
+int getnbr(char *str)
 {
-	char const *tmp = str;
+	char *tmp = str;
 	int nb = 0;
 	int tmpnb;
 	int neg = 1;
@@ -18,6 +18,8 @@ int getnbr(char const *str)
 		tmp++;
 		neg *= -1;
 	}
+	while (*tmp == '+')
+		tmp++;
 	for (tmp; my_char_isnum(*tmp) && *tmp != 0; tmp++) {
 		tmpnb = nb;
 		nb *= 10;
