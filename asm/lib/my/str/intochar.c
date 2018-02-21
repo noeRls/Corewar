@@ -10,7 +10,7 @@
 
 char *my_intochar(int base)
 {
-	char *converted = my_malloc(sizeof(char) * 11);
+	char *converted = MALLOC(sizeof(char) * 11);
 	int neg = (base < 0 ? 1 : 0);
 	int div = 1;
 	int cont = 0;

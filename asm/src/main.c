@@ -20,6 +20,7 @@ int main(int ac, char **av)
 	rewrite_header(bin, &header);
 	close(src);
 	close(bin);
+	FREEZER;
 	return (0);
 }
 

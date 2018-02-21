@@ -30,7 +30,7 @@ char *flags_manager(char *str)
 
 	for (i = 0; str[i] && (contains(fl, str[i]) || my_char_isnum(str[i]))\
 		&& !contains(flags, str[i]); i++) {}
-	res = my_malloc(sizeof (char) * (i + 1));
+	res = MALLOC(sizeof (char) * (i + 1));
 	for (i = 0; str[i] && (contains(fl, str[i]) || my_char_isnum(str[i]))\
 		&& !contains(flags, str[i]); i++) {
 		if (i > 0 && my_char_isnum(str[i - 1])\
@@ -50,7 +50,7 @@ int print(char **str, int (**fctns)(va_list *, char *), va_list *ap)
 	args = flags_manager(*str + 1);
 	if (!contains(flags, (*str)[1 + my_strlen(args)])) {
 		my_putchar('%');
-		free(args);
+		FREE(args);
 		return (1);
 	}
 	*str = *str + 1;
@@ -58,7 +58,7 @@ int print(char **str, int (**fctns)(va_list *, char *), va_list *ap)
 	for (int i = 0; flags[i]; i++) {
 		if (**str == flags[i]) {
 			fctns[i](ap, args);
-			free(args);
+			FREE(args);
 			return (0);
 		}
 	}

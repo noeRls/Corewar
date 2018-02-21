@@ -40,7 +40,7 @@ char **str_words_forb(char const *src, char const *forb)
 {
 	char *str = my_strdup(src);
 	int words = count_words(str, forb);
-	char **res = my_malloc(sizeof (char *) * (words + 1));
+	char **res = MALLOC(sizeof (char *) * (words + 1));
 	int wasw = 0;
 	int ind = 0;
 

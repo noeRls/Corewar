@@ -43,8 +43,8 @@ static int count_words(char const *str, char const *forb)
 char **manage_return(char **res, int inq)
 {
 	if (inq) {
-		free(*res);
-		free(res);
+		FREE(*res);
+		FREE(res);
 		return ((char **) -1);
 	}
 	return (res);
@@ -54,7 +54,7 @@ char **str_words_param(char const *src, char const *forb)
 {
 	char *str = my_strdup(src);
 	int words = count_words(str, forb);
-	char **res = my_malloc(sizeof (char *) * (words + 1));
+	char **res = MALLOC(sizeof (char *) * (words + 1));
 	int wasw = 0;
 	int ind = 0;
 	int in_quotes = 0;

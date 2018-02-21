@@ -11,7 +11,7 @@
 char *get_nbr_base(long long nb, char const *base)
 {
 	long long basenb = my_strlen(base);
-	char *final = my_malloc(50);
+	char *final = MALLOC(50);
 	int index = 0;
 	long long tmp = 0;
 	int neg = (nb < 0 ? 1 : 0);
