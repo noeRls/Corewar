@@ -81,8 +81,10 @@ void verif_header(int fd)
 			len = 0;
 		clear_comment(s);
 		tab = str_to_av(s);
-		if (!tab[0])
+		if (!tab[0]) {
+			len = 0;
 			continue;
+		}
 		if (verif_name(tab, &name))
 			continue;
 		verif_comment_before_name(tab, name);
