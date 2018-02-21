@@ -46,7 +46,7 @@ static void verif_comment(char **tab, int *comment)
 	}
 }
 
-static void verif_comment_name(char *s, int comment, int name, int fd)
+static void verif_comment_name(size_t len, int comment, int name, int fd)
 {
 	if (!comment)
 		my_puterror(WARNING"No comment specified\n");
@@ -62,8 +62,7 @@ static void verif_comment_name(char *s, int comment, int name, int fd)
 		my_puterror(ERROR"The comment can only be defined once.\n");
 		exit(84);
 	}
-	if (s)
-		lseek(fd, (my_strlen(s) + 1) * -1, SEEK_CUR);
+	lseek(fd, (len + 1) * -1, SEEK_CUR);
 }
 
 void verif_header(int fd)
@@ -72,8 +71,13 @@ void verif_header(int fd)
 	int comment = 0;
 	char **tab;
 	char *s = NULL;
+	size_t len = 0;
 
 	while ((s = get_next_line(fd))) {
+		if (s)
+			len = my_strlen(s);
+		else
+			len = 0;
 		clear_comment(s);
 		tab = str_to_av(s);
 		if (!tab[0])
@@ -87,5 +91,5 @@ void verif_header(int fd)
 		}
 		break;
 	}
-	verif_comment_name(s, comment, name, fd);
+	verif_comment_name(len, comment, name, fd);
 }

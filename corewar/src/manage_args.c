@@ -61,6 +61,8 @@ void second_part(args_t *args, int ac, char **av)
 	}
 	for (int i = 1; i < ac; i++) {
 		exists = 0;
+		if (args->curr >= args->nb_prog)
+			exit(84);
 		if (av[i][0] != '-') {
 			args->prog_paths[args->curr] = av[i];
 			args->curr++;
