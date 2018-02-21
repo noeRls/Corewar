@@ -59,12 +59,12 @@ int d_snp(va_list *ap, char *fl)
 int d_char(va_list *ap, char *fl)
 {
 	char c = (char) va_arg(*ap, int);
-	char *tmp = my_malloc(2);
+	char *tmp = MALLOC(2);
 
 	tmp[0] = c;
 	tmp[1] = 0;
 	display_str(tmp, fl);
-	free(tmp);
+	FREE(tmp);
 	return (1);
 }
 

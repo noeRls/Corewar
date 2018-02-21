@@ -62,7 +62,8 @@ static void verif_comment_name(char *s, int comment, int name, int fd)
 		my_puterror(ERROR"The comment can only be defined once.\n");
 		exit(84);
 	}
-	lseek(fd, (my_strlen(s) + 1) * -1, SEEK_CUR);
+	if (s)
+		lseek(fd, (my_strlen(s) + 1) * -1, SEEK_CUR);
 }
 
 void verif_header(int fd)

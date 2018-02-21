@@ -38,7 +38,7 @@ static int count_words(char const *str)
 char **str_words(char *str)
 {
 	int words = count_words(str);
-	char **res = my_malloc(sizeof (char *) * (words + 1));
+	char **res = MALLOC(sizeof (char *) * (words + 1));
 	int wasw = 0;
 	int ind = 0;
 

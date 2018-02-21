@@ -6,6 +6,7 @@
 */
 
 #include <unistd.h>
+#include "freezer.h"
 
 #ifndef GETNEXTLINE_H_
 	#define GETNEXTLINE_H_

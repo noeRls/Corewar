@@ -15,7 +15,7 @@ void reinit_pos(label_t *label)
 
 label_t *init_label(void)
 {
-	label_t *label = malloc(sizeof(label_t));
+	label_t *label = MALLOC(sizeof(label_t));
 
 	label->decla = NULL;
 	label->call = NULL;
@@ -27,12 +27,12 @@ label_t *init_label(void)
 void goto_last_label_call(call_t **call, label_t *label)
 {
 	if (*call == NULL) {
-		label->call = malloc(sizeof(call_t));
+		label->call = MALLOC(sizeof(call_t));
 		*call = label->call;
 	} else {
 		while ((*call)->next)
 			*call = (*call)->next;
-		(*call)->next = malloc(sizeof(call_t));
+		(*call)->next = MALLOC(sizeof(call_t));
 		(*call) = (*call)->next;
 	}
 }
@@ -64,12 +64,12 @@ char **fill_label_decla(char **tab, label_t *label)
 	char *str = tab[0];
 
 	if (decla == NULL) {
-		label->decla = malloc(sizeof(decla_t));
+		label->decla = MALLOC(sizeof(decla_t));
 		decla = label->decla;
 	} else {
 		while (decla->next)
 			decla = decla->next;
-		decla->next = malloc(sizeof(decla_t));
+		decla->next = MALLOC(sizeof(decla_t));
 		decla = decla->next;
 	}
 	str[my_strlen(str) - 1] = '\0';

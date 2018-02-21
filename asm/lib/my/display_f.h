@@ -6,6 +6,7 @@
 */
 
 #include <stdarg.h>
+#include "my.h"
 
 /*	display_basenb.c	*/
 

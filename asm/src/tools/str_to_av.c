@@ -52,7 +52,7 @@ char **str_to_av(char *str)
 {
 	int size = replace_space(str);
 	int nb_av = count_av(str, size);
-	char **av = malloc(sizeof(char *) * (nb_av + 1));
+	char **av = MALLOC(sizeof(char *) * (nb_av + 1));
 	int j = 0;
 
 	if (str[0] != '\0') {
