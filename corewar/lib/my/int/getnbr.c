@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-int getnbr(char *str)
+int getnbr(char const *str)
 {
 	char *tmp = str;
 	int nb = 0;
