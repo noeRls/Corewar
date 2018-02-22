@@ -45,6 +45,7 @@ void write_to_mem(unsigned char *memory, void const *data, int size, int start)
 	char *tmp = (char *) data;
 
 	for (int i = 0; i < size; i++) {
+		printf("i : %d && start : %d && MEM_SIZE : %d\n", i, start, MEM_SIZE);
 		memory[(start + i) % MEM_SIZE] = tmp[i];
 	}
 }
