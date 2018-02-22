@@ -12,7 +12,7 @@ static int verif_name(char **tab, int *name)
 	if (!my_strcmp(tab[0], NAME_CMD_STRING)) {
 		(*name)++;
 		if (!tab[1]) {
-			my_puterror(ERROR"prog name not specified");
+			my_puterror(ERROR"prog name not specified\n");
 			exit(84);
 		}
 		if (my_strlen(tab[1]) > PROG_NAME_LENGTH) {
@@ -62,7 +62,8 @@ static void verif_comment_name(size_t len, int comment, int name, int fd)
 		my_puterror(ERROR"The comment can only be defined once.\n");
 		exit(84);
 	}
-	lseek(fd, (len + 1) * -1, SEEK_CUR);
+	if (len != 0)
+		lseek(fd, (len + 1) * -1, SEEK_CUR);
 }
 
 void verif_header(int fd)
@@ -74,14 +75,13 @@ void verif_header(int fd)
 	size_t len = 0;
 
 	while ((s = get_next_line(fd))) {
-		if (s)
-			len = my_strlen(s);
-		else
-			len = 0;
+		len = my_strlen(s);
 		clear_comment(s);
 		tab = str_to_av(s);
-		if (!tab[0])
+		if (!tab[0]) {
+			len = 0;
 			continue;
+		}
 		if (verif_name(tab, &name))
 			continue;
 		verif_comment_before_name(tab, name);
@@ -91,5 +91,7 @@ void verif_header(int fd)
 		}
 		break;
 	}
+	if (!s)
+		len = 0;
 	verif_comment_name(len, comment, name, fd);
 }

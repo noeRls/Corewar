@@ -18,6 +18,8 @@ int getnbr(char *str)
 		tmp++;
 		neg *= -1;
 	}
+	while (*tmp == '+')
+		tmp++;
 	for (tmp; my_char_isnum(*tmp) && *tmp != 0; tmp++) {
 		tmpnb = nb;
 		nb *= 10;
