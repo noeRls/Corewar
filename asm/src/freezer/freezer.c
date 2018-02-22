@@ -27,6 +27,11 @@ elem_t *init_freezer(void)
 {
 	elem_t *ret = malloc(sizeof(elem_t));
 
+	if (ret == NULL) {
+		my_puterror("Malloc error!\n");
+		my_puterror(ORIGIN);
+		exit(84);
+	}
 	ret->data = NULL;
 	ret->previous = NULL;
 	ret->next = NULL;
