@@ -75,10 +75,7 @@ void verif_header(int fd)
 	size_t len = 0;
 
 	while ((s = get_next_line(fd))) {
-		if (s)
-			len = my_strlen(s);
-		else
-			len = 0;
+		len = my_strlen(s);
 		clear_comment(s);
 		tab = str_to_av(s);
 		if (!tab[0]) {
@@ -94,5 +91,7 @@ void verif_header(int fd)
 		}
 		break;
 	}
+	if (!s)
+		len = 0;
 	verif_comment_name(len, comment, name, fd);
 }
