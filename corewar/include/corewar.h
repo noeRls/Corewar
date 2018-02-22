@@ -66,6 +66,7 @@ typedef struct env_s {
 
 	int dump_cycle;
 	int nbr_player;
+	int nb_prog;
 	int cycle;
 	int live_counter;
 	int cycle_to_die;

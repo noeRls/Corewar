@@ -30,10 +30,10 @@ void destroy_prog(env_t *env, program_t **list, program_t *p)
 	program_t *prev = 0;
 
 	if ((*list)->next == NULL) {
-		env->end = 1;
 		env->last_id = (*list)->id;
 		my_strcpy(env->last_name, (*list)->name);
 	}
+	env->nb_prog--;
 	if (p == *list) {
 		*list = p->next;
 		free(p);
@@ -95,9 +95,13 @@ void execute_prog(env_t *env, program_t *p)
 }
 
 int run(env_t *env) {
+	int i = 0;
+	
 	while (!(env->end) && !end(env, env->prgm)) {
-		for (program_t *p = env->prgm; p; p = p->next) {
+		i = env->nb_prog;
+		for (program_t *p = env->prgm; p && i >= 0 ; p = p->next) {
 			p->cycle ? 0 : execute_prog(env, p);
+			i--;
 		}
 		manage_cycle(env);
 		env->cycle += 1;

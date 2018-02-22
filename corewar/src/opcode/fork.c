@@ -26,4 +26,5 @@ void fork_op(env_t *env, program_t *p, instr_t info)
 	set_pc(new_prog, value);
 	set_cycle(p, info.code);
 	new_prog->cycle = 1;
+	env->nb_prog++;
 }

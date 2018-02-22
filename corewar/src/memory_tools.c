@@ -43,18 +43,29 @@ void print_hexa_mem(unsigned char const *memory)
 void write_to_mem(unsigned char *memory, void const *data, int size, int start)
 {
 	char *tmp = (char *) data;
+	int index = 0;
 
 	for (int i = 0; i < size; i++) {
-		printf("i : %d && start : %d && MEM_SIZE : %d\n", i, start, MEM_SIZE);
-		memory[(start + i) % MEM_SIZE] = tmp[i];
+		index = (start + i) % MEM_SIZE;
+		if (index < 0) {
+			index = MEM_SIZE + index;
+		}
+//		printf("INDEX : %d\n", index);
+		memory[index] = tmp[i];
 	}
 }
 
 void read_from_mem(unsigned char const *memory, void *data, int size, int start)
 {
 	unsigned char *tmp = (unsigned char *) data;
-
+	int index = 0;
+	
 	for (int i = 0; i < size; i++) {
-		tmp[i] = memory[(start + i) % MEM_SIZE];
+		index = (start + i) % MEM_SIZE;
+		if (index < 0) {
+			index = MEM_SIZE + index;
+		}
+//		printf("INDEX : %d\n", index);
+		tmp[i] = memory[index];
 	}
 }

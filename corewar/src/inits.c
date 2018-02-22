@@ -77,10 +77,13 @@ void init(args_t *arg, env_t *env)
 	env->cycle = 0;
 	env->end = 0;
 	env->last_id = 0;
+	env->nb_prog = 0;
 	my_memset(env->last_name, 0, PROG_NAME_LENGTH + 1);
 	my_memset(env->memory, 0, MEM_SIZE);
 	init_progs(arg, env);
 	ini_prog_memory(env);
 	env->live_counter = 0;	
 	check_init(env);
+	for (program_t *p = env->prgm; p; p = p->next)
+		env->nb_prog++;
 }
