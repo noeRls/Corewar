@@ -41,6 +41,5 @@ void ldi(env_t *env, program_t *p, instr_t info)
 	read_from_mem(env->memory, &value, REG_SIZE, sum);
 	swap(&value, REG_SIZE);
 	p->reg[arg[2]] = value;
-	set_cycle(p, info.code);
 	p->carry = 0;
 }

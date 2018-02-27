@@ -42,7 +42,7 @@ void manage_idx_mod(int *value, program_t *p, int idx_mod_ind)
 int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind)
 {
 	type_arg_t type;
-	instr_t *info = p->info;
+	instr_t *info = &(p->info);
 
 	for (int i = 0; i < op_tab[info->code - 1].nbr_args; i++) {
 		type = get_arg_type(info->desc, i + 1);

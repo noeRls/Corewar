@@ -38,7 +38,7 @@ typedef enum type_s {
 
 typedef struct program_s {
 	int pc_backup;
-	instr_t *info;
+	instr_t info;
 	int id;
 	int reg[REG_NUMBER + 1];
 	int fd;

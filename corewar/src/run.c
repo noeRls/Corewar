@@ -78,25 +78,27 @@ void execute_prog(env_t *env, program_t *p)
 	static void (*fctns[])(env_t *, program_t *, instr_t) = {live, ld, \
 	st, add, sub, and, or, xor, zjmp, ldi, sti, fork_op, lld, \
 	lldi, lfork, aff};
-	instr_t tmp;
 
-	read_from_mem(env->memory, &tmp, sizeof(instr_t), p->PC);
+	if (p->info.code > 16 || p->info.code < 1)
+		p->cycle = 1;
+	else
+		fctns[p->info.code - 1](env, p, p->info);
+	read_from_mem(env->memory, &(p->info), sizeof(instr_t), p->PC);
 	p->pc_backup = p->PC;
-	if (tmp.code == 1 || tmp.code == 9 || \
-	tmp.code == 12 || tmp.code == 15)
+	if (p->info.code == 1 || p->info.code == 9 || \
+	p->info.code == 12 || p->info.code == 15)
 		up_pc(p, 1);
 	else
 		up_pc(p, sizeof(instr_t));
-	p->info = &tmp;
-	if (tmp.code > 16 || tmp.code < 1)
+	if (p->info.code > 16 || p->info.code < 1)
 		p->cycle = 1;
 	else
-		fctns[tmp.code - 1](env, p, tmp);
+		set_cycle(p, p->info.code);
 }
 
 int run(env_t *env) {
 	int i = 0;
-	
+
 	while (!(env->end) && !end(env, env->prgm)) {
 		i = env->nb_prog;
 		for (program_t *p = env->prgm; p && i >= 0 ; p = p->next) {

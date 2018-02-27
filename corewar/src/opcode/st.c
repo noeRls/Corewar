@@ -23,5 +23,4 @@ void st(env_t *env, program_t *p, instr_t info)
 		swap(&value, sizeof(int));
 		write_to_mem(env->memory, &value, sizeof(int), arg[1]);
 	}
-	set_cycle(p, info.code);
 }

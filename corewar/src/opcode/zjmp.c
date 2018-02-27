@@ -12,7 +12,7 @@ void zjmp(env_t *env, program_t *p, instr_t info)
 	int arg[MAX_ARGS_NUMBER] = {0};
 	int index = 0;
 
-	p->info->desc = 128;
+	p->info.desc = 128;
 	if (setup_arg(arg, p, env, TRUE) == 84 && p->carry != 1) {
 		p->cycle = 1;
 		return;
@@ -20,5 +20,4 @@ void zjmp(env_t *env, program_t *p, instr_t info)
 	index = arg[0];
 	index += p->pc_backup;
 	set_pc(p, index);
-	set_cycle(p, info.code);
 }

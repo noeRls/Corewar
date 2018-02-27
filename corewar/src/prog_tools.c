@@ -47,14 +47,8 @@ program_t *start_prog(char *path)
 
 	if (fd == -1)
 		exit(84);
+	my_memset(prgm, 0, sizeof(program_t));
 	my_memset(prgm->reg, 0, sizeof(int) * (REG_NUMBER + 1));
-	prgm->cycle = 0;
 	prgm->fd = fd;
-	prgm->carry = 0;
-	prgm->live_signal = 0;
-	prgm->cycle = 0;
-	prgm->PC = 0;
-	prgm->pc_backup = 0;
-	prgm->next = 0;
 	return (prgm);
 }

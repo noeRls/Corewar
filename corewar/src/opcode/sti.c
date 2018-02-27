@@ -27,5 +27,4 @@ void sti(env_t *env, program_t *p, instr_t info)
 	tmp = p->reg[arg[0]];
 	swap(&tmp, sizeof(int));
 	write_to_mem(env->memory, &tmp, sizeof(int), index);
-	set_cycle(p, info.code);
 }

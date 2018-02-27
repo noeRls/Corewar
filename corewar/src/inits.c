@@ -35,7 +35,7 @@ int get_default_id(env_t *env)
 {
 	int x = 0;
 	program_t *p = env->prgm;
-	
+
 	while (p) {
 		if (p->id == x) {
 			p = env->prgm;
@@ -51,7 +51,7 @@ void ini_prog_memory(env_t *env)
 {
 	header_t hd;
 	unsigned char *stock = 0;
-	
+
 	for (program_t *tmp = env->prgm; tmp; tmp = tmp->next) {
 		if (tmp->id == -1)
 			tmp->id = get_default_id(env);
@@ -82,7 +82,7 @@ void init(args_t *arg, env_t *env)
 	my_memset(env->memory, 0, MEM_SIZE);
 	init_progs(arg, env);
 	ini_prog_memory(env);
-	env->live_counter = 0;	
+	env->live_counter = 0;
 	check_init(env);
 	for (program_t *p = env->prgm; p; p = p->next)
 		env->nb_prog++;

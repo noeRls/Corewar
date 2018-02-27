@@ -37,5 +37,4 @@ void and(env_t *env, program_t *p, instr_t info)
 	setup(env, p, info, arg);
 	p->carry = 0;
 	p->reg[arg[2]] = arg[0] & arg[1];
-	set_cycle(p, info.code);
 }

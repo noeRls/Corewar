@@ -52,7 +52,7 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 {
 	int value = 0;
 	int size = 0;
-	int special_size = is_special_size(p->info->code);
+	int special_size = is_special_size(p->info.code);
 
 	size = get_size_type(type, special_size);
 	if (size == -1)

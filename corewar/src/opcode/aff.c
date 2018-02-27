@@ -16,5 +16,4 @@ void aff(env_t *env, program_t *p, instr_t info)
 		return;
 	}
 	my_printf("%c\n", p->reg[arg[0]] % 256);
-	set_cycle(p, info.code);
 }

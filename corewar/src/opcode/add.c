@@ -21,6 +21,5 @@ void add(env_t *env, program_t *p, instr_t info)
 	value1 = p->reg[arg[0]];
 	value2 = p->reg[arg[1]];
 	p->reg[arg[2]] = value1 + value2;
-	set_cycle(p, info.code);
 	p->carry = 0;
 }

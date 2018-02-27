@@ -13,7 +13,7 @@ void fork_op(env_t *env, program_t *p, instr_t info)
 	int value = 0;
 	program_t *new_prog = 0;
 
-	p->info->desc = 128;
+	p->info.desc = 128;
 	if (setup_arg(arg, p, env, TRUE) == 84) {
 		p->cycle = 1;
 		return;
@@ -24,7 +24,6 @@ void fork_op(env_t *env, program_t *p, instr_t info)
 	new_prog = prog_dup(p);
 	add_prog(&(env->prgm), new_prog);
 	set_pc(new_prog, value);
-	set_cycle(p, info.code);
 	new_prog->cycle = 1;
 	env->nb_prog++;
 }

@@ -23,6 +23,5 @@ void ld(env_t *env, program_t *p, instr_t info)
 		arg[0] = value;
 	}
 	p->carry = 0;
-	set_cycle(p, info.code);
 	p->reg[arg[1]] = arg[0];
 }

@@ -22,7 +22,6 @@ void lld(env_t *env, program_t *p, instr_t info)
 		swap(&value, REG_SIZE);
 		arg[0] = value;
 	}
-	set_cycle(p, info.code);
 	p->reg[arg[1]] = arg[0];
 	p->carry = 0;
 }
