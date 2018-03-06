@@ -7,12 +7,19 @@
 
 #include "my.h"
 
-size_t super_getnbr(char *str)
+ssize_t super_getnbr(char *str)
 {
 	char *tmp = str;
-	size_t nb = 0;
-	size_t tmpnb;
+	ssize_t nb = 0;
+	ssize_t tmpnb;
+	int neg = 1;
 
+	while (*tmp == '-') {
+		tmp++;
+		neg *= -1;
+	}
+	while (*tmp == '+')
+		tmp++;
 	for (tmp; my_char_isnum(*tmp) && *tmp != 0; tmp++) {
 		tmpnb = nb;
 		nb *= 10;
@@ -20,5 +27,5 @@ size_t super_getnbr(char *str)
 		if (tmpnb != nb / 10)
 			return (0);
 	}
-	return (nb);
+	return ((neg == -1 ? -nb : nb));
 }

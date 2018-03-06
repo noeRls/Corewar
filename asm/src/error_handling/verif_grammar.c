@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2018
+1;4804;0c** EPITECH PROJECT, 2018
 ** grammar
 ** File description:
 ** verify the grammar of args
@@ -49,6 +49,8 @@ void check_gram(char *tab)
 		my_puterror(ERROR"Empty argument\n");
 		exit(84);
 	}
+	if (tab[0] == '-')
+		tab++;
 	for (int i = 0 ; tab[i] ; i++)
 		if (tab[i] < '0' || tab[i] > '9') {
 			my_puterror(ERROR"Directs and indirects args should "
