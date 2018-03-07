@@ -9,8 +9,8 @@
 
 void swap(void *data, int size)
 {
-	char *tmp = (char *) data;
-	char t = 0;
+	unsigned char *tmp = (char *) data;
+	unsigned char t = 0;
 
 	for (int i = 0; i < size / 2; i++) {
 		t = tmp[i];
