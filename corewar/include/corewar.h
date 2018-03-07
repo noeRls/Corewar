@@ -145,19 +145,19 @@ int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind);
 
 /*	opcodes.c	*/
 
-void add(env_t *env, program_t *p, instr_t info);
-void aff(env_t *env, program_t *p, instr_t info);
-void and(env_t *env, program_t *p, instr_t info);
-void fork_op(env_t *env, program_t *p, instr_t info);
-void ld(env_t *env, program_t *p, instr_t info);
-void ldi(env_t *env, program_t *p, instr_t info);
-void lfork(env_t *env, program_t *p, instr_t info);
-void live(env_t *env, program_t *p, instr_t info);
-void lld(env_t *env, program_t *p, instr_t info);
-void lldi(env_t *env, program_t *p, instr_t info);
-void or(env_t *env, program_t *p, instr_t info);
-void st(env_t *env, program_t *p, instr_t info);
-void sti(env_t *env, program_t *p, instr_t info);
-void sub(env_t *env, program_t *p, instr_t info);
-void xor(env_t *env, program_t *p, instr_t info);
-void zjmp(env_t *env, program_t *p, instr_t info);
+void add(env_t *env, program_t *p);
+void aff(env_t *env, program_t *p);
+void and(env_t *env, program_t *p);
+void fork_op(env_t *env, program_t *p);
+void ld(env_t *env, program_t *p);
+void ldi(env_t *env, program_t *p);
+void lfork(env_t *env, program_t *p);
+void live(env_t *env, program_t *p);
+void lld(env_t *env, program_t *p);
+void lldi(env_t *env, program_t *p);
+void or(env_t *env, program_t *p);
+void st(env_t *env, program_t *p);
+void sti(env_t *env, program_t *p);
+void sub(env_t *env, program_t *p);
+void xor(env_t *env, program_t *p);
+void zjmp(env_t *env, program_t *p);

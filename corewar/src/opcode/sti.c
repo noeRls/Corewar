@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void sti(env_t *env, program_t *p, instr_t info)
+void sti(env_t *env, program_t *p)
 {
 	int arg[MAX_ARGS_NUMBER] = {0};
 	int index = 0;
@@ -18,9 +18,9 @@ void sti(env_t *env, program_t *p, instr_t info)
 		return;
 	}
 	for (int i = 1; i < 3; i++) {
-		if (get_arg_type(info.desc, i + 1) == REG)
+		if (get_arg_type(p->info.desc, i + 1) == REG)
 			arg[i] = p->reg[arg[i]];
-		if (get_arg_type(info.desc, i + 1) == IND)
+		if (get_arg_type(p->info.desc, i + 1) == IND)
 			arg[i] -= p->pc_backup;
 	}
 	index += arg[1] + arg[2] + p->pc_backup;

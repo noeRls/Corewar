@@ -75,14 +75,14 @@ void manage_cycle(env_t *env)
 
 void execute_prog(env_t *env, program_t *p)
 {
-	static void (*fctns[])(env_t *, program_t *, instr_t) = {live, ld, \
+	static void (*fctns[])(env_t *, program_t *) = {live, ld, \
 	st, add, sub, and, or, xor, zjmp, ldi, sti, fork_op, lld, \
 	lldi, lfork, aff};
 
 	if (p->info.code > 16 || p->info.code < 1)
 		p->cycle = 1;
 	else
-		fctns[p->info.code - 1](env, p, p->info);
+		fctns[p->info.code - 1](env, p);
 	read_from_mem(env->memory, &(p->info), sizeof(instr_t), p->PC);
 	p->pc_backup = p->PC;
 	if (p->info.code == 1 || p->info.code == 9 || \
