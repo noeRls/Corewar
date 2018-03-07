@@ -9,8 +9,8 @@
 
 void swap(void *data, int size)
 {
-	char *tmp = (char *) data;
-	char t = 0;
+	unsigned char *tmp = (char *) data;
+	unsigned char t = 0;
 
 	for (int i = 0; i < size / 2; i++) {
 		t = tmp[i];
@@ -59,7 +59,7 @@ void read_from_mem(unsigned char const *memory, void *data, int size, int start)
 {
 	unsigned char *tmp = (unsigned char *) data;
 	int index = 0;
-	
+
 	for (int i = 0; i < size; i++) {
 		index = (start + i) % MEM_SIZE;
 		if (index < 0) {
