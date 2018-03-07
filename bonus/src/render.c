@@ -17,9 +17,11 @@ void render(env_t *env)
 		rgb[1] = env->memory[i].last_id == 1;
 		rgb[2] = env->memory[i].last_id == 2;
 		if (rgb[0] || rgb[1] || rgb[2])
-			sfSprite_setColor(env->sprites[i], sfColor_fromRGBA(rgb[0] * 255, rgb[1] * 255, rgb[2] * 255, 150));
+			sfSprite_setColor(env->sprites[i], \
+	sfColor_fromRGBA(rgb[0] * 255, rgb[1] * 255, rgb[2] * 255, 150));
 		else
-			sfSprite_setColor(env->sprites[i], sfColor_fromRGBA(255, 255, 255, 255));
+			sfSprite_setColor(env->sprites[i], \
+			sfColor_fromRGBA(255, 255, 255, 255));
 		sfRenderWindow_drawSprite(env->win, env->sprites[i], NULL);
 	}
 	sfRenderWindow_display(env->win);

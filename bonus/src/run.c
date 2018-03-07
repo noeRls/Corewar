@@ -7,24 +7,6 @@
 
 #include "corewar.h"
 
-int end(env_t *env, program_t *list)
-{
-	int last = 0;
-
-	if (list == NULL)
-		return (1);
-	else
-		last = list->id;
-	for (program_t *prgm = list; prgm; prgm = prgm->next) {
-		if (last != prgm->id)
-			return (0);
-	}
-	env->end = 1;
-	env->last_id = last;
-	my_strcpy(env->last_name, list->name);
-	return (1);
-}
-
 void destroy_prog(env_t *env, program_t **list, program_t *p)
 {
 	program_t *prev = 0;
@@ -83,7 +65,8 @@ void execute_prog(env_t *env, program_t *p)
 		p->cycle = 1;
 	else
 		fctns[p->info.code - 1](env, p, p->info);
-	read_from_mem(env->memory, &(p->info), &((mem_info_t) {sizeof(instr_t), p->PC, p->id}));
+	read_from_mem(env->memory, &(p->info), \
+	&((mem_info_t) {sizeof(instr_t), p->PC, p->id}));
 	p->pc_backup = p->PC;
 	if (p->info.code == 1 || p->info.code == 9 || \
 	p->info.code == 12 || p->info.code == 15)
@@ -111,7 +94,8 @@ void update(env_t *env)
 
 int run(env_t *env)
 {
-	while (!(env->end) && !end(env, env->prgm) && sfRenderWindow_isOpen(env->win)) {
+	while (!(env->end) && !end(env, env->prgm) \
+	&& sfRenderWindow_isOpen(env->win)) {
 		update(env);
 		render(env);
 	}

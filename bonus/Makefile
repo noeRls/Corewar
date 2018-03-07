@@ -35,6 +35,7 @@ SRC =	./src/main.c			\
 	./src/opcode/lld.c		\
 	./src/opcode/tool_op.c		\
 	./src/render.c			\
+	./src/destroy.c			\
 
 OBJ =	$(SRC:.c=.o)
 
