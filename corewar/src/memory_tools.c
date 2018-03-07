@@ -59,13 +59,12 @@ void read_from_mem(unsigned char const *memory, void *data, int size, int start)
 {
 	unsigned char *tmp = (unsigned char *) data;
 	int index = 0;
-	
+
 	for (int i = 0; i < size; i++) {
 		index = (start + i) % MEM_SIZE;
 		if (index < 0) {
 			index = MEM_SIZE + index;
 		}
-//		printf("INDEX : %d\n", index);
 		tmp[i] = memory[index];
 	}
 }

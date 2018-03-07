@@ -108,7 +108,8 @@ void manage_args(int ac, char **av, args_t *args);
 void swap(void *data, int size);
 void print_hexa_mem(unsigned char const *memory);
 void write_to_mem(unsigned char *memory, void const *data, int size, int start);
-void read_from_mem(unsigned char const *memory, void *data, int size, int start);
+void read_from_mem(unsigned char const *memory, void *data,\
+		int size, int start);
 
 /*	prog_tools.c	*/
 
