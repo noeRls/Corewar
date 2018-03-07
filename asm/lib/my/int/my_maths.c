@@ -24,14 +24,12 @@ int my_find_prime_sup(int nb)
 {
 	int nbpr;
 
-	if (my_is_prime(nb)) {
+	if (my_is_prime(nb))
 		return (nb);
-	}
 	while (1) {
 		nbpr = my_is_prime(nb);
-		if (nbpr == 1) {
+		if (nbpr == 1)
 			return (nb);
-		}
 		nb++;
 	}
 }
@@ -41,9 +39,8 @@ int my_is_prime(int nb)
 	if (nb < 2)
 		return (0);
 	for (int i = 2; i <= nb / 2; i++) {
-		if (nb % i == 0 && nb != 1 && nb != 0) {
+		if (nb % i == 0 && nb != 1 && nb != 0)
 			return (0);
-		}
 	}
 	return (1);
 }

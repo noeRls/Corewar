@@ -16,7 +16,7 @@ char *add_char(char *str, int *size, char c)
 
 	for (s; *size && str[s]; s++);
 	if (s + 1 >= *size || *size == 0) {
-		new = MALLOC(sizeof (char) * (*size + READ_SIZE + 1));
+		new = MALLOC(sizeof(char) * (*size + READ_SIZE + 1));
 		for (int i = 0; new && *size && i < *size; i++)
 			new[i] = str[i];
 		*size += READ_SIZE + 1;
@@ -49,9 +49,8 @@ char *handle_read(int *index, char *buff, char **res, int *res_size)
 
 char *clear_buff(char *buff, int *index)
 {
-	for (int i = 0; i < READ_SIZE + 1; i++) {
+	for (int i = 0; i < READ_SIZE + 1; i++)
 		buff[i] = 0;
-	}
 	*index = 0;
 	return (buff);
 }
@@ -59,7 +58,7 @@ char *clear_buff(char *buff, int *index)
 char *get_next_line(int fd)
 {
 	static char buff[READ_SIZE + 1] = { 0 };
-	static int index = 0;
+	static int index;
 	char *res = 0;
 	int res_size = 0;
 	int size = 0;
@@ -67,7 +66,7 @@ char *get_next_line(int fd)
 	res = add_char(res, &res_size, 0);
 	if (handle_read(&index, buff, &res, &res_size))
 		return (res);
-	while ((size = read(fd, clear_buff(buff, &index), READ_SIZE))	\
+	while ((size = read(fd, clear_buff(buff, &index), READ_SIZE))
 	&& size != -1 && fd != -1)
 		if (handle_read(&index, buff, &res, &res_size))
 			return (res);

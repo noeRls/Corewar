@@ -5,23 +5,21 @@
 ** char analyses
 */
 
-int my_strlen(char const *);
+#include "my.h"
 
 int my_char_isalpha(char c)
 {
-	if ((c > 47 && c < 58) || (c > 64 && c < 91) || (c > 96 && c < 123)) {
+	if ((c > 47 && c < 58) || (c > 64 && c < 91) || (c > 96 && c < 123))
 		return (1);
-	} else {
+	else
 		return (0);
-	}
 }
 
 int isonlychar(char *str, char c)
 {
-	for (int i = 0; i < my_strlen(str); i++) {
+	for (int i = 0; i < my_strlen(str); i++)
 		if (str[i] != c)
 			return (0);
-	}
 	return (1);
 }
 
@@ -34,18 +32,16 @@ int my_char_isnum(char c)
 
 char upchar(char c)
 {
-	if (c >= 'a' && c <= 'z') {
+	if (c >= 'a' && c <= 'z')
 		return (c - 32);
-	} else {
+	else
 		return (c);
-	}
 }
 
 char lowchar(char c)
 {
-	if (c >= 'A' && c <= 'Z') {
+	if (c >= 'A' && c <= 'Z')
 		return (c + 32);
-	} else {
+	else
 		return (c);
-	}
 }
