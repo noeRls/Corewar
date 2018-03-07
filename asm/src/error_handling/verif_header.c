@@ -41,11 +41,11 @@ static void verif_comment(char **tab, int *comment)
 {
 	(*comment)++;
 	if (!tab[1]) {
-		my_puterror(ERROR"comment not specified");
+		my_puterror(ERROR"comment not specified\n");
 		exit(84);
 	}
 	if (tab[2]) {
-		my_puterror(ERROR"comment error");
+		my_puterror(ERROR"comment error\n");
 		exit(84);
 	}
 	if (my_strlen(tab[1]) > COMMENT_LENGTH) {
