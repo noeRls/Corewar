@@ -11,11 +11,9 @@
 
 static int remains(char const *str, char const *forb)
 {
-	for (int i = 0; str[i]; i++) {
-		if (!contains(forb, str[i])) {
+	for (int i = 0; str[i]; i++)
+		if (!contains(forb, str[i]))
 			return (1);
-		}
-	}
 	return (0);
 }
 
@@ -25,13 +23,12 @@ static int count_words(char const *str, char const *forb)
 	int count = 0;
 
 	for (int i = 0; str[i]; i++) {
-		if (wasw && remains(&str[i], forb) &&	\
+		if (wasw && remains(&str[i], forb) &&
 		contains(forb, str[i])) {
 			wasw = 0;
 			count++;
-		} else if (!contains(forb, str[i])) {
+		} else if (!contains(forb, str[i]))
 			wasw = 1;
-		}
 	}
 	return (count + 1);
 }
@@ -40,7 +37,7 @@ char **str_words_forb(char const *src, char const *forb)
 {
 	char *str = my_strdup(src);
 	int words = count_words(str, forb);
-	char **res = MALLOC(sizeof (char *) * (words + 1));
+	char **res = MALLOC(sizeof(char *) * (words + 1));
 	int wasw = 0;
 	int ind = 0;
 

@@ -14,17 +14,15 @@ int my_strcmp(char const *s1, char const *s2)
 	int index = 0;
 	int minindex;
 
-	if (lena <= lenb) {
+	if (lena <= lenb)
 		minindex = lena;
-	} else {
+	else
 		minindex = lenb;
-	}
 	while (index < minindex) {
-		if (s1[index] == s2[index]) {
+		if (s1[index] == s2[index])
 			index = index + 1;
-		} else {
+		else
 			return (s1[index] - s2[index]);
-		}
 	}
 	return (lena - lenb);
 }
@@ -35,10 +33,9 @@ int my_strncmp(char const *s1, char const *s2, int n)
 
 	while (s1[index] == s2[index] && index < n && s1[index] && s2[index]) {
 		index++;
-		if (index == n) {
+		if (index == n)
 			if (s1[index] == s2[index])
 				return (0);
-		}
 	}
 	if (s1[index] != s2[index] && index != n)
 		return (s1[index] - s2[index]);
@@ -48,8 +45,7 @@ int my_strncmp(char const *s1, char const *s2, int n)
 
 int my_supercmp(char const *s1, char const *s2)
 {
-	if (my_strlen(s1) != my_strlen(s2)) {
+	if (my_strlen(s1) != my_strlen(s2))
 		return (my_strlen(s1) - my_strlen(s2));
-	}
 	return (my_strcmp(s1, s2));
 }

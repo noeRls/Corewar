@@ -9,9 +9,8 @@ void my_memset(void *str, int c, int len)
 {
 	char *s = (char *) str;
 
-	for (int i = 0; i < len; i++) {
+	for (int i = 0; i < len; i++)
 		s[i] = c;
-	}
 }
 
 void my_swap(int *a, int *b)

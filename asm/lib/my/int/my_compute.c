@@ -14,17 +14,15 @@ int my_compute_power(int nb, int p)
 
 	if (nb >= 0)
 		wasp = 1;
-	if (p == 0) {
+	if (p == 0)
 		return (1);
-	} else if (p < 0) {
+	else if (p < 0)
 		return (0);
-	}
 	res = res * my_compute_power(res, p - 1);
-	if ((res < 0 && wasp == 1) || (wasp == 1 && res < nb && p >= 1)) {
+	if ((res < 0 && wasp == 1) || (wasp == 1 && res < nb && p >= 1))
 		return (0);
-	} else {
+	else
 		return (res);
-	}
 }
 
 int my_compute_square_root(int nb)
@@ -40,9 +38,8 @@ int my_compute_square_root(int nb)
 	bi = bs / 10;
 	bi = bi - (nb % 2);
 	while (bi <= bs) {
-		if (bi * bi == nb) {
+		if (bi * bi == nb)
 			return (bi);
-		}
 		bi = bi + 1;
 	}
 	return (0);

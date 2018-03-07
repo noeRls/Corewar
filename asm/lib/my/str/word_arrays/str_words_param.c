@@ -6,16 +6,14 @@
 */
 
 #include "my.h"
-#include <stdlib.h>
 #include "display_f.h"
+#include <stdlib.h>
 
 static int remains(char const *str, char const *forb)
 {
-	for (int i = 0; str[i]; i++) {
-		if (!contains(forb, str[i])) {
+	for (int i = 0; str[i]; i++)
+		if (!contains(forb, str[i]))
 			return (1);
-		}
-	}
 	return (0);
 }
 
@@ -26,16 +24,14 @@ static int count_words(char const *str, char const *forb)
 	int in_quotes = 0;
 
 	for (int i = 0; str[i]; i++) {
-		if (str[i] == '"') {
+		if (str[i] == '"')
 			in_quotes = !in_quotes;
-		}
-		if (wasw && remains(&str[i], forb) &&	\
+		if (wasw && remains(&str[i], forb) &&
 		contains(forb, str[i]) && !in_quotes) {
 			wasw = 0;
 			count++;
-		} else if (!contains(forb, str[i])) {
+		} else if (!contains(forb, str[i]))
 			wasw = 1;
-		}
 	}
 	return (count + 1);
 }
