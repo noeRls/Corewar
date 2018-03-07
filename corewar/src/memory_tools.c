@@ -65,7 +65,6 @@ void read_from_mem(unsigned char const *memory, void *data, int size, int start)
 		if (index < 0) {
 			index = MEM_SIZE + index;
 		}
-//		printf("INDEX : %d\n", index);
 		tmp[i] = memory[index];
 	}
 }
