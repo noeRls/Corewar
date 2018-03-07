@@ -18,7 +18,7 @@ static void setup(env_t *env, program_t *p, instr_t info, int *arg)
 		}
 		if (get_arg_type(info.desc, i + 1) == IND) {
 			read_from_mem(env->memory, &tmp, \
-				      &((mem_info_t) {READ_SIZE_BINARY_OP, arg[i], p->id}));
+			&((mem_info_t) {READ_SIZE_BINARY_OP, arg[i], p->id}));
 			swap(&tmp, READ_SIZE_BINARY_OP);
 			arg[i] = tmp;
 		}

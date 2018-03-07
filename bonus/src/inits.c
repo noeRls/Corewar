@@ -63,7 +63,8 @@ void ini_prog_memory(env_t *env)
 		stock = malloc(sizeof(unsigned char) * hd.prog_size);
 		if (read(tmp->fd, stock, hd.prog_size) != hd.prog_size)
 			exit(84);
-		write_to_mem(env->memory, stock, &((mem_info_t) {hd.prog_size, tmp->PC, tmp->id}));
+		write_to_mem(env->memory, stock, &((mem_info_t) \
+		{hd.prog_size, tmp->PC, tmp->id}));
 		free(stock);
 		my_memset(tmp->name, 0, PROG_NAME_LENGTH + 1);
 		my_strcpy(tmp->name, hd.prog_name);

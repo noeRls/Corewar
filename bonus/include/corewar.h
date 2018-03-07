@@ -73,6 +73,12 @@ typedef struct cell_s {
 	unsigned char value;
 } cell_t;
 
+typedef struct stats_s {
+	sfText *read_rate;
+	unsigned int *read;
+	unsigned int *next_actions;
+} stats_t;
+
 typedef struct env_s {
 	cell_t memory[MEM_SIZE];
 	program_t *prgm;
@@ -80,7 +86,8 @@ typedef struct env_s {
 	sfRenderWindow *win;
 	sfSprite *sprites[MEM_SIZE];
 	sfTexture *blank;
-	
+	stats_t stats;
+
 	int dump_cycle;
 	int nbr_player;
 	int nb_prog;

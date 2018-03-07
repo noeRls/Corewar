@@ -50,7 +50,6 @@ void write_to_mem(cell_t *memory, void const *data, mem_info_t *infos)
 		if (index < 0) {
 			index = MEM_SIZE + index;
 		}
-//		printf("INDEX : %d\n", index);
 		memory[index].value = tmp[i];
 		memory[index].last_id = infos->id;
 	}
@@ -60,13 +59,12 @@ void read_from_mem(cell_t *memory, void *data, mem_info_t *infos)
 {
 	unsigned char *tmp = (unsigned char *) data;
 	int index = 0;
-	
+
 	for (int i = 0; i < infos->size; i++) {
 		index = (infos->start + i) % MEM_SIZE;
 		if (index < 0) {
 			index = MEM_SIZE + index;
 		}
-//		printf("INDEX : %d\n", index);
 		tmp[i] = memory[index].value;
 		memory[index].last_id = infos->id;
 	}

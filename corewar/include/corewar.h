@@ -108,7 +108,8 @@ void manage_args(int ac, char **av, args_t *args);
 void swap(void *data, int size);
 void print_hexa_mem(unsigned char const *memory);
 void write_to_mem(unsigned char *memory, void const *data, int size, int start);
-void read_from_mem(unsigned char const *memory, void *data, int size, int start);
+void read_from_mem(unsigned char const *memory, void *data,\
+		int size, int start);
 
 /*	prog_tools.c	*/
 
@@ -145,19 +146,19 @@ int setup_arg(int *arg, program_t *p, env_t *env, int idx_mod_ind);
 
 /*	opcodes.c	*/
 
-void add(env_t *env, program_t *p, instr_t info);
-void aff(env_t *env, program_t *p, instr_t info);
-void and(env_t *env, program_t *p, instr_t info);
-void fork_op(env_t *env, program_t *p, instr_t info);
-void ld(env_t *env, program_t *p, instr_t info);
-void ldi(env_t *env, program_t *p, instr_t info);
-void lfork(env_t *env, program_t *p, instr_t info);
-void live(env_t *env, program_t *p, instr_t info);
-void lld(env_t *env, program_t *p, instr_t info);
-void lldi(env_t *env, program_t *p, instr_t info);
-void or(env_t *env, program_t *p, instr_t info);
-void st(env_t *env, program_t *p, instr_t info);
-void sti(env_t *env, program_t *p, instr_t info);
-void sub(env_t *env, program_t *p, instr_t info);
-void xor(env_t *env, program_t *p, instr_t info);
-void zjmp(env_t *env, program_t *p, instr_t info);
+void add(env_t *env, program_t *p);
+void aff(env_t *env, program_t *p);
+void and(env_t *env, program_t *p);
+void fork_op(env_t *env, program_t *p);
+void ld(env_t *env, program_t *p);
+void ldi(env_t *env, program_t *p);
+void lfork(env_t *env, program_t *p);
+void live(env_t *env, program_t *p);
+void lld(env_t *env, program_t *p);
+void lldi(env_t *env, program_t *p);
+void or(env_t *env, program_t *p);
+void st(env_t *env, program_t *p);
+void sti(env_t *env, program_t *p);
+void sub(env_t *env, program_t *p);
+void xor(env_t *env, program_t *p);
+void zjmp(env_t *env, program_t *p);

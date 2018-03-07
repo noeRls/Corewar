@@ -25,6 +25,10 @@ int replace_space(char *str)
 					|| str[i] == SEPARATOR_CHAR))
 			str[i] = '\0';
 	}
+	if (string_mode == 1) {
+		my_puterror(ERROR"Syntax error\n");
+		exit(84);
+	}
 	return (i);
 }
 

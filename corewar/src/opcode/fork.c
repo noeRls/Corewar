@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void fork_op(env_t *env, program_t *p, instr_t info)
+void fork_op(env_t *env, program_t *p)
 {
 	int arg[MAX_ARGS_NUMBER] = {0};
 	int value = 0;

@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void st(env_t *env, program_t *p, instr_t info)
+void st(env_t *env, program_t *p)
 {
 	int arg[MAX_ARGS_NUMBER] = {0};
 	int value = 0;
@@ -17,7 +17,7 @@ void st(env_t *env, program_t *p, instr_t info)
 		return;
 	}
 	value = p->reg[arg[0]];
-	if (get_arg_type(info.desc, 2) == REG) {
+	if (get_arg_type(p->info.desc, 2) == REG) {
 		p->reg[arg[1]] = value;
 	} else {
 		swap(&value, sizeof(int));
