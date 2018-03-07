@@ -7,6 +7,16 @@
 
 #include "corewar.h"
 
+void set_color_live(env_t *env, int index, int id)
+{
+	index %= MEM_SIZE;
+	if (index < 0) {
+		index = MEM_SIZE + index;
+	}
+	sfClock_restart(env->memory[index].cl);
+	env->memory[index].lived = 1 + id;
+}
+
 void live(env_t *env, program_t *p, instr_t info)
 {
 	int id = 0;
@@ -24,6 +34,7 @@ void live(env_t *env, program_t *p, instr_t info)
 			pa = p_tmp;
 		}
 	}
+	set_color_live(env, p->PC, id);
 	if (lived)
 		my_printf("The player %d(%s) is alive\n", pa->id, pa->name);
 }

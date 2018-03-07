@@ -29,6 +29,7 @@ void ini_sprite_mem(env_t *env)
 			pos.x = 0;
 			tmp = 0;
 		}
+		env->memory[i].cl = sfClock_create();
 	}
 }
 

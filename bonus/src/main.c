@@ -66,12 +66,14 @@ int main(int ac, char **av)
 	env_t env;
 	args_t args;
 
+	my_memset(&env, 0, sizeof(env_t));
 	if (ac == 1 || !my_strcmp(av[1], "-h"))
 		return (print_usage());
 	manage_args(ac, av, &args);
 	finally_setup_arg(&args);
 	env.dump_cycle = args.dump_cycle;
 	init(&args, &env);
+	env.player_id = args.prog_ids;
 	clean_args(&args);
 	init_window(&env);
 	return (run(&env));

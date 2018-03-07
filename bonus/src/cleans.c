@@ -10,7 +10,6 @@
 void clean_args(args_t *args)
 {
 	free(args->prog_paths);
-	free(args->prog_ids);
 	free(args->mem_start);
 }
 

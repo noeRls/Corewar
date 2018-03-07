@@ -7,21 +7,41 @@
 
 #include "corewar.h"
 
+static const char rgb_id[7][3] = {
+	{150, 150, 150},
+	{0, 0, 150},
+	{150, 0, 0},
+	{0, 150, 0},
+	{0, 150, 150},
+	{150, 0, 150},
+	{150, 150, 0}
+};
+
+int player_nbr(env_t *env, int id)
+{
+	for (int i = 0; i < env->nbr_player && i < 7; i++)
+		if (env->player_id[i] == id)
+			return (i + 1);
+	return (0);
+}
+
 void render(env_t *env)
 {
-	int rgb[3] = {0};
+	int p_nb = 0;
+	sfColor color;
 
 	sfRenderWindow_clear(env->win, sfBlack);
 	for (int i = 0; i < MEM_SIZE; i++) {
-		rgb[0] = env->memory[i].last_id == 0;
-		rgb[1] = env->memory[i].last_id == 1;
-		rgb[2] = env->memory[i].last_id == 2;
-		if (rgb[0] || rgb[1] || rgb[2])
-			sfSprite_setColor(env->sprites[i], \
-	sfColor_fromRGBA(rgb[0] * 255, rgb[1] * 255, rgb[2] * 255, 150));
-		else
-			sfSprite_setColor(env->sprites[i], \
-			sfColor_fromRGBA(255, 255, 255, 255));
+		p_nb = player_nbr(env, env->memory[i].last_id);
+		color = sfColor_fromRGB(rgb_id[p_nb][0], \
+					rgb_id[p_nb][1], rgb_id[p_nb][2]);
+		if (env->memory[i].lived) {
+			p_nb = player_nbr(env, env->memory[i].lived - 1);
+			color = sfColor_fromRGB(rgb_id[p_nb][0],	\
+					rgb_id[p_nb][1], rgb_id[p_nb][2]);
+			color = sfColor_add(color, color);
+		}
+		sfSprite_setColor(env->sprites[i], color);
 		sfRenderWindow_drawSprite(env->win, env->sprites[i], NULL);
 	}
 	sfRenderWindow_display(env->win);

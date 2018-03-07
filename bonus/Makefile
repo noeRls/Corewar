@@ -39,7 +39,7 @@ SRC =	./src/main.c			\
 
 OBJ =	$(SRC:.c=.o)
 
-CFLAGS = -Wall #-Wextra #-Werror
+CFLAGS = -Wall #-Wextra -Wextra
 
 CPPFLAGS = -Iinclude -g3
 

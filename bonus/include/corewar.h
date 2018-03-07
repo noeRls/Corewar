@@ -17,9 +17,13 @@
 #include <stdio.h>
 
 #include <SFML/Graphics.h>
+#define CLOCK_TIME(clock) sfClock_getElapsedTime((clock)).microseconds
+
 
 #define PC reg[0]
 #define READ_SIZE_BINARY_OP 1
+
+#define TIME_LIVE_COLOR 300000
 
 #define BYTES_PER_LINE 32
 
@@ -69,6 +73,8 @@ typedef struct mem_info_s {
 } mem_info_t;
 
 typedef struct cell_s {
+	sfClock *cl;
+	int lived;
 	int last_id;
 	unsigned char value;
 } cell_t;
@@ -90,6 +96,7 @@ typedef struct env_s {
 
 	int dump_cycle;
 	int nbr_player;
+	int *player_id;
 	int nb_prog;
 	int cycle;
 	int live_counter;

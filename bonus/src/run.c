@@ -7,28 +7,22 @@
 
 #include "corewar.h"
 
-void destroy_prog(env_t *env, program_t **list, program_t *p)
+int end(env_t *env, program_t *list)
 {
-	program_t *prev = 0;
+        int last = 0;
 
-	if ((*list)->next == NULL) {
-		env->last_id = (*list)->id;
-		my_strcpy(env->last_name, (*list)->name);
-	}
-	env->nb_prog--;
-	if (p == *list) {
-		*list = p->next;
-		free(p);
-		return;
-	}
-	for (program_t *tmp = *list; tmp; tmp = tmp->next) {
-		if (tmp == p) {
-			prev->next = tmp->next;
-			free(tmp);
-			break;
-		}
-		prev = tmp;
-	}
+        if (list == NULL)
+                return (1);
+        else
+                last = list->id;
+        for (program_t *prgm = list; prgm; prgm = prgm->next) {
+                if (last != prgm->id)
+                        return (0);
+        }
+        env->end = 1;
+        env->last_id = last;
+        my_strcpy(env->last_name, list->name);
+        return (1);
 }
 
 void manage_cycle(env_t *env)
@@ -84,6 +78,10 @@ void update(env_t *env)
 	int i = 0;
 
 	i = env->nb_prog;
+	for (int i = 0; i < MEM_SIZE; i++)
+		if (env->memory[i].lived && \
+		CLOCK_TIME(env->memory[i].cl) > TIME_LIVE_COLOR)
+			env->memory[i].lived = 0;
 	for (program_t *p = env->prgm; p && i >= 0 ; p = p->next) {
 		p->cycle ? 0 : execute_prog(env, p);
 		i--;
