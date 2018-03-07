@@ -7,15 +7,15 @@
 
 #include "corewar.h"
 
-static int setup(env_t *env, instr_t info, int *arg)
+static int setup(env_t *env, int *arg, program_t *p)
 {
 	short int tmp = 0;
 	int sum = 0;
 
 	for (int i = 1; i < 3; i++) {
-		if (get_arg_type(info.desc, i + 1) == DIR)
+		if (get_arg_type(p->info.desc, i + 1) == DIR)
 			sum += (short int) arg[i];
-		if (get_arg_type(info.desc, i + 1) == IND) {
+		if (get_arg_type(p->info.desc, i + 1) == IND) {
 			read_from_mem(env->memory, &tmp, IND_SIZE, arg[i]);
 			swap(&tmp, IND_SIZE);
 			sum += tmp;
@@ -24,7 +24,7 @@ static int setup(env_t *env, instr_t info, int *arg)
 	return (sum);
 }
 
-void lldi(env_t *env, program_t *p, instr_t info)
+void lldi(env_t *env, program_t *p)
 {
 	int arg[MAX_ARGS_NUMBER] = {0};
 	int value = 0;
@@ -35,7 +35,7 @@ void lldi(env_t *env, program_t *p, instr_t info)
 		p->carry = 1;
 		return;
 	}
-	sum = setup(env, info, arg);
+	sum = setup(env, arg, p);
 	sum += p->pc_backup;
 	read_from_mem(env->memory, &value, REG_SIZE, sum);
 	swap(&value, REG_SIZE);

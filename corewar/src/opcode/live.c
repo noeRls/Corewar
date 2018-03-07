@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void live(env_t *env, program_t *p, instr_t info)
+void live(env_t *env, program_t *p)
 {
 	int id = 0;
 	int lived = 0;

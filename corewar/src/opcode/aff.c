@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-void aff(env_t *env, program_t *p, instr_t info)
+void aff(env_t *env, program_t *p)
 {
 	int arg[MAX_ARGS_NUMBER] = {0};
 
