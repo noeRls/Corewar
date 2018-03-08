@@ -41,7 +41,7 @@ SRCS	= ./char/my_char.c \
 	  ./str/my_strdigits.c \
 	  ./str/match.c \
 
-CFLAGS	=	-I./ -g3
+CFLAGS	=	-I./
 
 OBJS	= $(SRCS:.c=.o)
 
