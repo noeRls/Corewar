@@ -54,7 +54,7 @@ static void verif_comment(char **tab, int *comment)
 	}
 }
 
-static void verif_comment_name(size_t len, int comment, int name, int fd)
+void verif_comment_name(size_t len, int comment, int name, int fd)
 {
 	if (!comment)
 		my_puterror(WARNING"No comment specified\n");
@@ -93,33 +93,24 @@ void check_special_case(char *s)
 	}
 }
 
-void verif_header(int fd)
+int verif_header_loop(char *s, int *name, int *comment, size_t *len)
 {
-	int name = 0;
-	int comment = 0;
 	char **tab;
-	char *s = NULL;
-	size_t len = 0;
 
-	while ((s = get_next_line(fd))) {
-		len = my_strlen(s);
-		clear_comment(s);
-		check_special_case(s);
-		tab = str_to_av(s);
-		if (!tab[0]) {
-			len = 0;
-			continue;
-		}
-		if (verif_name(tab, &name))
-			continue;
-		verif_comment_before_name(tab, name);
-		if (!my_strcmp(tab[0], COMMENT_CMD_STRING)) {
-			verif_comment(tab, &comment);
-			continue;
-		}
-		break;
+	*len = my_strlen(s);
+	clear_comment(s);
+	check_special_case(s);
+	tab = str_to_av(s);
+	if (!tab[0]) {
+		*len = 0;
+		return (0);
 	}
-	if (!s)
-		len = 0;
-	verif_comment_name(len, comment, name, fd);
+	if (verif_name(tab, name))
+		return (0);
+	verif_comment_before_name(tab, *name);
+	if (!my_strcmp(tab[0], COMMENT_CMD_STRING)) {
+		verif_comment(tab, comment);
+		return (0);
+	}
+	return (1);
 }
