@@ -96,7 +96,8 @@ void execute_prog(env_t *env, program_t *p)
 		set_cycle(p, p->info.code);
 }
 
-int run(env_t *env) {
+int run(env_t *env)
+{
 	int i = 0;
 
 	while (!(env->end) && !end(env, env->prgm)) {
