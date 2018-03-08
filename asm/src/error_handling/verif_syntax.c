@@ -33,24 +33,22 @@ void verif_nb_arg(int mnemonic, char **tab, label_t *label)
 	}
 }
 
+void check_type(int mnemonic, int i, int expected)
+{
+	if ((op_tab[mnemonic].type[i - 1] & expected) == 0) {
+		my_puterror(ERROR"Invalid type of arguments\n");
+		exit(84);
+	}
+}
+
 void verif_arg_type(int mnemonic, char **tab)
 {
 	for (int i = 1 ; tab[i] ; i++) {
-		if (tab[i][0] == DIRECT_CHAR) {
-			if ((op_tab[mnemonic].type[i - 1] & T_DIR) == 0) {
-				my_puterror(ERROR"Invalid type of arguments\n");
-				exit(84);
-			}
-		} else if (tab[i][0] == 'r') {
-			if ((op_tab[mnemonic].type[i - 1] & T_REG) == 0) {
-				my_puterror(ERROR"Invalid type of arguments\n");
-				exit(84);
-			}
-		} else {
-			if ((op_tab[mnemonic].type[i - 1] & T_IND) == 0) {
-				my_puterror(ERROR"Invalid type of arguments\n");
-				exit(84);
-			}
-		}
+		if (tab[i][0] == DIRECT_CHAR)
+			check_type(mnemonic, i, T_DIR);
+		else if (tab[i][0] == 'r')
+			check_type(mnemonic, i, T_REG);
+		else
+			check_type(mnemonic, i, T_IND);
 	}
 }
