@@ -52,10 +52,9 @@ void verif_loop(int fd, label_t *label)
 	}
 }
 
-int verif(char *path)
+int verif(int fd, char *path)
 {
 	label_t *label = init_label();
-	int fd = open(path, O_RDONLY);
 
 	verif_header(fd);
 	verif_loop(fd, label);

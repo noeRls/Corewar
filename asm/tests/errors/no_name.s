@@ -1,11 +1,4 @@
-	#
-	#zork.s for corewar
-	#
-	#Bob Bylan
-	#
-	#Sat Nov 10 03:24:30 2081
-	#
+	.name
+	.comment "yaya"
 
-	.comment "just a basic living prog"
-
-	live %1
+	sti r1, r2, r3
