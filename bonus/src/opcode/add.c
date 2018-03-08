@@ -13,6 +13,7 @@ void add(env_t *env, program_t *p, instr_t info)
 	int value1 = 0;
 	int value2 = 0;
 
+	UNUSED(info);
 	if (setup_arg(arg, p, env, TRUE) == 84) {
 		p->cycle = 1;
 		p->carry = 1;

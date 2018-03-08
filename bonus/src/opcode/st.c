@@ -21,6 +21,7 @@ void st(env_t *env, program_t *p, instr_t info)
 		p->reg[arg[1]] = value;
 	} else {
 		swap(&value, sizeof(int));
-		write_to_mem(env->memory, &value, &((mem_info_t) {sizeof(int), arg[1], p->id}));
+		write_to_mem(env->memory, &value,\
+			&((mem_info_t) {sizeof(int), arg[1], p->id}));
 	}
 }

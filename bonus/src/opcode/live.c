@@ -23,8 +23,10 @@ void live(env_t *env, program_t *p, instr_t info)
 	int lived = 0;
 	program_t *pa = 0;
 
+	UNUSED(info);
 	env->live_counter++;
-	read_from_mem(env->memory, &id, &((mem_info_t) {sizeof(int), p->PC, p->id}));
+	read_from_mem(env->memory, &id,\
+		&((mem_info_t) {sizeof(int), p->PC, p->id}));
 	swap(&id, sizeof(int));
 	up_pc(p, sizeof(int));
 	for (program_t *p_tmp = env->prgm; p_tmp; p_tmp = p_tmp->next) {

@@ -26,5 +26,6 @@ void sti(env_t *env, program_t *p, instr_t info)
 	index += arg[1] + arg[2] + p->pc_backup;
 	tmp = p->reg[arg[0]];
 	swap(&tmp, sizeof(int));
-	write_to_mem(env->memory, &tmp, &((mem_info_t) {sizeof(int), index, p->id}));
+	write_to_mem(env->memory, &tmp,\
+		&((mem_info_t) {sizeof(int), index, p->id}));
 }

@@ -16,7 +16,8 @@ static int setup(env_t *env, instr_t info, int *arg, int id)
 		if (get_arg_type(info.desc, i + 1) == DIR)
 			sum += (short int) arg[i];
 		if (get_arg_type(info.desc, i + 1) == IND) {
-			read_from_mem(env->memory, &tmp, &((mem_info_t) {IND_SIZE, arg[i], id}));
+			read_from_mem(env->memory, &tmp,\
+				&((mem_info_t) {IND_SIZE, arg[i], id}));
 			swap(&tmp, IND_SIZE);
 			sum += tmp;
 		}
@@ -38,7 +39,8 @@ void ldi(env_t *env, program_t *p, instr_t info)
 	sum = setup(env, info, arg, p->id);
 	sum += p->pc_backup;
 	sum = do_idx_mod(sum, p);
-	read_from_mem(env->memory, &value, &((mem_info_t) {REG_SIZE, sum, p->id}));
+	read_from_mem(env->memory, &value,\
+		&((mem_info_t) {REG_SIZE, sum, p->id}));
 	swap(&value, REG_SIZE);
 	p->reg[arg[2]] = value;
 	p->carry = 0;

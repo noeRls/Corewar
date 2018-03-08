@@ -41,7 +41,6 @@ void ini_sprite_mem(env_t *env)
 void init_window(env_t *env)
 {
 	sfVideoMode mode = {800, 600, 32};
-	int offset = 0;
 
 	env->win = sfRenderWindow_create(mode, "My_corewar", \
 		sfDefaultStyle, NULL);
