@@ -37,9 +37,9 @@ SRC =	./src/main.c			\
 
 OBJ =	$(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra #-Werror
+CFLAGS = -Wall -Wextra -Werror
 
-CPPFLAGS = -Llib/my -lmy -Iinclude -g3
+CPPFLAGS = -Llib/my -lmy -Iinclude
 
 NAME =	corewar
 
