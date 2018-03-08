@@ -80,24 +80,16 @@ void check_special_case(char *s)
 	if (!my_strncmp(s, ".name", 5)) {
 		s += 5;
 		for (s = s ; *s == ' ' || *s == '\t' ; s++);
-		if (*s != '"') {
-			my_puterror(ERROR"name syntax error\n");
-			exit(84);
-		}
+		if (*s != '"')
+			exit(my_puterror(ERROR"name syntax error\n"));
 		s++;
-		if (*s == '"') {
-			my_puterror(ERROR"name syntax error\n");
-			exit(84);
-		}
+		if (*s == '"')
+			exit(my_puterror(ERROR"name syntax error\n"));
 		for (s = s ; *s != '"' && *s != '\0' ; s++);
-		if (*s == '\0') {
-			my_puterror(ERROR"name syntax error\n");
-			exit(84);
-		}
-		if (*(s + 1) != '\0' && *(s + 1) != ' ' && *(s + 1) != '\t') {
-			my_puterror(ERROR"name syntax error\n");
-			exit(84);
-		}
+		if (*s == '\0')
+			exit(my_puterror(ERROR"name syntax error\n"));
+		if (*(s + 1) != '\0' && *(s + 1) != ' ' && *(s + 1) != '\t')
+			exit(my_puterror(ERROR"name syntax error\n"));
 	}
 }
 
