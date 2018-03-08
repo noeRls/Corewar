@@ -33,12 +33,10 @@ void render(env_t *env)
 	sfRenderWindow_clear(env->win, sfBlack);
 	for (int i = 0; i < MEM_SIZE; i++) {
 		p_nb = player_nbr(env, env->memory[i].last_id);
-		color = sfColor_fromRGB(rgb_id[p_nb][0], \
-					rgb_id[p_nb][1], rgb_id[p_nb][2]);
+		color = sfColor_fromRGB(rgb_id[p_nb % 7][0], \
+			rgb_id[p_nb % 7][1], rgb_id[p_nb % 7][2]);
 		if (env->memory[i].lived) {
 			p_nb = player_nbr(env, env->memory[i].lived - 1);
-			color = sfColor_fromRGB(rgb_id[p_nb][0],	\
-					rgb_id[p_nb][1], rgb_id[p_nb][2]);
 			color = sfColor_add(color, color);
 		}
 		sfSprite_setColor(env->sprites[i], color);

@@ -91,6 +91,7 @@ typedef struct env_s {
 
 	sfRenderWindow *win;
 	sfSprite *sprites[MEM_SIZE];
+	sfSprite **pcs;
 	sfTexture *blank;
 	stats_t stats;
 
