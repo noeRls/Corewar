@@ -31,8 +31,8 @@ static int verif_name(char **tab, int *name)
 static void verif_comment_before_name(char **tab, int name)
 {
 	if (!my_strcmp(tab[0], COMMENT_CMD_STRING) && !name) {
-		my_puterror(ERROR"The name must be specified"
-			" just before the comment.\n");
+		my_puterror(ERROR"The name must be specified");
+		my_puterror(" just before the comment.\n");
 		exit(84);
 	}
 }

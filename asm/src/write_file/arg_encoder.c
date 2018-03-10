@@ -42,10 +42,10 @@ void write_direct_arg(char *str, int fd, int mnemonique, label_t *label)
 
 void write_indirect_arg(char *str, int fd, label_t *label)
 {
-	short unsigned int tmp = (short unsigned int) super_getnbr(str);
+	unsigned short int tmp = (unsigned short int) super_getnbr(str);
 
 	short_magic_reverse(&tmp);
-	write(fd, &tmp, sizeof(short unsigned int));
+	write(fd, &tmp, sizeof(unsigned short int));
 	label->tmp_pos += 2;
 }
 
@@ -66,8 +66,8 @@ void arg_encoder(char **tab, int fd, int mnemonique, label_t *label)
 			fill_label_call(tab[i], fd, mnemonique, label);
 			break;
 		case LABEL_DECLARATION:
-			my_puterror(ERROR"Unknow error occured\n"
-				"Please contact TheWanderingCat\n");
+			my_puterror(ERROR"Unknow error occured\n");
+			my_puterror("Please contact TheWanderingCat\n");
 			break;
 		}
 	}
