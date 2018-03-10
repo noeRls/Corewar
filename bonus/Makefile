@@ -39,9 +39,9 @@ SRC =	./src/main.c			\
 
 OBJ =	$(SRC:.c=.o)
 
-CFLAGS = -Wall #-Wextra -Wextra
+CFLAGS = -Wall -Wextra -Werror
 
-CPPFLAGS = -Iinclude -g3
+CPPFLAGS = -Iinclude
 
 LDFLAGS = -lc_graph_prog -L../corewar/lib/my -lmy -lm
 

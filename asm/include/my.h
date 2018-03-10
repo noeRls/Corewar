@@ -59,7 +59,7 @@ void my_swap_char(char *a, char *b);
 void my_putchar(char c);
 void my_putstr(char const *str);
 void my_putstr_err(char const *str);
-void my_puterror(char *str);
+int my_puterror(char *str);
 
 /*	put/my_put_nbr.c	*/
 

@@ -50,7 +50,6 @@ void write_to_mem(unsigned char *memory, void const *data, int size, int start)
 		if (index < 0) {
 			index = MEM_SIZE + index;
 		}
-//		printf("INDEX : %d\n", index);
 		memory[index] = tmp[i];
 	}
 }

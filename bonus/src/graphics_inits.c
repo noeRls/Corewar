@@ -8,6 +8,12 @@
 #include <math.h>
 #include "corewar.h"
 
+void init_mem(env_t *env, int i)
+{
+	env->sprites[i] = sfSprite_create();
+	env->memory[i].cl = sfClock_create();
+}
+
 void ini_sprite_mem(env_t *env)
 {
 	sfVector2f pos = {0, 0};
@@ -16,7 +22,7 @@ void ini_sprite_mem(env_t *env)
 	int start = 0;
 
 	for (int i = 0; i < MEM_SIZE; i++) {
-		env->sprites[i] = sfSprite_create();
+		init_mem(env, i);
 		sfSprite_setTexture(env->sprites[i], env->blank, sfFalse);
 		if (!(start++))
 			bounds = sfSprite_getGlobalBounds(env->sprites[i]);
@@ -29,14 +35,12 @@ void ini_sprite_mem(env_t *env)
 			pos.x = 0;
 			tmp = 0;
 		}
-		env->memory[i].cl = sfClock_create();
 	}
 }
 
 void init_window(env_t *env)
 {
 	sfVideoMode mode = {800, 600, 32};
-	int offset = 0;
 
 	env->win = sfRenderWindow_create(mode, "My_corewar", \
 		sfDefaultStyle, NULL);

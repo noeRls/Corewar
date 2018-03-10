@@ -57,7 +57,8 @@ int get_arg_data(env_t *env, program_t *p, type_arg_t type)
 	size = get_size_type(type, special_size);
 	if (size == -1)
 		return (0);
-	read_from_mem(env->memory, &value, &((mem_info_t) {size, p->PC, p->id}));
+	read_from_mem(env->memory, &value,\
+		&((mem_info_t) {size, p->PC, p->id}));
 	swap(&value, size);
 	if (special_size && (type == DIR || type == IND))
 		value = (short int) value;

@@ -13,6 +13,7 @@ void lfork(env_t *env, program_t *p, instr_t info)
 	int value = 0;
 	program_t *new_prog = 0;
 
+	UNUSED(info);
 	p->info.desc = 128;
 	if (setup_arg(arg, p, env, FALSE) == 84) {
 		p->cycle = 1;

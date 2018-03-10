@@ -19,6 +19,7 @@ SRC		=	$(SDIR)main.c					\
 			$(SDIR)write_file/coding_byte.c			\
 			$(SDIR)error_handling/verif_syntax.c		\
 			$(SDIR)error_handling/verif_header.c		\
+			$(SDIR)error_handling/verif_header_core.c	\
 			$(SDIR)error_handling/verif_label.c		\
 			$(SDIR)error_handling/verif.c			\
 			$(SDIR)error_handling/verif_grammar.c		\

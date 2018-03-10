@@ -54,7 +54,7 @@ static void verif_comment(char **tab, int *comment)
 	}
 }
 
-static void verif_comment_name(size_t len, int comment, int name, int fd)
+void verif_comment_name(size_t len, int comment, int name, int fd)
 {
 	if (!comment)
 		my_puterror(WARNING"No comment specified\n");
@@ -74,32 +74,43 @@ static void verif_comment_name(size_t len, int comment, int name, int fd)
 		lseek(fd, (len + 1) * -1, SEEK_CUR);
 }
 
-void verif_header(int fd)
+void check_special_case(char *s)
 {
-	int name = 0;
-	int comment = 0;
-	char **tab;
-	char *s = NULL;
-	size_t len = 0;
-
-	while ((s = get_next_line(fd))) {
-		len = my_strlen(s);
-		clear_comment(s);
-		tab = str_to_av(s);
-		if (!tab[0]) {
-			len = 0;
-			continue;
-		}
-		if (verif_name(tab, &name))
-			continue;
-		verif_comment_before_name(tab, name);
-		if (!my_strcmp(tab[0], COMMENT_CMD_STRING)) {
-			verif_comment(tab, &comment);
-			continue;
-		}
-		break;
+	for (s = s ; *s == ' ' || *s == '\t' ; s++);
+	if (!my_strncmp(s, ".name", 5)) {
+		s += 5;
+		for (s = s ; *s == ' ' || *s == '\t' ; s++);
+		if (*s != '"')
+			exit(my_puterror(ERROR"name syntax error\n"));
+		s++;
+		if (*s == '"')
+			exit(my_puterror(ERROR"name syntax error\n"));
+		for (s = s ; *s != '"' && *s != '\0' ; s++);
+		if (*s == '\0')
+			exit(my_puterror(ERROR"name syntax error\n"));
+		if (*(s + 1) != '\0' && *(s + 1) != ' ' && *(s + 1) != '\t')
+			exit(my_puterror(ERROR"name syntax error\n"));
 	}
-	if (!s)
-		len = 0;
-	verif_comment_name(len, comment, name, fd);
+}
+
+int verif_header_loop(char *s, int *name, int *comment, size_t *len)
+{
+	char **tab;
+
+	*len = my_strlen(s);
+	clear_comment(s);
+	check_special_case(s);
+	tab = str_to_av(s);
+	if (!tab[0]) {
+		*len = 0;
+		return (0);
+	}
+	if (verif_name(tab, name))
+		return (0);
+	verif_comment_before_name(tab, *name);
+	if (!my_strcmp(tab[0], COMMENT_CMD_STRING)) {
+		verif_comment(tab, comment);
+		return (0);
+	}
+	return (1);
 }

@@ -58,14 +58,16 @@ typedef struct label_list_s {
 } label_t;
 
 /*ERROR_HANDLING*/
-int verif(char *);
+int verif(int, char *);
 void verif_nb_arg(int, char **, label_t *);
 void verif_arg_type(int, char **);
 void verif_gram(char **);
 void check_label_gram(char *);
 void check_gram(char *);
 void verif_header(int);
+int verif_header_loop(char *, int *, int *, size_t *);
 void verif_label(label_t *);
+void verif_comment_name(size_t, int, int, int);
 
 /*WRITE_FILE*/
 int write_instruction(char *cmd, int fd, label_t *);
