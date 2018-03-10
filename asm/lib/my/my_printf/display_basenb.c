@@ -13,7 +13,7 @@
 int d_bhexa(va_list *ap, char *fl)
 {
 	char *str = get_nbr_base(va_arg(*ap, long long), "0123456789ABCDEF");
-	char *tmp = MALLOC(sizeof (char) * (my_strlen(str) + 3));
+	char *tmp = MALLOC(sizeof(char) * (my_strlen(str) + 3));
 	int count = 0;
 
 	replace(fl, '+', 'A');
@@ -34,7 +34,7 @@ int d_bhexa(va_list *ap, char *fl)
 int d_oct(va_list *ap, char *fl)
 {
 	char *str = get_nbr_base(va_arg(*ap, long long), "01234567");
-	char *tmp = MALLOC(sizeof (char) * (my_strlen(str) + 3));
+	char *tmp = MALLOC(sizeof(char) * (my_strlen(str) + 3));
 	int count = 0;
 
 	replace(fl, '+', 'A');
@@ -54,11 +54,11 @@ int d_oct(va_list *ap, char *fl)
 void disp_ptr(char *str, char *fl)
 {
 	char indentc = ' ';
-	char *tmp = MALLOC(sizeof (char) * (my_strlen(str) + 3));
+	char *tmp = MALLOC(sizeof(char) * (my_strlen(str) + 3));
 
 	replace(fl, '#', 'A');
 	for (int i = 0; fl[i] && indentc != '0'; i++) {
-		if (fl[i] == '0' &&\
+		if (fl[i] == '0' &&
 		((i > 0 && !my_char_isnum(fl[i - 1])) || !i)) {
 			indentc = '0';
 		}

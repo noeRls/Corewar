@@ -10,9 +10,8 @@
 
 int print_str(char *nb, int indent, char indentc, char *fl)
 {
-	if (contains(fl, '+') && !indent) {
+	if (contains(fl, '+') && !indent)
 		indent--;
-	}
 	manage_ind(fl, nb, &indent);
 	!contains(fl, '-') ? indent_str(fl, indent, indentc, my_strlen(nb)) : 0;
 	my_putstr(nb);
@@ -35,9 +34,8 @@ int display_str(char *nb, char *fl)
 
 void indent_nb(char *fl, int indent, char indentc, int len)
 {
-	for (int i = 0; i < indent - len - (contains(fl, '+') && indent); i++) {
+	for (int i = 0; i < indent - len - (contains(fl, '+') && indent); i++)
 		my_putchar(indentc);
-	}
 }
 
 void manage_ind(char const *fl, char const *nb, int *indent)
@@ -48,7 +46,6 @@ void manage_ind(char const *fl, char const *nb, int *indent)
 
 void indent_str(char *fl, int indent, char indentc, int len)
 {
-	for (int i = 0; i < indent - len; i++) {
+	for (int i = 0; i < indent - len; i++)
 		my_putchar(indentc);
-	}
 }

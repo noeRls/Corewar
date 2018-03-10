@@ -28,12 +28,12 @@ char *flags_manager(char *str)
 	int i = 0;
 	char *flags = "diouxXcsCSpm%b";
 
-	for (i = 0; str[i] && (contains(fl, str[i]) || my_char_isnum(str[i]))\
+	for (i = 0; str[i] && (contains(fl, str[i]) || my_char_isnum(str[i]))
 		&& !contains(flags, str[i]); i++) {}
-	res = MALLOC(sizeof (char) * (i + 1));
-	for (i = 0; str[i] && (contains(fl, str[i]) || my_char_isnum(str[i]))\
+	res = MALLOC(sizeof(char) * (i + 1));
+	for (i = 0; str[i] && (contains(fl, str[i]) || my_char_isnum(str[i]))
 		&& !contains(flags, str[i]); i++) {
-		if (i > 0 && my_char_isnum(str[i - 1])\
+		if (i > 0 && my_char_isnum(str[i - 1])
 		&& !my_char_isnum(str[i]))
 			break;
 		res[i] = str[i];
@@ -76,7 +76,7 @@ int my_rec(char *str, int count, va_list *ap, int (**fctns)(va_list *, char *))
 		my_putchar(*str);
 		return (my_rec(str + 1, ++count, ap, fctns));
 	}
-	if (str[1] && !contains(flags, str[1]) &&\
+	if (str[1] && !contains(flags, str[1]) &&
 	!my_char_isnum(str[1]) && !contains(fl, str[1])) {
 		my_putchar('%');
 		return (my_rec(str + 1, ++count, ap, fctns));
@@ -89,9 +89,9 @@ int my_printf(char *str, ...)
 {
 	va_list ap;
 	int result = 0;
-	int (*fctns[14])(va_list *, char *) = {&d_int, &d_int, &d_oct, &d_u,\
-					&d_hexa, &d_bhexa, &d_char, \
-					&d_str, &d_cnp, &d_snp, &d_p,\
+	int (*fctns[14])(va_list *, char *) = {&d_int, &d_int, &d_oct, &d_u,
+					&d_hexa, &d_bhexa, &d_char,
+					&d_str, &d_cnp, &d_snp, &d_p,
 					&d_mod, &d_mod, &d_bin};
 
 	va_start(ap, str);

@@ -9,20 +9,20 @@
 
 int end(env_t *env, program_t *list)
 {
-        int last = 0;
+	int last = 0;
 
-        if (list == NULL)
-                return (1);
-        else
-                last = list->id;
-        for (program_t *prgm = list; prgm; prgm = prgm->next) {
-                if (last != prgm->id)
-                        return (0);
-        }
-        env->end = 1;
-        env->last_id = last;
-        my_strcpy(env->last_name, list->name);
-        return (1);
+	if (list == NULL)
+		return (1);
+	else
+		last = list->id;
+	for (program_t *prgm = list; prgm; prgm = prgm->next) {
+		if (last != prgm->id)
+			return (0);
+	}
+	env->end = 1;
+	env->last_id = last;
+	my_strcpy(env->last_name, list->name);
+	return (1);
 }
 
 void manage_cycle(env_t *env)

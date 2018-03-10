@@ -27,9 +27,8 @@ int my_putchars(char c, int times)
 {
 	int i = 0;
 
-	for (i = 0; i < times; i++) {
+	for (i = 0; i < times; i++)
 		my_putchar(c);
-	}
 	return (i + 1);
 }
 

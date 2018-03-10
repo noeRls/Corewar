@@ -50,7 +50,7 @@ char **str_words_param(char const *src, char const *forb)
 {
 	char *str = my_strdup(src);
 	int words = count_words(str, forb);
-	char **res = MALLOC(sizeof (char *) * (words + 1));
+	char **res = MALLOC(sizeof(char *) * (words + 1));
 	int wasw = 0;
 	int ind = 0;
 	int in_quotes = 0;

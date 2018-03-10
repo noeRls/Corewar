@@ -5,8 +5,7 @@
 ** show word array
 */
 
-int my_putstr(char *);
-void my_putchar(char);
+#include "my.h"
 
 void my_show_word_array(char * const *tab)
 {

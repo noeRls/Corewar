@@ -17,14 +17,12 @@ int d_cnp(va_list *ap, char *fl)
 	if (my_char_isprintable(c)) {
 		my_putchar(c);
 		return (1);
-	} else {
-		my_putchar('\\');
-		for (int i = 0; i < 3 - digits(c); i++) {
-			my_putchar('0');
-		}
-		my_put_nbr(c);
-		return (4);
 	}
+	my_putchar('\\');
+	for (int i = 0; i < 3 - digits(c); i++)
+		my_putchar('0');
+	my_put_nbr(c);
+	return (4);
 }
 
 int d_mod(va_list *ap, char *fl)
@@ -45,9 +43,9 @@ int d_snp(va_list *ap, char *fl)
 			indent = getnbr(&fl[i]);
 	count += my_putchars(' ', indent - my_strlen(str));
 	for (int i = 0; str[i]; i++) {
-		if (str[i] >= 32 && str[i] != 127) {
+		if (str[i] >= 32 && str[i] != 127)
 			my_putchar(str[i]);
-		} else {
+		else {
 			my_putchar('\\');
 			my_putchars('0', 3 - b_digits(str[i], 8));
 			my_putstr(get_nbr_base((int) str[i], "01234567"));
