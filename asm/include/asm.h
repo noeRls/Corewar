@@ -68,6 +68,7 @@ void verif_header(int);
 int verif_header_loop(char *, int *, int *, size_t *);
 void verif_label(label_t *);
 void verif_comment_name(size_t, int, int, int);
+void check_special_case(char *);
 
 /*WRITE_FILE*/
 int write_instruction(char *cmd, int fd, label_t *);

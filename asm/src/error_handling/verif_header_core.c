@@ -7,6 +7,25 @@
 
 #include "asm.h"
 
+void check_special_case(char *s)
+{
+	for (s = s ; *s == ' ' || *s == '\t' ; s++);
+	if (!my_strncmp(s, ".name", 5)) {
+		s += 5;
+		for (s = s ; *s == ' ' || *s == '\t' ; s++);
+		if (*s != '"')
+			exit(my_puterror(ERROR"name syntax error\n"));
+		s++;
+		if (*s == '"')
+			exit(my_puterror(ERROR"name syntax error\n"));
+		for (s = s ; *s != '"' && *s != '\0' ; s++);
+		if (*s == '\0')
+			exit(my_puterror(ERROR"name syntax error\n"));
+		if (*(s + 1) != '\0' && *(s + 1) != ' ' && *(s + 1) != '\t')
+			exit(my_puterror(ERROR"name syntax error\n"));
+	}
+}
+
 void verif_header(int fd)
 {
 	int name = 0;
