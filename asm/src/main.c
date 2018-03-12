@@ -10,7 +10,7 @@
 int main(int ac, char **av)
 {
 	int src = check_main(ac, av);
-	int bin = verif(src, av[1]);
+	int bin = verif(av[1]);
 	header_t header;
 	label_t *label = init_label();
 

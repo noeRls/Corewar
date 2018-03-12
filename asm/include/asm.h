@@ -58,7 +58,7 @@ typedef struct label_list_s {
 } label_t;
 
 /*ERROR_HANDLING*/
-int verif(int, char *);
+int verif(char *);
 void verif_nb_arg(int, char **, label_t *);
 void verif_arg_type(int, char **);
 void verif_gram(char **);
