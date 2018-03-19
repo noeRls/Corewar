@@ -15,8 +15,8 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
-
 #include <SFML/Graphics.h>
+
 #define CLOCK_TIME(clock) sfClock_getElapsedTime((clock)).microseconds
 
 #define UNUSED(x)	(void) ((x))
