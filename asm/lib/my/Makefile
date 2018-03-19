@@ -15,7 +15,6 @@ SRCS	= ./char/my_char.c \
 	  ./int/my_compute.c \
 	  ./int/my_maths.c \
 	  ./int/my_sort_int_array.c \
-	  ./mem/my_malloc.c \
 	  ./mem/my_sys_utils.c \
 	  ./my_printf/display_basenb.c \
 	  ./my_printf/display_f.c \
