@@ -5,7 +5,6 @@
 ## compile, et clean
 ##
 
-
 SRC =	./src/main.c			\
 	./src/inits.c			\
 	./src/prog_tools.c		\

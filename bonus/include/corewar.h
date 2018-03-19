@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2018
+1;5002;0c** EPITECH PROJECT, 2018
 ** corewar
 ** File description:
 ** header file for corewar
@@ -19,7 +19,7 @@
 #include <SFML/Graphics.h>
 #define CLOCK_TIME(clock) sfClock_getElapsedTime((clock)).microseconds
 
-#define UNUSED(x)	(void) x
+#define UNUSED(x)	(void) ((x))
 
 #define PC reg[0]
 #define READ_SIZE_BINARY_OP 1
