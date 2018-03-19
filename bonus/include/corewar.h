@@ -19,7 +19,7 @@
 
 #define CLOCK_TIME(clock) sfClock_getElapsedTime((clock)).microseconds
 
-#define UNUSED(x)	(void) x
+#define UNUSED(x)	(void) ((x))
 
 #define PC reg[0]
 #define READ_SIZE_BINARY_OP 1
