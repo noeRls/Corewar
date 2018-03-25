@@ -61,13 +61,21 @@ int print_usage(void)
 	return (0);
 }
 
-int main(int ac, char **av)
+int env_okay(char **env)
+{
+	for (int i = 0; env[i]; i++)
+		if (my_strncmp(env[i], "DISPLAY", 6) == 0)
+			return (1);
+	return (0);
+}
+
+int main(int ac, char **av, char **envp)
 {
 	env_t env;
 	args_t args;
 
 	my_memset(&env, 0, sizeof(env_t));
-	if (ac == 1 || !my_strcmp(av[1], "-h"))
+	if (ac == 1 || !my_strcmp(av[1], "-h") || !env_okay(envp))
 		return (print_usage());
 	manage_args(ac, av, &args);
 	finally_setup_arg(&args);

@@ -130,7 +130,6 @@ void init(args_t *arg, env_t *env);
 
 int get_unique_id(int const *diff_id, int size);
 int get_mem_start(int const *mem_start, int size);
-int main(int ac, char **av);
 
 /*	manage_args.c	*/
 
